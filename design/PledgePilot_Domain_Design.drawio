@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-11-14T04:07:30.723Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="ichRbk-3bf6C8EJ7kF9T" version="22.1.0" type="device">
+<mxfile host="app.diagrams.net" modified="2023-11-14T04:54:03.906Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" etag="l0BWVn0O2R8kJiUa-o6U" version="22.1.0" type="device">
   <diagram name="Page-1" id="qvUXPrmPt6XnoW094Hr5">
     <mxGraphModel dx="875" dy="435" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -13,7 +13,7 @@
         <mxCell id="l1-nlIrV0ILPvxU3cDVE-4" value="Payment" style="whiteSpace=wrap;html=1;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="540" y="80" width="100" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="l1-nlIrV0ILPvxU3cDVE-5" value="Community" style="whiteSpace=wrap;html=1;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+        <mxCell id="l1-nlIrV0ILPvxU3cDVE-5" value="Community" style="whiteSpace=wrap;html=1;align=center;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
           <mxGeometry x="150" y="280" width="100" height="40" as="geometry" />
         </mxCell>
         <mxCell id="l1-nlIrV0ILPvxU3cDVE-6" value="Reward" style="whiteSpace=wrap;html=1;align=center;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
