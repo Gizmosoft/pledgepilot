@@ -1,0 +1,106 @@
+openapi: 3.1.0
+info:
+  title: Campaign API
+  description: View Individual Requested Campaign
+  version: 'v1.0'
+servers:
+  - url: http://localhost:8080
+paths:
+  /campaigns/campaign-name:
+    get:
+      operationId: get-campaign-by-name
+      description: View requested campaign
+      parameters:
+        - name: campaignName
+          in: query
+          required: false
+          example: projectOne
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Campaign"
+        "404":
+          description: Resource Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Campaign:
+      type: object
+      properties:
+        id:
+          type: string
+          example:
+            - 596495c994ff4a37988e8f99
+        name:
+          type: string
+          example: 
+            - ProjectOne
+        community:
+          $ref: "#/components/schemas/Community"
+        milestone:
+          $ref: "#/components/schemas/Milestone"
+    Community:
+      type: object
+      properties:
+        comment:
+          $ref: "#/components/schemas/Comment"
+        blog:
+          $ref: "#/components/schemas/Blog"
+    Comment:
+      type: object
+      properties:
+        id:
+          type: string
+          example:
+            - 4fh2-3yuw-21lz
+        body:
+          type: string
+          example: "This is an example comment."
+    Blog:
+      type: object
+      properties:
+        id:
+          type: string
+          example:
+            - 23h2-13uw-22lz
+        body:
+          type: string
+          example: "This is an example blog."
+    Milestone:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Milestone 1"
+        value:
+          type: number
+          example: 500.00
+        isAchieved:
+          type: boolean
+          example: true
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+          example:
+            - Resource Not Found
+        message:
+          type: string
+          description: Error message
+          example:
+            - The Requested Resource is Not Found.
+          
