@@ -6,49 +6,48 @@ info:
 servers:
   - url: http://localhost:8080
 paths:
-    /discover:
-      get:
-        operationId: discover-campaigns
-        description: list of campaigns that are posted by the users
-        responses:
-          "200":
-            description: Successful response for displaying campaigns
-            content:
-              application/json:
-                schema:
-                  type: array
-                  items: 
-                    $ref: "#/components/schemas/Campaign"
-          "500":
-            description: Internal Server Error
-            content: 
-              application/json:
-                schema:
-                  type: object 
-                  $ref: "#/components/schemas/Error"
+  /discover:
+    get:
+      operationId: discover-campaigns
+      description: List of campaigns posted by users
+      responses:
+        "200":
+          description: Successful response for displaying campaigns
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Campaign"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Error"
 components:
-   schemas: 
-     Campaign:
+  schemas:
+    Campaign:
       type: object
       properties:
-        name: 
+        id:
           type: string
           examples:
-            - "Project ABC"
-        description:
+            - "596495c994ff4a37988e8f99"
+        name:
           type: string
-          examples: 
-            - "This is a description of Project ABC"
-     Error:    
-      type: object  
+          examples:
+            - "ProjectOne"
+    Error:
+      type: object
       properties:
         code:
           type: string
-          decription: Error code
-          examples:   
-            - Server Error    
+          description: Error code
+          examples:
+            - "Server Error"
         message:
           type: string
-          decription: Error message
-          examples:   
-            - Bad Gateway
+          description: Error message
+          examples:
+            - "Bad Gateway"
