@@ -30,4 +30,4 @@ _"PledgePilot is a crowdfunding application which incentivizes people for fundin
 
 ## Domain Driven Design  
 
-![domain design](design/design/PledgePilot_Domain_Design.png)
+![domain design](design/PledgePilot_Domain_Design.png)
