@@ -2,7 +2,7 @@ openapi: 3.1.0
 info:
   title: Pledge Pilot API
   description: REST API of Pledge Pilot
-  version: 'v1.0'
+  version: "v1.0"
 servers:
   - url: http://localhost:8080
 paths:
@@ -27,23 +27,39 @@ paths:
                 $ref: "#/components/schemas/user"
         "404":
           description: User not found
-          content: 
+          content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
 components:
   schemas:
-    user: 
+    user:
       type: object
       properties:
         name:
-          type: string 
-          examples: 
+          type: string
+          examples:
             - "Aaryan"
+        lastName:
+          type: string
+          examples:
+            - "Praveen"
+        amountDonated:
+          type: number
+          examples:
+            - 1000
+        hasProject:
+          type: boolean
+          examples:
+            - true
+        projects:
+          type: array
+          examples:
+            - ["123", "234", "456"]
         schedule:
           $ref: "#/components/schemas/Schedule"
     Schedule:
-      type: object         
+      type: object
       properties:
         start-time:
           type: string
@@ -52,12 +68,12 @@ components:
             - "2023-11-12T13:14:15Z"
         end-time:
           type: string
-          format: date-time 
+          format: date-time
           examples:
             - "2023-11-12T13:14:15Z"
     Error:
       type: object
-      properties: 
+      properties:
         code:
           type: string
           description: Error code
@@ -68,4 +84,3 @@ components:
           description: Error message
           examples:
             - User not Found
-
