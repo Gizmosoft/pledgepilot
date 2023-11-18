@@ -1,0 +1,23 @@
+import express from 'express'
+import mongoose from 'mongoose'
+import cors from 'cors'
+import registerRouter from './routes/index.js'
+import models from './models/index.js'
+
+// receives an object of app and initializes it
+const initialize = (app) => {
+    app.use(cors())
+    app.use(express.json())
+    app.use(express.urlencoded({ extended: true }))
+
+    // Separate DB configs for the scope of assignment
+    // MongoDB config
+    mongoose.connect(process.env.DB_CONNECTION_STRING)
+
+    // Initialize Routes
+    registerRouter(app)
+    // Flow:
+        // server.js -> app.js -> routes -> controller -> services -> model
+}
+
+export default initialize
