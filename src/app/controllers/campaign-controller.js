@@ -15,7 +15,7 @@ export const addCampaign = async (request, response) => {
 // Controller for GetCampaign API
 export const getCampaign = async (request, response) => {
     try {
-        const campaignName = request.params.name
+        const campaignName = request.params.campaignName
         const campaign = await campaignService.getCampaignByName(campaignName)
         setResponse(campaign, response)
     } catch (error) {

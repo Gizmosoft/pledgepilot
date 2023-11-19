@@ -11,6 +11,46 @@ const CampaignSchema = new Schema({
         type: String,
         required: true
     },
+    owner: {
+        userId: {
+            type: String,
+            required: true
+        }
+    },
+    community: {
+        comment: {
+            id: {
+                type: String,
+                required: true
+            },
+            body: {
+                type: String,
+                required: true
+            },
+            owner: {
+                userId: {
+                    type: String,
+                    required: true
+                }
+            }
+        },
+        blog: {
+            id: {
+                type: String,
+                required: true
+            },
+            body: {
+                type: String,
+                required: true
+            },
+            owner: {
+                userId: {
+                    type: String,
+                    required: true
+                }
+            }
+        }
+    },
     milestone: {
         target: {
             type: String,

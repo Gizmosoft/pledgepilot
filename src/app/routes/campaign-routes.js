@@ -9,7 +9,7 @@ router.route('/create')
     .post(campaignController.addCampaign)   // call addCampaign function in controller
 
 // '/campaigns/:campaign-name' GetCampaign API to get a particular API
-router.route('/campaigns/:name')
+router.route('/campaigns/:campaignName')
     .get(campaignController.getCampaign)
 
 export default router
