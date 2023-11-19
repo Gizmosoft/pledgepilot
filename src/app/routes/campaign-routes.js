@@ -8,4 +8,8 @@ const router = express.Router()
 router.route('/create')
     .post(campaignController.addCampaign)   // call addCampaign function in controller
 
+// '/campaigns/:campaign-name' GetCampaign API to get a particular API
+router.route('/campaigns/:name')
+    .get(campaignController.getCampaign)
+
 export default router
