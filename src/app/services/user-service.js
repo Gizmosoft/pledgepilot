@@ -25,7 +25,7 @@ export const update = async (updateUser, id) => {
 //remove user
 export const remove = async (id) =>{
   try{
-    const x = await User.findByIdAndRemove(id).exec();
+    return await User.findByIdAndDelete(id).exec();
   }catch(err){
     console.log(err);
   }
