@@ -20,7 +20,7 @@ const CommunitySchema = new Schema({
         required: false
     },
     commentsCount: {
-        type: number,
+        type: Number,
         required: false
     },
     createdDateTime:{
