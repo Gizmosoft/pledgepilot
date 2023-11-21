@@ -1,0 +1,31 @@
+{
+    "owner": {
+        "userId": "2"
+    },
+    "community": {
+        "comment": {
+            "owner": {
+                "userId": "123"
+            },
+            "id": "1021",
+            "body": "This is a comment"
+        },
+        "blog": {
+            "owner": {
+                "userId": "2"
+            },
+            "id": "1011",
+            "body": "This is a blog"
+        }
+    },
+    "milestone": {
+        "target": "3000",
+        "progress": "250"
+    },
+    "payments": {
+        "count": "9"
+    },
+    "_id": "655cdefc1ab54c2be8828a14",
+    "name": "App5",
+    "description": "A new real estatet App for students"
+}

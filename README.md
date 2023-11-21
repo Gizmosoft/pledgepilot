@@ -9,7 +9,14 @@ _"PledgePilot is a crowdfunding application which incentivizes people for fundin
 **Kartikey Vijayakumar Hebbar**	(vijayakumarhebbar.k@northeastern.edu)  
 **Kartik Shanbhag**	(shanbhag.k@northeastern.edu)  
 **Aaryan Praveen** (praveen.aa@northeastern.edu)  
-**Deepansh Chaturvedi**	(chaturvedi.de@northeastern.edu)
+**Deepansh Chaturvedi**	(chaturvedi.de@northeastern.edu)  
+
+### Development Updates (as of 11/21/2023)  
+- Discover API (GET) : **(author @KartikShanbhag)** This API is responsible to fetch all campaign objects from the database  
+- Campaign API (GET/POST) : **(author @KartikeyHebbar)** This API is responsible for adding a new campaign to the database and fetching a campaigns by their name from the database  
+- Community API (GET/POST/PATCH) : **(author @DeepanshChaturvedi)** This API is responsible for adding a new community to the database, fetching a new community and updating the community and its fields in the database  
+- User API (GET/PUT/POST/DELETE) : **(author @AaryanPraveen)** This API is responsible for adding user profiles, updating and deleting them on the database. This API also fetches all or one user from the database  
+
 ## High-Level Features
 
 - User Authentication and Registration
