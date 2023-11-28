@@ -1,0 +1,1 @@
+Delete this file as soon as a react app is initialized in this directory
