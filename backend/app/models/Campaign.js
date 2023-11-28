@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import UserModel from "./User.js";
 
 const Schema = mongoose.Schema
 
@@ -11,12 +12,13 @@ const CampaignSchema = new Schema({
         type: String,
         required: true
     },
-    owner: {
-        userId: {
-            type: String,
-            required: true
-        }
-    },
+    // owner: {
+    //     userId: {
+    //         type: String,
+    //         required: true
+    //     }
+    // },
+    owner: { type: Schema.Types.ObjectId, ref: UserModel },
     community: {
         comment: {
             id: {
@@ -72,6 +74,6 @@ const CampaignSchema = new Schema({
     versionKey: false
 })
 
-const campaignModel = mongoose.model('campaign', CampaignSchema)
+const campaignModel = mongoose.model('Campaign', CampaignSchema)
 
 export default campaignModel

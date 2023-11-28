@@ -3,6 +3,7 @@ import Campaign from '../models/Campaign.js'
 // searchAll is a helper service function
 export const searchAll = async (params = {}) => {
     const campaigns = Campaign.find(params).exec()  // find() is a model function 
+    console.log(typeof campaigns);
     return campaigns
 }
 

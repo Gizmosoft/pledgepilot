@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import commentModel from "./Comment.js";
+import blogModel from "./Blog.js";
 
 const Schema = mongoose.Schema
 
@@ -26,7 +28,9 @@ const CommunitySchema = new Schema({
     createdDateTime:{
         type: String,
         required: true
-    }
+    },
+    comments: { type: Schema.Types.ObjectId, ref: commentModel },
+    blogs: { type: Schema.Types.ObjectId, ref: blogModel }
 },
 {
     versionKey: false

@@ -3,7 +3,6 @@ import { setResponse, setErrorResponse } from './response-handler.js';
 
 // Controller to Create user
 export const addUser = async (request, response) => {
-  console.log(request);
     try {
         const newUser = {...request.body}
         const user = await userService.create(newUser)
