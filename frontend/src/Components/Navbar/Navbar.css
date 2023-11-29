@@ -1,0 +1,23 @@
+nav{
+  background-color: #02B9DD;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+#img-logo{
+  height: 10vh;
+}
+#search-bar{
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+  width: 10vw;
+}
+#logo-container{
+  display: flex;
+  align-items: center;
+}
+.nav-links{
+  color: #fff;
+}
