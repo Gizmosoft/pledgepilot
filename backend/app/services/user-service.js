@@ -7,7 +7,8 @@ export const create = async (newUser) => {
 }
 // find user using id
 export const findById = async (id) => {
-  const user  = await User.findById(id).exec();
+  // const user  = await User.findById(id).exec();
+  const user = await User.find({ Email: id })
   return user;
 }
 //find user from query params

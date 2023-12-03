@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 const GoogleLoginComponent = () => {
     const navigate = useNavigate()
     // const [user, setUser] = useState([])
-    const handleLoginSuccess = (credentialResponse:any) => {
+    const handleLoginSuccess = async (credentialResponse:any) => {
         const userCredentials = jwtDecode(credentialResponse.credential)
         const userObject = JSON.parse(JSON.stringify(userCredentials))
         
@@ -18,6 +18,16 @@ const GoogleLoginComponent = () => {
         }
 
         // Check if the user email is already registered on the DB
+        console.log('fetch api testing');
+        
+        try{
+            const userDBResponse = await  fetch(process.env.BASE_URL + 'users/' + user.email)
+            const userJsonResponse = await userDBResponse.json()
+            console.log(userJsonResponse)
+        } catch (error:any) {
+            console.error('Error fetching user:', error.message);
+        }
+        
         // if yes then login the user
         // if no, then add the user to the DB
         
