@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import "./LoginComponent.css";
+import GoogleLoginComponent from "./GoogleLoginComponent";
 function LoginComponent() {
   const [formData, setFormData] = useState({
     username: '',
@@ -31,7 +32,7 @@ function LoginComponent() {
     <>
       <h2 className="login-text">Login to your Account</h2>
       <p className="welcome-text">
-        Welcome to PledgePilot
+        Login to experience a new world of PledgePilot
       </p>
       <form className="login-form" onSubmit={handleLogin}>
         <label htmlFor="username">Email:</label>
@@ -60,6 +61,8 @@ function LoginComponent() {
 
         <div className="btn-forgot-password">
           <button type="submit">Login</button>
+          <GoogleLoginComponent />
+          <br />
           <div className="forgot-password">
             <a href="#">Forgot Password?</a>
           </div>
