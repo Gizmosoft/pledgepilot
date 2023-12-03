@@ -12,11 +12,7 @@ const User = new Schema(
       type: String,
       required: true,
     },
-    role: {
-      type: String,
-      required: true,
-    },
-    EmailAddress: {
+    Email: {
       type: String,
       required: true,
     },
@@ -28,29 +24,7 @@ const User = new Schema(
       type: String,
       required: false,
     },
-    Location: {
-      AddressLine1: {
-        type: String,
-        required: true,
-      },
-      AddressLine2:{
-        type: String,
-        required: false,
-      },
-      city:{
-        type: String,
-        required: true,
-      },
-      state:{
-        type: String,
-        required: true,
-      },
-      pin:{
-        type: String,
-        required: true,
-      }
-    },
-    ProjectBackings: {
+    ProjectsFollowed: {
       type: Array,
       required: false,
     },
@@ -59,8 +33,8 @@ const User = new Schema(
       required: false,
     },
     AccountCreationDate: {
-      type: Date,
-      required: false,
+      type: String,
+      required: true,
     },
   },
   {

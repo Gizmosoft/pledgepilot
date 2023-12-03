@@ -1,26 +1,32 @@
 [
     {
-    "firstName": "Aaryan",
-    "LastName":"Praveen",
-    "role": "backer",
-    "EmailAddress": "aaryan.praveen@gmail.com",
-    "Location": {
-        "AddressLine1": "24 Boulevard Ter",
-        "city": "Boston",
-        "state": "MA",
-        "pin": "02134"
+        "firstName": "Aaryan",
+        "LastName": "Praveen",
+        "role": "backer",
+        "EmailAddress": "aaryan.praveen@gmail.com",
+        "Location": {
+            "AddressLine1": "24 Boulevard Ter",
+            "city": "Boston",
+            "state": "MA",
+            "pin": "02134"
         }
     },
     {
-    "firstName": "Deepansh",
-    "LastName":"Chaturvedi",
-    "role": "creator",
-    "EmailAddress": "deepansh.chaturvedi@gmail.com",
-    "Location": {
-        "AddressLine1": "Coolidge Corner",
-        "city": "Boston",
-        "state": "MA",
-        "pin": "02136"
+        "firstName": "Deepansh",
+        "LastName": "Chaturvedi",
+        "role": "creator",
+        "EmailAddress": "deepansh.chaturvedi@gmail.com",
+        "Location": {
+            "AddressLine1": "Coolidge Corner",
+            "city": "Boston",
+            "state": "MA",
+            "pin": "02136"
         }
+    },
+    {
+        "firstName": "Kartikey",
+        "LastName": "Hebbar",
+        "Email": "kartikey.hebbar@gmail.com",
+        "AccountCreationDate": "2023-12-03"
     }
 ]
