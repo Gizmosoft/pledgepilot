@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
-import LoginPage from './Pages/Login Page/LoginPage';
-import SignUp from './Components/Signup Component/Signup';
+import LoginPage from './Pages/Login/LoginPage';
+import SignUp from './Components/Signup/Signup';
 import Navbar from './Components/Navbar/Navbar';
 import {BrowserRouter as Router, Route, Routes} from  'react-router-dom';
-import Dashboard from './Components/Dashboard/Dashboard';
+import Dashboard from './Pages/Dashboard/Dashboard';
 import Home from './Components/Home/Home';
+import ProtectedRoutes from './Utils/ProtectedRoutes';
 
 function App() {
   return (
@@ -29,9 +30,14 @@ function App() {
             <SignUp />
           }>
           </Route>
+          {/* /dashboard goes through a protected route - only authenticated users can access this URL */}
           <Route path='/dashboard' element={
-            <Dashboard />
+            <ProtectedRoutes />
           }>
+            <Route path='/dashboard' element={
+              <Dashboard />
+            }>
+            </Route>
           </Route>
         </Routes>
       </Router>

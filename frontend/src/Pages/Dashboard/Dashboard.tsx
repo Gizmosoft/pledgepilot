@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react';
-// import { googleLogout, useGoogleLogin } from '@react-oauth/google';
-// import axios from 'axios';
 
 function Dashboard() {
     const user = sessionStorage.getItem("user") ?? ""
     const profile = JSON.parse(user)
-    
-    console.log(profile);
-    
     
     return (
         <div>
@@ -15,8 +10,8 @@ function Dashboard() {
             <br />
             <br />
             <div>
-                <h5>Welcome {profile.first_name}</h5>
-                <h6>Your email is: {profile.email}</h6>
+                <h5>Welcome {profile.FirstName + ' ' + profile.LastName}</h5>
+                <h6>Your email is: {profile.Email}</h6>
             </div>
         </div>
     );
