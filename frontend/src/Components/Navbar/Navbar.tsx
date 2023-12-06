@@ -1,6 +1,6 @@
 import React from "react";
 import "./Navbar.css";
-const logo = require("../../assets/images/logo.png");
+const logo = require("../../assets/logo.png");
 function Navbar() {
   return (
     <nav>

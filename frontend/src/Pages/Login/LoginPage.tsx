@@ -3,7 +3,7 @@ import "./LoginPage.css";
 import LoginComponent from "../../Components/Auth/LoginComponent";
 import SignUp from "../../Components/Signup/Signup";
 // import loginPageImage from '../../assets/LoginPageImg.jpeg';
-const loginPageImage = require("../../assets/images/LoginPageImg.jpg");
+const loginPageImage = require("../../assets/LoginPageImg.jpg");
 function LoginPage() {
   const [isRegistered, setIsRegistered] = useState(false);
 
