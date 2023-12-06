@@ -12,8 +12,12 @@ router.route('/discover')
 router.route('/create')
     .post(campaignController.addCampaign)   // call addCampaign function in controller
 
-// '/campaigns/:campaign-name' GetCampaign API to get a particular API
+// '/campaigns/:campaignName' GetCampaign API to get a particular API
 router.route('/:campaignName')
     .get(campaignController.getCampaign)
+
+// '/campaigns/campaign/:campaignId' GetCampaign API by ID to get a particular API
+router.route('/campaign/:campaignId')
+    .get(campaignController.getCampaignById)
 
 export default router

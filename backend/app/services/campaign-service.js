@@ -3,7 +3,6 @@ import Campaign from '../models/Campaign.js'
 // searchAll is a helper service function
 export const searchAll = async (params = {}) => {
     const campaigns = Campaign.find(params).exec()  // find() is a model function 
-    console.log(typeof campaigns);
     return campaigns
 }
 
@@ -16,5 +15,11 @@ export const create = async (newCampaign) => {
 // getCampaignByName is a service function to fetch a requested campaign
 export const getCampaignByName = async (campaignName) => {
     const campaign = await Campaign.find({ name: campaignName })
+    return campaign
+}
+
+// getCampaignById is a service function to fetch a requested campaign by id
+export const getCampaignById = async (campaignId) => {
+    const campaign = await Campaign.findById(campaignId).exec()
     return campaign
 }
