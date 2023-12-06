@@ -33,3 +33,13 @@ export const getCampaign = async (request, response) => {
         setErrorResponse(error, response)
     }
 }
+
+export const getCampaignById = async(request, response) => {
+    try {
+        const campaignId = request.params.campaignId
+        const campaign = await campaignService.getCampaignById(campaignId)
+        setResponse(campaign, response)
+    } catch (error) {
+        setErrorResponse(error, response)
+    }
+}

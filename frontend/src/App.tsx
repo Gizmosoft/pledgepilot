@@ -7,6 +7,8 @@ import {BrowserRouter as Router, Route, Routes} from  'react-router-dom';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Home from './Components/Home/Home';
 import ProtectedRoutes from './Utils/ProtectedRoutes';
+import CampaignPage from './Pages/Campaign/CampaignPage';
+import DiscoverPage from './Pages/Discover/DiscoverPage';
 
 function App() {
   return (
@@ -30,6 +32,10 @@ function App() {
             <SignUp />
           }>
           </Route>
+          <Route path='/discover' element={
+            <DiscoverPage />
+          }>
+          </Route>
           {/* /dashboard goes through a protected route - only authenticated users can access this URL */}
           <Route path='/dashboard' element={
             <ProtectedRoutes />
@@ -38,6 +44,10 @@ function App() {
               <Dashboard />
             }>
             </Route>
+          </Route>
+          <Route path='/campaigns/campaign/:campaignId' element={
+            <CampaignPage />
+          }>
           </Route>
         </Routes>
       </Router>
