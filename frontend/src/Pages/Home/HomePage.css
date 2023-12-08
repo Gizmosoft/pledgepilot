@@ -1,0 +1,149 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* background-image: url("../../assets/c5cb4258-b6e7-4fa2-b775-c4cb9735d220.png"); */
+    background-repeat: no-repeat;
+    background-size: cover;   
+    background-size: 100% auto; /* or background-size: cover; */
+    background-position: 0px;
+    backdrop-filter: blur(2px);
+  
+  }
+  html {
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
+  
+  .navbar-brand {
+    position: relative;
+    margin-left: auto;
+    /* text-align: center; */
+    /* width: 0%; */
+  }
+  
+  /* Flexbox styles to align links in the Navbar */
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-nav .nav-link {
+    padding-right: 10px; /* Adjust spacing between links as needed */
+  }
+  
+  .stats-container{
+    display: flex;
+    margin-top: 40px;
+    top: 40px;
+  }
+  
+  /* search -container */
+  
+  .search-container {
+    display: flex;
+    top: 100px;
+    left: 400px;
+    width: 500px;
+    
+  }
+  
+  .search-box {
+    /* width: 500px; */
+    /* height: 0px; */
+    
+  }
+  
+  .search-icon {
+    display: flex;
+    width: 50px;
+    height: 40px;
+    margin-left: 40px;
+    ;
+    
+  }
+  
+  .footer-container {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    /* height: 140px; */
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    margin-top: 100px; 
+    margin-left: 290px;
+    border: 1px solid black;
+    padding: 10px;
+    width: 900px;
+    gap: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    border-radius: 8px;
+    /* gap: 10px; */
+  }
+  
+  .grid-items {
+    background-color: #ddd;
+    /* padding: 20px; */
+    text-align: center;
+    border: 1px solid black;
+  
+  } 
+  
+  .team-names {
+    font-size: 12px;
+  }
+  
+  .logo2 {
+    display: flex;
+    justify-content: left;
+    height: 140px;
+    padding: 0px;
+    margin-left: 50px;
+  }
+  
+  .footer-brand {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 50px;
+  }
+  
+  .social-container {
+    position: relative;;
+    /* justify-content: left; */
+    /* align-items: left; */
+    /* margin-right: 200px; */
+    right: 120px;
+    top: 20px;
+    display: flex;
+    gap: 5px;
+  }
+  
+  .icon {
+    font-size: 30px;
+    position: relative;
+    top: 40px;
+    left: -190px;
+    
+  }
+  
+  .footer-list {
+    display: flex;
+    flex-direction: column;
+    float: right;
+    margin-top: 40px;
+  }

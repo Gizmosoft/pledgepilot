@@ -4,6 +4,8 @@ import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-k
 import { FaTwitter, FaInstagram, FaFacebook, FaYoutube } from 'react-icons/fa'
 
 
+const Logo=require('../../assets/logo2.png')
+
 export default function Footer() {
   return (
 
@@ -14,7 +16,7 @@ export default function Footer() {
         <MDBRow>
           <MDBCol lg='6' md='12' className='mb-4 mb-md-0'>
             {/* The logo component for image is called below */}
-            {/* <img src={Logo} alt='logo' className='logo'></img> */}
+            <img src={Logo} alt='logo' className='logo2'/>
 
           </MDBCol>
 

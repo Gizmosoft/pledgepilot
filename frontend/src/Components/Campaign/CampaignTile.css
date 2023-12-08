@@ -1,0 +1,33 @@
+.campaign-tile{
+    width: 350px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    overflow: hidden;
+  }
+  .campaign-image-container{
+    height: 150px;
+  }
+  .campaign-image{
+    width: 100%;
+   
+  }
+
+ .campaign-description{
+  font-style: italic;
+  color: black;
+ }
+
+  .campaign-name{
+    font-size: 23px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 30px;
+    color: #000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+ 
