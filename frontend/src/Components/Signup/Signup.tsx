@@ -1,17 +1,22 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import "./Signup.css"
+import { registerUser } from '../../services/userServices';
 
 interface FormData {
-  username: string;
-  email: string;
-  password: string;
+  firstName: string,
+  lastName:string,
+  emailAddress: string,
+  password: string,
+  accountCreationDate:string
 }
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    username: '',
-    email: '',
+    firstName: '',
+    lastName:'',
+    emailAddress: '',
     password: '',
+    accountCreationDate:''
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,18 +25,22 @@ const SignUp: React.FC = () => {
       ...formData,
       [name]: value,
     });
-    console.log(formData);
+
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Add your signup logic here using the formData
-    // console.log('Form submitted:', formData);
-    // Reset the form after submission if needed
+    const date = new Date();
     setFormData({
-      username: '',
-      email: '',
+      ...formData, accountCreationDate : `${date.getFullYear}-${date.getMonth}-${date.getDate}`
+    })
+    registerUser(formData);
+    setFormData({
+      firstName: '',
+      lastName: '',
+      emailAddress: '',
       password: '',
+      accountCreationDate:''
     });
   };
 
@@ -39,23 +48,32 @@ const SignUp: React.FC = () => {
     <div>
       <h1 id='sign-up-text'>Register</h1>
       <form id='signup-form' onSubmit={handleSubmit}>
-        <label htmlFor="username">Full Name:</label>
+        <label htmlFor="firstName">First Name:</label>
         <input
           type="text"
-          id="signup-username"
-          name="username"
-          value={formData.username}
+          id="signup-firstname"
+          name="firstName"
+          value={formData.firstName}
           onChange={handleChange}
-          placeholder="username"
+          placeholder="first name"
           required
         />
-
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="lastName">Last Name:</label>
+        <input
+          type="text"
+          id="signup-lastname"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleChange}
+          placeholder="last name"
+          required
+        />
+        <label htmlFor="emailAddress">Email:</label>
         <input
           type="email"
           id="signup-email"
-          name="email"
-          value={formData.email}
+          name="emailAddress"
+          value={formData.emailAddress}
           onChange={handleChange}
           placeholder="email"
           required

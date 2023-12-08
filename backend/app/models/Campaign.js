@@ -18,7 +18,7 @@ const CampaignSchema = new Schema({
     //         required: true
     //     }
     // },
-    owner: { type: Schema.Types.ObjectId, ref: UserModel },
+    owner: { type: Schema.Types.ObjectId, ref: "User" },
     community: {
         comment: {
             id: {

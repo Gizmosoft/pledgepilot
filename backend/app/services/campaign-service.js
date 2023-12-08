@@ -14,7 +14,7 @@ export const create = async (newCampaign) => {
 
 // getCampaignByName is a service function to fetch a requested campaign
 export const getCampaignByName = async (campaignName) => {
-    const campaign = await Campaign.find({ name: campaignName })
+    const campaign = await Campaign.find({ name: campaignName }).populate("owner").exec();
     return campaign
 }
 

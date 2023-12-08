@@ -1,41 +1,56 @@
 import mongoose from "mongoose";
+import campaignModel from "./Campaign.js";
 
 const Schema = mongoose.Schema;
 
 const User = new Schema(
   {
-    FirstName: {
+    firstName: {
       type: String,
       required: true,
     },
-    LastName: {
+    lastName: {
       type: String,
       required: true,
     },
-    Email: {
+    role: {
+      type: String,
+      required: false,
+    },
+    emailAddress: {
       type: String,
       required: true,
     },
-    ProfilePicture: {
+    profilePicture: {
       type: Buffer,
       required: false,
     },
-    AboutMe: {
+    aboutMe: {
       type: String,
       required: false,
     },
-    ProjectsFollowed: {
-      type: Array,
-      required: false,
-    },
-    CreatedProjects: {
-      type: Array,
-      required: false,
-    },
-    AccountCreationDate: {
+    projectsFollowed: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Campaign", // Reference to the Campaign model
+      },
+    ],
+    createdProjects: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Campaign", // Reference to the Campaign model
+      },
+    ],
+    accountCreationDate: {
       type: String,
-      required: true,
+      required: false,
     },
+    hashedPassword: { type: String, required: true },
+    refreshToken: {
+      type: String,
+      required: false
+    },
+    salt: { type: String, required: true },
   },
   {
     versionKey: false,
@@ -45,3 +60,44 @@ const User = new Schema(
 const UserModel = mongoose.model("User", User);
 
 export default UserModel;
+
+// {
+//   FirstName: {
+//     type: String,
+//     required: true,
+//   },
+//   LastName: {
+//     type: String,
+//     required: true,
+//   },
+//   Email: {
+//     type: String,
+//     required: true,
+//   },
+//   ProfilePicture: {
+//     type: Buffer,
+//     required: false,
+//   },
+//   AboutMe: {
+//     type: String,
+//     required: false,
+//   },
+//   ProjectsFollowed: {
+//     type: [projectSchema],
+//     required: false,
+//   },
+//   CreatedProjects: {
+//     type: [projectSchema],
+//     required: false,
+//   },
+//   AccountCreationDate: {
+//     type: String,
+//     required: true,
+//   },
+//   stats: {
+//     totalPledged: Number,
+//     successfulBackedProjects: Number,
+//     createdProjectsCount: Number,
+//     totalRaised: Number,
+//   },
+// },
