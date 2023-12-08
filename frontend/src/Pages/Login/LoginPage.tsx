@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
-import LoginComponent from "../../Components/Auth/LoginComponent";
+import LoginComponent from "../../Components/Login-Auth/LoginComponent";
 import SignUp from "../../Components/Signup/Signup";
 // import loginPageImage from '../../assets/LoginPageImg.jpeg';
 const loginPageImage = require("../../assets/LoginPageImg.jpg");

@@ -5,42 +5,52 @@ const Schema = mongoose.Schema;
 
 const User = new Schema(
   {
-    FirstName: {
+    firstName: {
       type: String,
       required: true,
     },
-    LastName: {
+    lastName: {
       type: String,
       required: true,
     },
-    Role: {
+    role: {
       type: String,
       required: false,
     },
-    EmailAddress: {
+    emailAddress: {
       type: String,
       required: true,
     },
-    ProfilePicture: {
+    profilePicture: {
       type: Buffer,
       required: false,
     },
-    AboutMe: {
+    aboutMe: {
       type: String,
       required: false,
     },
-    ProjectsFollowed: [{
-      type: Schema.Types.ObjectId,
-      ref: "Campaign", // Reference to the Campaign model
-    }],
-    CreatedProjects: [{
-      type: Schema.Types.ObjectId,
-      ref: "Campaign", // Reference to the Campaign model
-    }],
-    AccountCreationDate: {
+    projectsFollowed: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Campaign", // Reference to the Campaign model
+      },
+    ],
+    createdProjects: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Campaign", // Reference to the Campaign model
+      },
+    ],
+    accountCreationDate: {
       type: String,
-      required: true,
+      required: false,
     },
+    hashedPassword: { type: String, required: true },
+    refreshToken: {
+      type: String,
+      required: false
+    },
+    salt: { type: String, required: true },
   },
   {
     versionKey: false,
