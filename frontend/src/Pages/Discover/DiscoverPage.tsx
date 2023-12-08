@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CampaignTile from '../../Components/Campaign/CampaignTile';
-
+import './DiscoverPage.css';
 const DiscoverPage = () => {
     // create a state for campaigns
     const [campaigns, setCampaigns] = useState<any>()
@@ -12,6 +12,7 @@ const DiscoverPage = () => {
             const campaignsResponse = await fetch('http://localhost:3001/campaigns/discover')
             // get the response in json
             const campaignsData = await campaignsResponse.json()
+            console.log(campaignsData);
             // set the campaignData to the state to be received by the UI
             setCampaigns(campaignsData)
         }
@@ -25,7 +26,7 @@ const DiscoverPage = () => {
   return (
     <div className='discover-page'>
         <h3>Showing Campaigns on PledgePilot</h3>
-        <div>
+        <div className='card-container'>
             {
                 campaigns.map((campaign: any) => <CampaignTile key={campaign._id} campaignObject={campaign}/>)
             }

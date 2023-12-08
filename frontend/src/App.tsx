@@ -5,10 +5,11 @@ import SignUp from './Components/Signup/Signup';
 import Navbar from './Components/Navbar/Navbar';
 import {BrowserRouter as Router, Route, Routes} from  'react-router-dom';
 import Dashboard from './Pages/Dashboard/Dashboard';
-import Home from './Components/Home/Home';
 import ProtectedRoutes from './Utils/ProtectedRoutes';
 import CampaignPage from './Pages/Campaign/CampaignPage';
 import DiscoverPage from './Pages/Discover/DiscoverPage';
+import HomePage from './Pages/Home/HomePage';
+import NavBar2 from './Components/Navbar2/NavBar2';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Routes>
           <Route path='/' element={
             <>
-            <Home />
+            <HomePage />
             </>
           }>
           </Route>
@@ -49,6 +50,11 @@ function App() {
             <CampaignPage />
           }>
           </Route>
+          <Route path='/test' element={
+            <>
+            <NavBar2 />
+            </>
+          }></Route>
         </Routes>
       </Router>
     </div>

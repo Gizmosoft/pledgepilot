@@ -2,7 +2,7 @@ import React from 'react';
 // import logo from './logo.svg';
 import './HomePage.css';
 // import { Button } from 'react-bootstrap';
-import Header from '../../Components/Navbar2/NavBar';
+import Header from '../../Components/Navbar2/NavBar2';
 import Search from '../../Components/SearchBar/SearchBar';
 import Footer from '../../Components/Footer/Footer';
 import Stats from '../../Components/Stats/Stats';
@@ -10,14 +10,14 @@ import Stats from '../../Components/Stats/Stats';
 
 function HomePage() {
   return (
-    <div className="App">
+    <div className="HomePage">
       {/* NavBar */}
-      <Header />
+      {/* <Header /> */}
       {/* Search Bar */}
-      {/* <Stats/> */}
-        <Stats />
+      <Stats/>
+        {/* <Stats /> */}
         <Search />
-      {/* Footer */}
+      
       <Footer />
 
     </div>
