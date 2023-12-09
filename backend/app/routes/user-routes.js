@@ -17,10 +17,16 @@ userRouter
 
 // userRouter.route(verifyJWT,"/email/:email").get(userController.getUserByEmailId);
 userRouter.route("/email/:email").get(userController.getUserByEmailId);
+// OAuth route
+userRouter.route('/oauth/:email')
+  .get(userController.getOAuthUser)
 userRouter
   .route("/register").post(userController.addUser);
 
   userRouter
   .route("/login").post(userController.userLogin);
+
+userRouter.route("/oauth/register")
+  .post(userController.oauthAddUser)
 
 export default userRouter;

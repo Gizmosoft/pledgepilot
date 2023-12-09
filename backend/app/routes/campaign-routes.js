@@ -20,4 +20,8 @@ router.route('/:campaignName')
 router.route('/campaign/:campaignId')
     .get(campaignController.getCampaignById)
 
+// testing: '/camapigns/upload
+router.route('/upload')
+    .post(campaignController.uploadCampaignImages)
+
 export default router

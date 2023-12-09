@@ -1,4 +1,5 @@
 export const setResponse = ({ type, data }, response) => {
+  console.log('data in setResponse: ' + data);
   if (type == "LOGIN") {
     response
       .status(200)

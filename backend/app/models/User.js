@@ -45,12 +45,12 @@ const User = new Schema(
       type: String,
       required: false,
     },
-    hashedPassword: { type: String, required: true },
+    hashedPassword: { type: String, required: false },
     refreshToken: {
       type: String,
       required: false
     },
-    salt: { type: String, required: true },
+    salt: { type: String, required: false },
   },
   {
     versionKey: false,

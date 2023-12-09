@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
+import { PaymentButton } from '../../Components/Payment/PaymentButton'
 
 const CampaignPage = () => {
     // define state
@@ -28,6 +29,8 @@ const CampaignPage = () => {
     <div className='campaign-page'>
         <h1>{campaign.name}</h1>
         <p>We are on the campaign page... It will be updated soon!</p>
+        <label>Donate to {campaign.name}</label>
+        <PaymentButton />
     </div>
   )
 }

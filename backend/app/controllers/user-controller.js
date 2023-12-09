@@ -1,16 +1,29 @@
 import * as userService from "../services/user-service.js";
 import { setResponse, setErrorResponse } from "./response-handler.js";
+import { setDataResponse, setDataErrorResponse } from "./simple-response-handler.js";
 
 // Controller to Create user
 export const addUser = async (request, response) => {
   try {
     const newUser = { ...request.body };
-    console.log(newUser);
     // const firstName = newUser.fir
     const user = await userService.create(newUser);
     setResponse({"type": "REGISTER", "data":user}, response);
   } catch (error) {
     setErrorResponse(error, response);
+  }
+};
+
+export const oauthAddUser = async (request, response) => {
+  try {
+    const newUser = { ...request.body };
+    console.log('New user' + newUser);
+    // const firstName = newUser.fir
+    const user = await userService.createOauthUser(newUser);
+    setDataResponse(user, response)
+    // setResponse({"type": "REGISTER", "data":user}, response);
+  } catch (error) {
+    setDataErrorResponse(error, response);
   }
 };
 
@@ -45,11 +58,23 @@ export const getUserByEmailId = async (request, response) => {
   try {
     const email = request.params.email;
     const user = await userService.findByEmailId(email);
+    console.log('found user by email: ' + user);
     setResponse({"type":"SEARCH_BY_EMAILID","data":user}, response);
   } catch (error) {
     setErrorResponse(error, response);
   }
 };
+
+// controller to handle OAuth 
+export const getOAuthUser = async (request, response) => {
+  try{
+    const email = request.params.email;
+    const user = await userService.findOAuthUser(email);
+    setDataResponse(user, response)
+  } catch (error){
+    setDataErrorResponse(error, response)
+  }
+}
 
 export const searchUsers = async (request, response) => {
   try {
