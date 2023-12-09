@@ -9,6 +9,10 @@ const CommunitySchema = new Schema({
         type: String,
         required: true
     },
+    campaignID: {
+        type: Number,
+        required: true
+    },
     description: {
         type: String,
         required: true

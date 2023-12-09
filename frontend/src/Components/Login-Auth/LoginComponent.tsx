@@ -1,32 +1,26 @@
 import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import "./LoginComponent.css";
 import GoogleLoginComponent from "./GoogleLoginComponent";
+import { loginUser } from "../../services/userServices";
 function LoginComponent() {
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Access the form data using refs
-    setFormData({...formData, username: usernameRef.current?.value || ''});
-    setFormData({...formData, password: passwordRef.current?.value || ''})
-    // console.log(usernameRef.current?.value , passwordRef.current?.value);
-
+    loginUser(formData);
   };
 
-  // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  // };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
   return (
     <>
@@ -35,27 +29,27 @@ function LoginComponent() {
         Login to experience a new world of PledgePilot
       </p>
       <form className="login-form" onSubmit={handleLogin}>
-        <label htmlFor="username">Email:</label>
+        <label htmlFor="email">Email:</label>
         <input
+          className="login-input"
           type="text"
           id="login-username"
-          name="username"
-          placeholder="username"
-          ref={usernameRef}
-          // onChange={handleChange}
-          // value={formData.username}
+          name="email"
+          placeholder="email"
+          onChange={handleChange}
+          value={formData.email}
           required
         />
 
         <label htmlFor="password">Password:</label>
         <input
+          className="login-input"
           type="password"
           id="login-password"
           name="password"
           placeholder="password"
-          ref={passwordRef}
-          // onChange={handleChange}
-          // value={formData.password}
+          onChange={handleChange}
+          value={formData.password}
           required
         />
 
@@ -64,7 +58,7 @@ function LoginComponent() {
           <GoogleLoginComponent />
           <br />
           <div className="forgot-password">
-            <a href="#">Forgot Password?</a>
+            <a className="forgot-password-link" href="#">Forgot Password?</a>
           </div>
         </div>
       </form>

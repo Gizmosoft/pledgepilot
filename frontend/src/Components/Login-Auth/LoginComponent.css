@@ -9,7 +9,7 @@ label {
   color: #9599AA;
 }
 
-input {
+.login-input {
   width: 100%;
   padding: 8px;
   margin-bottom: 16px;
@@ -66,11 +66,12 @@ button:hover {
 }
 .forgot-password{
   font-size: 11px;
+  color: #2ACBC4;
 }
 
 a{
   text-decoration: none;
-  color: #2ACBC4;
+  
 }
 input::placeholder {
   font-size: 11px;

@@ -1,55 +1,83 @@
-import * as userService from '../services/user-service.js';
-import { setResponse, setErrorResponse } from './response-handler.js';
+import * as userService from "../services/user-service.js";
+import { setResponse, setErrorResponse } from "./response-handler.js";
 
 // Controller to Create user
 export const addUser = async (request, response) => {
-    try {
-        const newUser = {...request.body}
-        const user = await userService.create(newUser)
-        setResponse(user, response)        
-    } catch (error) {
-        setErrorResponse(error, response)
+  try {
+    const newUser = { ...request.body };
+    console.log(newUser);
+    // const firstName = newUser.fir
+    const user = await userService.create(newUser);
+    setResponse({"type": "REGISTER", "data":user}, response);
+  } catch (error) {
+    setErrorResponse(error, response);
+  }
+};
+
+export const userLogin = async (request,response) =>{
+    try{
+        const userCredentials = {...request.body};
+        console.log(request?.body,"body");
+        const email = userCredentials.emailAddress;
+        const password = userCredentials.password;
+        const login = await userService.userLogin(email,password);
+        setResponse({"type": "LOGIN", "data":login}, response);
+    } catch(error){
+        console.log(error);
+        setErrorResponse(error, response);
     }
+  
 }
 
-// Controller for Create user
+// Controller for get user by id
 export const getUser = async (request, response) => {
-    try {
-      const id = request.params.id;
-      const user = await userService.findById(id);
-        setResponse(user, response)        
-    } catch (error) {
-        setErrorResponse(error, response)
-    }
-}
+  try {
+    console.log(request.params);
+    const id = request.params.id;
+    const user = await userService.findById(id);
+    setResponse({"type":"GET_USER_BY_ID","data":user}, response);
+  } catch (error) {
+    setErrorResponse(error, response);
+  }
+};
+
+export const getUserByEmailId = async (request, response) => {
+  try {
+    const email = request.params.email;
+    const user = await userService.findByEmailId(email);
+    setResponse({"type":"SEARCH_BY_EMAILID","data":user}, response);
+  } catch (error) {
+    setErrorResponse(error, response);
+  }
+};
 
 export const searchUsers = async (request, response) => {
-    try {
-      const params = {...request.query};
-      const users = await userService.search(params);
-      setResponse(users,response);       
-    } catch (error) {
-        setErrorResponse(error, response)
-    }
-}
+  try {
+    const params = { ...request.query };
+    const users = await userService.search(params);
+    setResponse({"type":"SEARCH_USERS","data":users}, response);
+  } catch (error) {
+    setErrorResponse(error, response);
+  }
+};
 export const updateUser = async (request, response) => {
-    try {
-      const id = request.params.id;
-      const updateUser = {...request.body};
-      await userService.update(updateUser,id);
-      const updatedUser = await userService.findById(id);
-      setResponse(updatedUser,response);       
-    } catch (error) {
-        setErrorResponse(error, response)
-    }
-}
+  try {
+    const id = request.params.id;
+    const updateUser = { ...request.body };
+    await userService.update(updateUser, id);
+    const updatedUser = await userService.findById(id);
+    setResponse({"type":"UPDATE_USER","data":updatedUser}, response);
+  } catch (error) {
+    setErrorResponse(error, response);
+  }
+};
 export const removeUser = async (request, response) => {
   try {
     const id = request.params.id;
     await userService.remove(id);
     const removedUser = `deleted user with id ${id}`;
-    setResponse(removedUser,response);       
+    setResponse({"type":"REMOVE_USER","data":removedUser}, response);
   } catch (error) {
-      setErrorResponse(error, response)
+    setErrorResponse(error, response);
   }
-}
+};

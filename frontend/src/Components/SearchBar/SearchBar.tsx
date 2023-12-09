@@ -1,16 +1,14 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { MDBInputGroup, MDBInput, MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
+import './SearchBar.css';
 
-const Search: FC = () => {
+export default function Search() {
     return (
-      
-            <MDBInputGroup className='search-container'>
-                <MDBInput  className='search-box'/>
-                <MDBBtn rippleColor='dark' className='search-icon'>
-                    <MDBIcon icon='search'/>
-                </MDBBtn>
+        <div>
+            <MDBInputGroup >
+                <MDBInput placeholder='Search for a Campaign' className='Search'/>
             </MDBInputGroup>
+        </div>
+
     );
 }
-
-export default Search;
