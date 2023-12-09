@@ -18,18 +18,16 @@ const GoogleLoginComponent = () => {
         }
         try {
             // const userDBResponse = await fetch('http://localhost:3001/users/' + 'kartikeyhebbar@gmail.com')
-            const userDBResponse = await fetch('http://localhost:3001/users/email/' + user.email)
+            const userDBResponse = await fetch('http://localhost:3001/users/oauth/' + user.email)
             console.log('userDBResponse:');
             console.log(userDBResponse);
             
             const userJsonResponse = await userDBResponse.json()
-            console.log('HI');
             
             console.log(userJsonResponse);
 
             // if user doesn't exist yet, then add the user to the DB
-            // if (Object.keys(userJsonResponse).length === 0) 
-            if (userJsonResponse === '') {
+            if (Object.keys(userJsonResponse).length === 0) {
                 console.log('Reached here inside try!');
                 
                 // use the post api endpoint
@@ -48,7 +46,7 @@ const GoogleLoginComponent = () => {
                         })
                     })
                     if(response.ok){
-                        const addedUser = await fetch('http://localhost:3001/users/email/' + user.email)
+                        const addedUser = await fetch('http://localhost:3001/users/oauth/' + user.email)
                         const addedUserJson = await addedUser.json()
                         console.log(addedUser);
                         sessionStorage.setItem("user", JSON.stringify(addedUserJson[0]))
@@ -63,7 +61,7 @@ const GoogleLoginComponent = () => {
             }
             // if user Exists, then login the user
             else {
-                sessionStorage.setItem("user", JSON.stringify(userJsonResponse))
+                sessionStorage.setItem("user", JSON.stringify(userJsonResponse[0]))
                 navigate('/dashboard')
             }
         } catch (error: any) {

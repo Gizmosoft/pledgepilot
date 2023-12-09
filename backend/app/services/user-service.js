@@ -85,6 +85,12 @@ export const findByEmailId = async (email) => {
   console.log(user);
   return user[0];
 };
+
+// find OAuth user in the DB
+export const findOAuthUser = async (email) => {
+  const user = await User.find({ emailAddress: email})
+  return user;
+}
 //find user from query params
 export const search = async (params = {}) => {
   const users = await User.find(params).exec();

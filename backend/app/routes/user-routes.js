@@ -17,6 +17,9 @@ userRouter
 
 // userRouter.route(verifyJWT,"/email/:email").get(userController.getUserByEmailId);
 userRouter.route("/email/:email").get(userController.getUserByEmailId);
+// OAuth route
+userRouter.route('/oauth/:email')
+  .get(userController.getOAuthUser)
 userRouter
   .route("/register").post(userController.addUser);
 

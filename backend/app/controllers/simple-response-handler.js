@@ -1,9 +1,9 @@
-export const setResponse = (data, response) => {
+export const setDataResponse = (data, response) => {
     response.status(200)
             .json(data)
 }
 
-export const setErrorResponse = (error, response) => {
+export const setDataErrorResponse = (error, response) => {
     response.status(500)
             .json({
                 code: "ServiceError",
