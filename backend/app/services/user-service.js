@@ -13,11 +13,11 @@ export const create = async (newUser) => {
 
     console.log(
       "first name: " +
-        user.FirstName +
+        user.firstName +
         "last name: " +
-        user.LastName +
+        user.lastName +
         "email: " +
-        user.EmailAddress +
+        user.hashedPassword +
         "HashPassword: " +
         hashedPassword
     );
@@ -28,6 +28,15 @@ export const create = async (newUser) => {
     console.log(error);
   }
 };
+
+export const createOauthUser = async (newUser) => {
+  try {
+    const user = new User(newUser)
+    return user.save() 
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export const userLogin = async (email, password) => {
   const foundUser = await findByEmailId(email);
@@ -71,8 +80,9 @@ export const findById = async (id) => {
   return user;
 };
 // find user using email id
-export const findByEmailId = async (id) => {
-  const user = await User.find({ EmailAddress: id });
+export const findByEmailId = async (email) => {
+  const user = await User.find({ emailAddress: email });
+  console.log(user);
   return user[0];
 };
 //find user from query params

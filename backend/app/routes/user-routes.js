@@ -23,4 +23,7 @@ userRouter
   userRouter
   .route("/login").post(userController.userLogin);
 
+userRouter.route("/oauth/register")
+  .post(userController.oauthAddUser)
+
 export default userRouter;

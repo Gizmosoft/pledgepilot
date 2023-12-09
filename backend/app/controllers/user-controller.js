@@ -5,9 +5,20 @@ import { setResponse, setErrorResponse } from "./response-handler.js";
 export const addUser = async (request, response) => {
   try {
     const newUser = { ...request.body };
-    console.log(newUser);
     // const firstName = newUser.fir
     const user = await userService.create(newUser);
+    setResponse({"type": "REGISTER", "data":user}, response);
+  } catch (error) {
+    setErrorResponse(error, response);
+  }
+};
+
+export const oauthAddUser = async (request, response) => {
+  try {
+    const newUser = { ...request.body };
+    console.log('New user' + newUser);
+    // const firstName = newUser.fir
+    const user = await userService.createOauthUser(newUser);
     setResponse({"type": "REGISTER", "data":user}, response);
   } catch (error) {
     setErrorResponse(error, response);
@@ -45,6 +56,7 @@ export const getUserByEmailId = async (request, response) => {
   try {
     const email = request.params.email;
     const user = await userService.findByEmailId(email);
+    console.log('found user by email: ' + user);
     setResponse({"type":"SEARCH_BY_EMAILID","data":user}, response);
   } catch (error) {
     setErrorResponse(error, response);

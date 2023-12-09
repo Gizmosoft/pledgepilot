@@ -1,6 +1,6 @@
 import { response } from 'express'
 import * as campaignService from '../services/campaign-service.js'
-import { setResponse, setErrorResponse } from './response-handler.js'
+import { setResponse, setErrorResponse } from './simple-response-handler.js'
 
 // Controller for Discover API
 export const discover = async (request, response) => {

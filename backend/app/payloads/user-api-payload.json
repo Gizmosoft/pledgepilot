@@ -24,10 +24,10 @@
         }
     },
     {
-        "FirstName": "Kartikey",
-        "LastName": "Hebbar",
-        "Email": "kartikey.hebbar@gmail.com",
-        "AccountCreationDate": "2023-12-03"
+        "firstName": "Kartikey",
+        "lastName": "Hebbar",
+        "emailAddress": "kartikey.hebbar@gmail.com",
+        "accountCreationDate": "2023-12-08"
     },
     {
         "AccountCreationDate": "2023-12-04",
