@@ -9,6 +9,8 @@ const initialize = (app) => {
     app.use(cors())
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
+    // Serve uploaded images statically
+    app.use('/uploads', express.static('public'));
 
     // Separate DB configs for the scope of assignment
     // MongoDB config

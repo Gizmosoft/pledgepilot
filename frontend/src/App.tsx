@@ -9,6 +9,8 @@ import Home from './Components/Home/Home';
 import ProtectedRoutes from './Utils/ProtectedRoutes';
 import CampaignPage from './Pages/Campaign/CampaignPage';
 import DiscoverPage from './Pages/Discover/DiscoverPage';
+import HomePage from './Pages/Home/HomePage';
+import ImageUploadTest from './Pages/Tests/ImageUploadTest';
 
 function App() {
   return (
@@ -47,6 +49,11 @@ function App() {
           </Route>
           <Route path='/campaigns/campaign/:campaignId' element={
             <CampaignPage />
+          }>
+          </Route>
+          <Route path='/test' element={
+            // Test Component here...
+            <ImageUploadTest />
           }>
           </Route>
         </Routes>
