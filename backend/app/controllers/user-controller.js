@@ -45,7 +45,6 @@ export const userLogin = async (request,response) =>{
 // Controller for get user by id
 export const getUser = async (request, response) => {
   try {
-    console.log(request.params);
     const id = request.params.id;
     const user = await userService.findById(id);
     setResponse({"type":"GET_USER_BY_ID","data":user}, response);

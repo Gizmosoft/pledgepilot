@@ -7,6 +7,9 @@ const paymentRouter = express.Router()
 paymentRouter.route('/')
     .post(paymentController.stripePaymentHandler)
 
+paymentRouter.route('/:payId')
+    .get(paymentController.getPaymentById)
+
 paymentRouter.route('/create')
     .post(paymentController.addPaymentToPaymentDB)
 

@@ -2,21 +2,21 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const PaymentSchema = new Schema(
+const RewardSchema = new Schema(
   {
-    campaignName: {
+    paymentId: {
       type: Schema.Types.ObjectId,
-      ref: "Campaign",
+      ref: "PaymentModel",
     },
-    paidBy: {
+    campaign: {
+      type: Schema.Types.ObjectId,
+      ref: "Campaign"
+    },
+    rewardedTo: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    amount: {
-      type: Number,
-      required: true,
-    },
-    rewardGenerated: {
+    rewardAmt: {
       type: Number,
       required: true,
     },
@@ -30,6 +30,6 @@ const PaymentSchema = new Schema(
   }
 );
 
-const PaymentModel = mongoose.model("Payment", PaymentSchema);
+const RewardModel = mongoose.model("Reward", RewardSchema);
 
-export default PaymentModel;
+export default RewardModel;

@@ -13,7 +13,7 @@ userRouter
   .route("/id/:id")
   .get(userController.getUser)
   .put(userController.updateUser)
-  .delete(userController.removeUser); // call addCampaign function in controller
+  .delete(userController.removeUser) // call addCampaign function in controller
 
 // userRouter.route(verifyJWT,"/email/:email").get(userController.getUserByEmailId);
 

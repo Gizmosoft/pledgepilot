@@ -45,20 +45,20 @@ const CampaignPage = () => {
             id="textInput"
             editor={ClassicEditor}
             data="<p>Hello from CKEditor&nbsp;5!</p>"
-            onReady={editor => {
+            onReady={(editor: {}) => {
               ckEditor = editor;
               // You can store the "editor" and use when it is needed.
               console.log('Editor is ready to use!', editor);
             }}
-            onChange={(event, ckEditor) => {
+            onChange={(event: any, ckEditor: { getData: () => any; }) => {
               console.log(event);
               console.log(ckEditor.getData());
               onChangeInEditor(event, ckEditor);
             }}
-            onBlur={(event, ckEditor) => {
+            onBlur={(event: any, ckEditor: any) => {
               console.log('Blur.', ckEditor);
             }}
-            onFocus={(event, ckEditor) => {
+            onFocus={(event: any, ckEditor: any) => {
               console.log('Focus.', ckEditor);
             }}
           />
