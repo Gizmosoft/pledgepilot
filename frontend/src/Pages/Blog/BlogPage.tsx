@@ -10,7 +10,7 @@ const BlogPage = () => {
     useEffect(() => {
         const fetchCampaign = async() => {
             // collect response
-            const blogResponse = await fetch('http://localhost:3001/community-blog/' + blogID)
+            const blogResponse = await fetch('http://localhost:3001/Blog/' + blogID)
             // get campaign Data
             const blogData = await blogResponse.json()   
             // set the campaign data to be received by the UI
@@ -21,7 +21,7 @@ const BlogPage = () => {
     )
 
     if(!blog || !blog._id) {
-        return <h1>404: Campaign Not Found!</h1>
+        return <h1>404: Blog Not Found!</h1>
     }
 
   return (

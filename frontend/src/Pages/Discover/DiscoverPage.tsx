@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CampaignTile from '../../Components/Campaign/CampaignTile';
 import './DiscoverPage.css';
-import Search from '../../Components/SearchBar/SearchBar';
 const DiscoverPage = () => {
     // create a state for campaigns
     const [campaigns, setCampaigns] = useState<any>()
@@ -36,7 +35,7 @@ const DiscoverPage = () => {
         {/* Grid to show the campaigns in UI */}
         {/* <div className='campaigns-grid'>
             { campaigns.map((campaign: { _id: any; name: any; }) => <CampaignTile key={campaign._id} campaignId={campaign._id} campaignName={campaign.name} />)}
-        </div> */}
+        </div> */}       
     </div>
   )
 }
