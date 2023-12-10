@@ -50,7 +50,7 @@ export const getCampaignById = async(request, response) => {
 export const uploadCampaignImages = async(request, response) => {
     try {
         const uploadResponse = campaignService.uploadImages(request, response)
-        setResponse(uploadResponse, response)
+        setDataResponse(uploadResponse, response)
     } catch (error) {
         setDataErrorResponse(error, response)
     }
