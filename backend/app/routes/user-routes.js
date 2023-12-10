@@ -16,10 +16,13 @@ userRouter
   .delete(userController.removeUser) // call addCampaign function in controller
 
 // userRouter.route(verifyJWT,"/email/:email").get(userController.getUserByEmailId);
-userRouter.route("/email/:email").get(userController.getUserByEmailId);
+
 // OAuth route
 userRouter.route('/oauth/:email')
   .get(userController.getOAuthUser)
+// userRouter.route("/email/:email").get(verifyJWT,userController.getUserByEmailId).post(userController.updateUserByEmailAddress);
+userRouter.route("/email/:email").get(userController.getUserByEmailId).post(userController.updateUserByEmailAddress);
+// userRouter.route("/email/:email").get(userController.getUserByEmailId);
 userRouter
   .route("/register").post(userController.addUser);
 

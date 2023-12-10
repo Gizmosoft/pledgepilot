@@ -40,7 +40,6 @@ export const createOauthUser = async (newUser) => {
 
 export const userLogin = async (email, password) => {
   const foundUser = await findByEmailId(email);
-  console.log(foundUser);
   if (!foundUser) {
     throw new Error("User not found");
   }
@@ -48,7 +47,7 @@ export const userLogin = async (email, password) => {
   if (match) {
     const accessToken = jwt.sign(
       {
-        username: foundUser,
+        user: foundUser.emailAddress,
       },
       process.env.ACCESS_TOKEN_SECRET,
       {
@@ -57,7 +56,7 @@ export const userLogin = async (email, password) => {
     );
     const refreshToken = jwt.sign(
       {
-        username: foundUser,
+        user: foundUser.emailAddress,
       },
       process.env.REFRESH_TOKEN_SECRET,
       {
@@ -66,8 +65,9 @@ export const userLogin = async (email, password) => {
       
     );
     foundUser.refreshToken = refreshToken;
+    new User(foundUser).save();
     //save this user in the db
-    return {accessToken}
+    return {accessToken , refreshToken ,foundUser}
   } else {
     console.log("incorrect password");
   }
@@ -93,6 +93,12 @@ export const findOAuthUser = async (email) => {
   const user = await User.find({ emailAddress: email})
   return user;
 }
+
+export const findByRefreshToken = async (userRefreshToken) => {
+  const user = await User.find({ refreshToken: userRefreshToken});
+  return user[0];
+};
+
 //find user from query params
 export const search = async (params = {}) => {
   const users = await User.find(params).exec();
@@ -104,7 +110,18 @@ export const update = async (updateUser, id) => {
   // console.log(user,"service");
   // return user;
 };
+// update user by id
+export const updateByEmailAddress = async (updateUser, emailAddress) => {
+  console.log(updateUser,"update user");
+  console.log(emailAddress,"emailAddress");
+  const updatedUser = await User.findOneAndUpdate(
+    { emailAddress: emailAddress },
+    { $set: updateUser },
+    { new: true } // Return the updated document
+  );
+  console.log(updatedUser);
 
+};
 //remove user
 export const remove = async (id) => {
   try {

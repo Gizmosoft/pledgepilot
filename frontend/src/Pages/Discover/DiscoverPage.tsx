@@ -26,6 +26,7 @@ const DiscoverPage = () => {
   return (
     <div className='discover-page'>
         <h3>Showing Campaigns on PledgePilot</h3>
+        <Search />
         <div className='card-container'>
             {
                 campaigns.map((campaign: any) => <CampaignTile key={campaign._id} campaignObject={campaign}/>)
@@ -34,7 +35,7 @@ const DiscoverPage = () => {
         {/* Grid to show the campaigns in UI */}
         {/* <div className='campaigns-grid'>
             { campaigns.map((campaign: { _id: any; name: any; }) => <CampaignTile key={campaign._id} campaignId={campaign._id} campaignName={campaign.name} />)}
-        </div> */}
+        </div> */}       
     </div>
   )
 }

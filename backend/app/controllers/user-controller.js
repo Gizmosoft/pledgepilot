@@ -30,10 +30,10 @@ export const oauthAddUser = async (request, response) => {
 export const userLogin = async (request,response) =>{
     try{
         const userCredentials = {...request.body};
-        // console.log(request?.body,"body");
         const email = userCredentials.emailAddress;
         const password = userCredentials.password;
         const login = await userService.userLogin(email,password);
+        console.log(login,"login")
         setResponse({"type": "LOGIN", "data":login}, response);
     } catch(error){
         console.log(error);
@@ -54,6 +54,7 @@ export const getUser = async (request, response) => {
 };
 
 export const getUserByEmailId = async (request, response) => {
+  console.log(request);
   try {
     const email = request.params.email;
     const user = await userService.findByEmailId(email);
@@ -90,6 +91,17 @@ export const updateUser = async (request, response) => {
     const updateUser = { ...request.body };
     await userService.update(updateUser, id);
     const updatedUser = await userService.findById(id);
+    setResponse({"type":"UPDATE_USER","data":updatedUser}, response);
+  } catch (error) {
+    setErrorResponse(error, response);
+  }
+};
+export const updateUserByEmailAddress = async (request, response) => {
+  try {
+    const emailAddress = request.params.email;
+    const updateUser = { ...request.body };
+    await userService.updateByEmailAddress(updateUser, emailAddress);
+    const updatedUser = await userService.findByEmailId(emailAddress);
     setResponse({"type":"UPDATE_USER","data":updatedUser}, response);
   } catch (error) {
     setErrorResponse(error, response);
