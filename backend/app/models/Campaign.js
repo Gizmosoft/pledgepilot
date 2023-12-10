@@ -12,43 +12,45 @@ const CampaignSchema = new Schema({
         type: String,
         required: true
     },
-    // owner: {
-    //     userId: {
-    //         type: String,
-    //         required: true
-    //     }
-    // },
-    owner: { type: Schema.Types.ObjectId, ref: "User" },
+    owner: {
+        // userId: {
+        //     type: String,
+        //     required: true
+        // }
+        type: String,
+        required: true
+    },
+    // owner: { type: Schema.Types.ObjectId, ref: "User" },
     community: {
         comment: {
             id: {
                 type: String,
-                required: true
+                //required: true
             },
             body: {
                 type: String,
-                required: true
+                //required: true
             },
             owner: {
                 userId: {
                     type: String,
-                    required: true
+                    //required: true
                 }
             }
         },
         blog: {
             id: {
                 type: String,
-                required: true
+                //required: true
             },
             body: {
                 type: String,
-                required: true
+                //required: true
             },
             owner: {
                 userId: {
                     type: String,
-                    required: true
+                    //required: true
                 }
             }
         }
@@ -56,17 +58,17 @@ const CampaignSchema = new Schema({
     milestone: {
         target: {
             type: String,
-            required: true
+            //required: true
         },
         progress: {
             type: String,
-            required: true
+            //required: true
         }
     },
     payments: {
         count: {
             type: String,
-            required: true
+            //required: true
         }
     }
 },
