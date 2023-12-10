@@ -74,9 +74,11 @@ export const userLogin = async (email, password) => {
 };
 // find user using id
 export const findById = async (id) => {
-  const user = await User.findById(id)
-    .populate(["ProjectsFollowed", "CreatedProjects"])
-    .exec();
+  const user = await User.findById(id).exec();
+  if(user.projectsFollowed.length !== 0)
+    user.populate(["ProjectsFollowed"]).exec()
+  if(user.createdProjects.length !== 0)
+    user.populate(["CreatedProjects"]).exec()
   return user;
 };
 // find user using email id

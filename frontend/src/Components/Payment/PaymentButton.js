@@ -48,8 +48,6 @@ export const PaymentButton = ({campaign}) => {
       });
       const { status } = response;
       if(status === 200){
-        console.log('Payment was success - in UI: Paid: ' + donationAmount);
-        console.log('Reward would be: ' + donationAmount*0.10);
         console.log(campaign);
         console.log(getUserInTheSession());
         try{
@@ -78,7 +76,7 @@ export const PaymentButton = ({campaign}) => {
   };
   return (
     <div className="payment-box">
-      <h4>Donate</h4>
+      <h4>Donate❤️</h4>
       <p></p>
       <div className="amount-box">
         <input

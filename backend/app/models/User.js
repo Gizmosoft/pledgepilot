@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import campaignModel from "./Campaign.js";
 
 const Schema = mongoose.Schema;
 
@@ -40,7 +39,7 @@ const User = new Schema(
         type: Schema.Types.ObjectId,
         ref: "Campaign", // Reference to the Campaign model
       },
-    ],
+    ],    
     accountCreationDate: {
       type: String,
       required: false,
