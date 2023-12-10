@@ -26,7 +26,15 @@ body {
       monospace;
   } */
   
+  .navbar-container {
+           background-color: #06D6A0;
+  }
+
+  .navbar-text {
+    color: #ffffff;
+  }
   
+
   .navbar-brand {
     position: relative;
     margin-left: auto;
@@ -59,6 +67,19 @@ body {
     width: 500px;
     
   }
+
+
+  .dive_button {
+    position: relative;
+    top: 200px;
+    left: 600px;
+    width: 300px;
+    background-color: #EF476F;
+    color: #ffffff;
+
+}
+
+
   
   .search-box {
     /* width: 500px; */
@@ -79,6 +100,9 @@ body {
     position: absolute;
     bottom: 0px;
     width: 100%;
+    background-color: #06D6A0;
+  
+
     /* height: 140px; */
   }
   
@@ -86,7 +110,7 @@ body {
     display: grid;
     grid-template-columns: repeat(3,1fr);
     margin-top: 100px; 
-    margin-left: 290px;
+    margin-left: 370px;
     border: 1px solid black;
     padding: 10px;
     width: 900px;
@@ -108,10 +132,11 @@ body {
     font-size: 12px;
   }
   
-  .logo2 {
+  .logo {
     display: flex;
     justify-content: left;
     height: 140px;
+    width: 215px;
     padding: 0px;
     margin-left: 50px;
   }
@@ -131,6 +156,7 @@ body {
     top: 20px;
     display: flex;
     gap: 5px;
+    
   }
   
   .icon {
@@ -138,7 +164,6 @@ body {
     position: relative;
     top: 40px;
     left: -190px;
-    
   }
   
   .footer-list {
@@ -146,4 +171,14 @@ body {
     flex-direction: column;
     float: right;
     margin-top: 40px;
+  }
+
+  .footer-list > h6,h5 {
+    color: white;
+  }
+
+  .navbar_logo {
+    display: flex;
+    width: 300px;
+    height: 100px;
   }
