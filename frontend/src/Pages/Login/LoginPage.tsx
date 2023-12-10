@@ -5,7 +5,7 @@ import SignUp from "../../Components/Signup/Signup";
 // import loginPageImage from '../../assets/LoginPageImg.jpeg';
 const loginPageImage = require("../../assets/LoginPageImg.jpg");
 function LoginPage() {
-  const [isRegistered, setIsRegistered] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(true);
 
   function switchComponent(){
     if(isRegistered){

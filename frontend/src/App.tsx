@@ -15,7 +15,7 @@ import CreateCampaign from './Pages/CreateCampaign/CreateCampaign';
 function App() {
   return (
     <div className='App'>
-      <Navbar />
+      <NavBar2 />
       <Router>
         <Routes>
           <Route path='/' element={

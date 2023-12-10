@@ -1,6 +1,8 @@
 import React from 'react';
 import { MDBInputGroup, MDBInput, MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
 import './SearchBar.css';
+import Button from 'react-bootstrap/Button';
+
 
 export default function Search() {
     return (
@@ -8,6 +10,7 @@ export default function Search() {
             <MDBInputGroup >
                 <MDBInput placeholder='Search for a Campaign' className='Search'/>
             </MDBInputGroup>
+
         </div>
 
     );
