@@ -1,17 +1,32 @@
 import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import "./LoginComponent.css";
 import GoogleLoginComponent from "./GoogleLoginComponent";
+
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userLogin} from "../../store/UserSlice";
 import { loginUser } from "../../services/userServices";
+import { AppDispatch } from "../../store/store";
+
 function LoginComponent() {
-  const [formData, setFormData] = useState({
-    email: "",
+  const navigate = useNavigate();
+  const [formData, setFormData]  = useState({
+    emailAddress: "",
     password: "",
   });
-
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const dispatch : AppDispatch = useDispatch();
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    loginUser(formData);
+    dispatch(userLogin(formData)).then((result)=>{
+      if(result.payload){
+        navigate("/discover");
+      }
+    });
+    // const user = await loginUser(formData);
+    // console.log(user);
+    // if (user) {
+    //   navigate("/discover");
+    // }
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,15 +44,15 @@ function LoginComponent() {
         Login to experience a new world of PledgePilot
       </p>
       <form className="login-form" onSubmit={handleLogin}>
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="emailAddress">Email:</label>
         <input
           className="login-input"
           type="text"
           id="login-username"
-          name="email"
+          name="emailAddress"
           placeholder="email"
           onChange={handleChange}
-          value={formData.email}
+          value={formData.emailAddress}
           required
         />
 
@@ -58,7 +73,9 @@ function LoginComponent() {
           <GoogleLoginComponent />
           <br />
           <div className="forgot-password">
-            <a className="forgot-password-link" href="#">Forgot Password?</a>
+            <a className="forgot-password-link" href="#">
+              Forgot Password?
+            </a>
           </div>
         </div>
       </form>
