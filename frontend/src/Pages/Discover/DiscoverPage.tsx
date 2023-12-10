@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import CampaignTile from '../../Components/Campaign/CampaignTile';
 import './DiscoverPage.css';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 const DiscoverPage = () => {
     // create a state for campaigns
     const [campaigns, setCampaigns] = useState<any>()
@@ -35,6 +38,28 @@ const DiscoverPage = () => {
         {/* <div className='campaigns-grid'>
             { campaigns.map((campaign: { _id: any; name: any; }) => <CampaignTile key={campaign._id} campaignId={campaign._id} campaignName={campaign.name} />)}
         </div> */}
+        {
+             <div className="App">
+             <h2>Using CKEditor&nbsp;5 build in React</h2>
+             <CKEditor
+                 editor={ ClassicEditor }
+                 data="<p>Hello from CKEditor&nbsp;5!</p>"
+                 onReady={ editor => {
+                     // You can store the "editor" and use when it is needed.
+                     console.log( 'Editor is ready to use!', editor );
+                 } }
+                 onChange={ ( event ) => {
+                     console.log( event );
+                 } }
+                 onBlur={ ( event, editor ) => {
+                     console.log( 'Blur.', editor );
+                 } }
+                 onFocus={ ( event, editor ) => {
+                     console.log( 'Focus.', editor );
+                 } }
+             />
+         </div>
+        }
     </div>
   )
 }
