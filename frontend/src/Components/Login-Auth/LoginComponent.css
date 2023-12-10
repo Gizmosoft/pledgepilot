@@ -27,7 +27,7 @@ button {
 }
 
 button:hover {
-  transform: scale(0.8);
+  transform: scale(0.96);
 }
 .welcome-text{
   color: #9599AA;
