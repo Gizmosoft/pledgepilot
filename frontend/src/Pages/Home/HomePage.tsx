@@ -1,7 +1,7 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './HomePage.css';
-// import { Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import Header from '../../Components/Navbar2/NavBar2';
 import Search from '../../Components/SearchBar/SearchBar';
 import Footer from '../../Components/Footer/Footer';
@@ -15,8 +15,9 @@ function HomePage() {
       {/* <Header /> */}
       {/* Search Bar */}
       <Stats/>
+      <Button variant="warning" className='dive_button'>Dive into PledgePilot</Button>{' '}
         {/* <Stats /> */}
-        <Search />
+        {/* <Search /> */}
       
       <Footer />
 

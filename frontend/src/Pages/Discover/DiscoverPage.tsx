@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CampaignTile from '../../Components/Campaign/CampaignTile';
 import './DiscoverPage.css';
+import Search from '../../Components/SearchBar/SearchBar';
 const DiscoverPage = () => {
     // create a state for campaigns
     const [campaigns, setCampaigns] = useState<any>()
@@ -26,6 +27,7 @@ const DiscoverPage = () => {
   return (
     <div className='discover-page'>
         <h3>Showing Campaigns on PledgePilot</h3>
+        <Search />
         <div className='card-container'>
             {
                 campaigns.map((campaign: any) => <CampaignTile key={campaign._id} campaignObject={campaign}/>)
