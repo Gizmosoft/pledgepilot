@@ -39,15 +39,15 @@ export const createOauthUser = async (newUser) => {
 }
 
 export const userLogin = async (email, password) => {
-  const foundUser = await findByEmailId(email);
-  if (!foundUser) {
+  const user = await findByEmailId(email);
+  if (!user) {
     throw new Error("User not found");
   }
-  const match = await bcrypt.compare(password, foundUser.hashedPassword);
+  const match = await bcrypt.compare(password, user.hashedPassword);
   if (match) {
     const accessToken = jwt.sign(
       {
-        user: foundUser.emailAddress,
+        user: user.emailAddress,
       },
       process.env.ACCESS_TOKEN_SECRET,
       {
@@ -56,7 +56,7 @@ export const userLogin = async (email, password) => {
     );
     const refreshToken = jwt.sign(
       {
-        user: foundUser.emailAddress,
+        user: user.emailAddress,
       },
       process.env.REFRESH_TOKEN_SECRET,
       {
@@ -64,10 +64,10 @@ export const userLogin = async (email, password) => {
       }
       
     );
-    foundUser.refreshToken = refreshToken;
-    new User(foundUser).save();
+    user.refreshToken = refreshToken;
+    new User(user).save();
     //save this user in the db
-    return {accessToken , refreshToken ,foundUser}
+    return {accessToken , refreshToken ,user}
   } else {
     console.log("incorrect password");
   }
