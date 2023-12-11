@@ -20,6 +20,7 @@ export const addCampaign = async (request, response) => {
         const campaign = await campaignService.create(newCampaign)
         setDataResponse(campaign, response) 
     } catch (error) {
+        console.log(error);
         setDataErrorResponse(error, response)
     }
 }
