@@ -12,15 +12,13 @@ const CampaignSchema = new Schema({
         type: String,
         required: true
     },
-    owner: {
-        // userId: {
-        //     type: String,
-        //     required: true
-        // }
-        type: String,
-        required: true
-    },
-    // owner: { type: Schema.Types.ObjectId, ref: "User" },
+    // owner: {
+    //     userId: {
+    //         type: String,
+    //         required: true
+    //     }
+    // },
+    owner: { type: Schema.Types.ObjectId, ref: "User" },
     community: {
         comment: {
             id: {
