@@ -26,7 +26,7 @@ const DiscoverPage = () => {
   return (
     <div className='discover-page'>
         <h3>Showing Campaigns on PledgePilot</h3>
-        <Search />
+        {/* <Search /> */}
         <div className='card-container'>
             {
                 campaigns.map((campaign: any) => <CampaignTile key={campaign._id} campaignObject={campaign}/>)
