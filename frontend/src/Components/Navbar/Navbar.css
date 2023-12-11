@@ -1,5 +1,5 @@
 nav{
-  background-color: #02B9DD;
+  background-color: #2ACBC4;
   height: 10vh;
   display: flex;
   align-items: center;
@@ -20,4 +20,29 @@ nav{
 }
 .nav-links{
   color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+#profile{
+  position: relative;
+}
+#profile-container{
+  padding: 10px;
+}
+.dropdown{
+  color: black;
+  position: absolute;
+  top: 180%;
+  left: -10px;
+  display: none;
+}
+.show{
+  display: block;
+}
+.dropdown-options{
+  padding: 10px;
+  background-color: rgb(148, 234, 148);
+  border-radius: 5px;
+  border: 1px solid #fff;
+  cursor: pointer;
 }

@@ -8,7 +8,7 @@ axios.defaults.baseURL = "http://localhost:3001/";
 
 axios.interceptors.response.use(res => res, async error =>{
   if(error.response.status === 401) {
-    const response  =  await axios.post("refresh", {},{withCredentials:true});
+    const response  =  await axios.get("refresh/",{withCredentials:true});
 
     if(response.status === 200){
       axios.defaults.headers.common["Authorization"] = `Bearer ${response.data['accessToken']}`

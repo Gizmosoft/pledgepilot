@@ -42,3 +42,20 @@ export const loginUser = async (loginValues: any) => {
     console.log(error);
   }
 };
+export const logoutUser = async () => {
+  
+  try {
+    const response = await axios.get(`/logout`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        withCredentials: true,
+      }
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

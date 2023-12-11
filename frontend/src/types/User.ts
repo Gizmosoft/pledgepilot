@@ -1,3 +1,8 @@
+export interface LoginResponse {
+  accessToken:string;
+  refreshToken?:string;
+  user:User;
+}
 export interface User {
   firstName: string;
   lastName: string;
@@ -9,7 +14,6 @@ export interface User {
   createdProjects: string[]; // Array of Campaign IDs
   accountCreationDate?: string;
   hashedPassword: string;
-  refreshToken?: string;
   salt: string;
   stats?: {
     totalPledged: number;

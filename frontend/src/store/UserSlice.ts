@@ -1,6 +1,6 @@
-import { CaseReducer, SliceCaseReducers, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { loginUser } from "../services/userServices";
-import { User } from "../types/User";
+import { CaseReducer, PayloadAction, SliceCaseReducers, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { loginUser, logoutUser } from "../services/userServices";
+import { LoginResponse, User } from "../types/User";
 import { RootState } from "./store";
 
 interface UserCredentials {
@@ -8,9 +8,9 @@ interface UserCredentials {
   password: string;
 }
 
-interface UserState {
+export interface UserState {
   loading: boolean;
-  user: User | null; // Define a more specific type if possible
+  loginResponse : LoginResponse | null; // Define a more specific type if possible
   error: string | null | undefined;
 }
 
@@ -18,8 +18,26 @@ export const userLogin = createAsyncThunk<any, UserCredentials>(
   "user/loginUser",
   async (userCredentials: UserCredentials) => {
     const response = await loginUser(userCredentials);
-    localStorage.setItem("user",JSON.stringify(response))
+    if(response?.status == 200){
+      localStorage.setItem("user",JSON.stringify(response?.data))
+    }
     return response?.data; // Assuming the response includes a data property
+  }
+);
+
+export const userLogout = createAsyncThunk<any, void>(
+  "user/logoutUser",
+  async () => {
+    try {
+      const response  = await logoutUser(); // You need to implement the logout service
+      if(response?.status == 204){
+        localStorage.removeItem("user");
+      }
+      // If needed, you can dispatch additional actions or perform cleanup here
+      return {}; // You can return an empty object or any data as needed
+    } catch (error) {
+      console.log(error)
+    }
   }
 );
 
@@ -27,24 +45,50 @@ const userSlice : any = createSlice<UserState,SliceCaseReducers<UserState>,any,a
   name: "user",
   initialState: {
     loading: false,
-    user: null,
+    loginResponse: null,
     error: null,
+  } as UserState,
+  reducers: {
+    setUser: (state, action: PayloadAction<LoginResponse>) => {
+      state.loginResponse = action.payload;
+    },
+    clearUser: (state) => {
+      state.loginResponse = null;
+    },
   },
-  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(userLogin.pending, (state) => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(userLogin.fulfilled, (state, action) => {
+    builder.addCase(userLogin.fulfilled, (state, action:any) => {
+      console.log(action.payload);
       state.loading = false;
-      state.user = action.payload;
+      state.loginResponse = action.payload;
+      console.log(state.loginResponse,"state");
+      
     });
     builder.addCase(userLogin.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     });
+
+    //logout
+    builder.addCase(userLogout.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(userLogout.fulfilled, (state) => {
+      state.loading = false;
+      state.loginResponse = null; // Reset the user state upon logout
+    });
+    builder.addCase(userLogout.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message || "Logout failed";
+    });
+
   },
 });
 
 export default userSlice.reducer;
+export const { setUser, clearUser } = userSlice.actions;
