@@ -4,14 +4,14 @@ import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-k
 import { FaTwitter, FaInstagram, FaFacebook, FaYoutube } from 'react-icons/fa'
 
 
-const Logo=require('../../assets/logo.png')
+const Logo=require('../../assets/footer-logo.png')
 
 export default function Footer() {
   return (
 
 
 
-    <MDBFooter  className='text-center text-lg-left footer-container'>
+    <MDBFooter id='footer'  className='text-center text-lg-left footer-container'>
       <MDBContainer className='p-4'>
         <MDBRow>
           <MDBCol lg='6' md='12' className='mb-4 mb-md-0'>

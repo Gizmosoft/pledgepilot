@@ -1,6 +1,8 @@
 .card-container {
+    margin-top: 10vh;
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
     padding: 30px;
+    height: 100%;
 }

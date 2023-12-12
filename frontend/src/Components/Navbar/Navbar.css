@@ -1,12 +1,26 @@
-nav{
-  background-color: #2ACBC4;
+.navbar-component{
+  padding: 3vw;
   height: 10vh;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-around;
+}
+.header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 2px 16px hsla(230, 75%, 32%, 0.15);
+  z-index: 1000;
+}
+.nav-links-container{
+  margin-left: auto;
+  display: flex;
+  gap: 3vw;
 }
 #img-logo{
-  height: 10vh;
+  height: 90px;
 }
 #search-bar{
   padding: 5px;
@@ -19,9 +33,12 @@ nav{
   align-items: center;
 }
 .nav-links{
-  color: #fff;
+  color: #000;
   text-decoration: none;
   cursor: pointer;
+  padding: 10px;
+  display: flex;
+  align-items: center;
 }
 #profile{
   position: relative;

@@ -76,3 +76,6 @@ a{
 input::placeholder {
   font-size: 11px;
 }
+.login-btn{
+  height: 40px;
+}
