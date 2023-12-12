@@ -71,7 +71,6 @@ const CampaignPage = () => {
 
     return (
       <div className='campaign-page'>
-        <p>We are on the campaign page... It will be updated soon!</p>
         <div>
           <form className="campaign-form" onSubmit={saveData}>
             <label htmlFor="title">Campaign Title:</label>
@@ -87,7 +86,7 @@ const CampaignPage = () => {
             />
 
             <div className="App ckStyle">
-              <h2>Using CKEditor&nbsp;5 build in React</h2>
+              <h2>Enter Campaign Details</h2>
               <CKEditor
                 id="textInput"
                 editor={ClassicEditor}

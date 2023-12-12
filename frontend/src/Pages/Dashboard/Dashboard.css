@@ -12,3 +12,9 @@
 .welcome-text{
   margin-bottom: 5vh;
 }
+.created-campaigns , .follow-campaigns{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}

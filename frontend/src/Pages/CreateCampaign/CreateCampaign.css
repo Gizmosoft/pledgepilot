@@ -3,3 +3,10 @@
     height: 300px;
     width: 50%;
   }
+  .campaign-page{
+    margin-top: 10vh;
+    padding: 5vw;
+  }
+  .name-input{
+    margin-bottom: 30px;
+  }

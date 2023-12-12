@@ -31,8 +31,16 @@ function Navbar() {
   };
 
   function handleOpenMenu(): void {
+    console.log(document.querySelector(".dropdown"));
     document.querySelector(".dropdown")?.classList.toggle("show");
   }
+  function redirectToDashboard(): void {
+    navigate("/dashboard");
+    handleOpenMenu();
+  }
+  const userString = sessionStorage.getItem("user") ?? "";
+  const user = JSON.parse(userString);
+  console.log(user.firstName);
   return (
     <header className="header">
 <nav className="navbar-component">
@@ -60,14 +68,15 @@ function Navbar() {
               <div onClick={handleOpenMenu}>
                 {loggedInUser.loginResponse?.user.firstName}
               </div>
-            ) : (
+            ) : user.firstName ? (<div onClick={handleOpenMenu}>{user.firstName}</div>) : (
               <div onClick={navigateToLogin}>Login</div>
-            )}
+            ) }
             <div className="dropdown">
-              {loggedInUser.loginResponse ? (
+              {loggedInUser.loginResponse || user ? (
                 <>
+                <div onClick={redirectToDashboard} className="dropdown-options">Dashboard</div>
                   <div className="dropdown-options">Profile</div>
-                  <div className="dropdown-options" onClick={handleLogout}>
+                  <div id="logout" className="dropdown-options" onClick={handleLogout}>
                     Logout
                   </div>
                 </>
