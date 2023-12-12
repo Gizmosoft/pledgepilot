@@ -19,7 +19,7 @@ function LoginComponent() {
     e.preventDefault();
     dispatch(userLogin(formData)).then((result)=>{
       if(result.payload){
-        navigate("/discover");
+        navigate("/dashboard");
       }
     });
     // const user = await loginUser(formData);

@@ -41,13 +41,13 @@ function App() {
           }>
           </Route>
           {/* /dashboard goes through a protected route - only authenticated users can access this URL */}
-          <Route path='/dashboard' element={
+          {/* <Route element={
             <ProtectedRoutes />
-          }>
+          }> */}
             <Route path='/dashboard' element={
               <Dashboard />
             }>
-            </Route>
+            {/* </Route> */}
           </Route>
           <Route path='/campaigns/campaign/:campaignId' element={
             <CampaignPage />
@@ -58,7 +58,7 @@ function App() {
             <NavBar2 />
             </>
           }></Route>
-          <Route path= '/Create' element={
+          <Route path= '/create' element={
             <CreateCampaign/>
           }></Route>
         </Routes>

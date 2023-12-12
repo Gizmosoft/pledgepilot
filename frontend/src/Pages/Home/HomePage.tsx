@@ -8,7 +8,7 @@ import Footer from "../../Components/Footer/Footer";
 import Stats from "../../Components/Stats/Stats";
 import { Link } from 'react-router-dom'
 
-// const pledgePilotVideo = require("../../assets/videos/pledge-pilot-landing-page.mp4");
+// // const pledgePilotVideo = require("../../assets/videos/pledge-pilot-landing-page.mp4");
 // import Test from './components/Test';
 const pledgePilotVideo = require("../../assets/videos/landing.gif");
 

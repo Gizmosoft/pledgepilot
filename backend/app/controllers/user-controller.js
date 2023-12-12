@@ -17,7 +17,6 @@ export const addUser = async (request, response) => {
 export const oauthAddUser = async (request, response) => {
   try {
     const newUser = { ...request.body };
-    console.log('New user' + newUser);
     // const firstName = newUser.fir
     const user = await userService.createOauthUser(newUser);
     setDataResponse(user, response)
@@ -33,7 +32,6 @@ export const userLogin = async (request,response) =>{
         const email = userCredentials.emailAddress;
         const password = userCredentials.password;
         const login = await userService.userLogin(email,password);
-        console.log(login,"login")
         setResponse({"type": "LOGIN", "data":login}, response);
     } catch(error){
         console.log(error);
@@ -54,11 +52,9 @@ export const getUser = async (request, response) => {
 };
 
 export const getUserByEmailId = async (request, response) => {
-  console.log(request);
   try {
     const email = request.params.email;
     const user = await userService.findByEmailId(email);
-    console.log('found user by email: ' + user);
     setResponse({"type":"SEARCH_BY_EMAILID","data":user}, response);
   } catch (error) {
     setErrorResponse(error, response);
