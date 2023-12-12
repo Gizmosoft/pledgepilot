@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { PaymentButton } from '../../Components/Payment/PaymentButton'
 import { getUserInTheSession } from '../../Utils/SessionStorage'
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 const CampaignPage = () => {
     // define state
@@ -35,6 +36,7 @@ const CampaignPage = () => {
                 <p>We are on the campaign page... It will be updated soon!</p>
                 <label>Donate to {campaign.name}</label>
                 <PaymentButton campaign={campaign}/>
+                {/* <BookmarkIcon /> */}
             </div>
         )
     } else {
@@ -45,6 +47,7 @@ const CampaignPage = () => {
                 <label>Donate to {campaign.name}</label>
                 <p>User in the session: {sessionUser.firstName}</p>
                 <PaymentButton campaign={campaign} />
+                {/* <BookmarkIcon fontSize='large' color='primary' /> */}
             </div>
         )
     }

@@ -7,7 +7,7 @@ const router = express.Router()
 
 // '/discover' API to show all campaigns in the system
 router.route('/discover')
-    .get(verifyJWT,campaignController.discover)   // call discover function in the controller
+    .get(campaignController.discover)   // call discover function in the controller
 
 // '/create' API to create a new Campaign
 router.route('/create')

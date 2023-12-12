@@ -6,6 +6,7 @@ import Header from '../../Components/Navbar2/NavBar2';
 import Search from '../../Components/SearchBar/SearchBar';
 import Footer from '../../Components/Footer/Footer';
 import Stats from '../../Components/Stats/Stats';
+import { Link } from 'react-router-dom'
 // import Test from './components/Test';
 
 function HomePage() {
@@ -15,7 +16,9 @@ function HomePage() {
       {/* <Header /> */}
       {/* Search Bar */}
       <Stats/>
-      <Button variant="warning" className='dive_button'>Dive into PledgePilot</Button>{' '}
+      <Link to='/login'>
+        <Button variant="warning" className='dive_button'>Dive into PledgePilot</Button>{' '}
+      </Link>
         {/* <Stats /> */}
         {/* <Search /> */}
       
