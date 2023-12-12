@@ -19,8 +19,14 @@
   display: flex;
   gap: 3vw;
 }
-#img-logo{
-  height: 90px;
+#img-logo-text{
+  height: 45px;
+}
+#logo-img{
+  height: 100px;
+}
+#img-logo-spacer{
+  height: 54px;
 }
 #search-bar{
   padding: 5px;
@@ -49,17 +55,29 @@
 .dropdown{
   color: black;
   position: absolute;
-  top: 180%;
-  left: -10px;
+  top: 90%;
+  left: -50%;
+  transform: translateX(35%);
   display: none;
+  width: 94px;
 }
+
 .show{
   display: block;
 }
 .dropdown-options{
-  padding: 10px;
-  background-color: rgb(148, 234, 148);
+  text-align: center;
+  padding: 5px;
+  background-color: #06D6A0;
   border-radius: 5px;
   border: 1px solid #fff;
   cursor: pointer;
+  transition: 0.3s all ease;
+}
+#logout{
+  background-color: #EF476F;
+  color: #fff;
+}
+.dropdown-options:hover{
+  background-color:#88f7da ;
 }

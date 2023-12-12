@@ -31,12 +31,12 @@ export const create = async (newUser) => {
 
 export const createOauthUser = async (newUser) => {
   try {
-    const user = new User(newUser)
-    return user.save() 
+    const user = new User(newUser);
+    return user.save();
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const userLogin = async (email, password) => {
   const user = await findByEmailId(email);
@@ -62,12 +62,11 @@ export const userLogin = async (email, password) => {
       {
         expiresIn: "1d",
       }
-      
     );
     user.refreshToken = refreshToken;
     new User(user).save();
     //save this user in the db
-    return {accessToken , refreshToken ,user}
+    return { accessToken, refreshToken, user };
   } else {
     console.log("incorrect password");
   }
@@ -75,27 +74,28 @@ export const userLogin = async (email, password) => {
 // find user using id
 export const findById = async (id) => {
   const user = await User.findById(id).exec();
-  if(user.projectsFollowed.length !== 0)
-    user.populate(["ProjectsFollowed"]).exec()
-  if(user.createdProjects.length !== 0)
-    user.populate(["CreatedProjects"]).exec()
+  if (user.projectsFollowed.length !== 0)
+    user.populate(["ProjectsFollowed"]).exec();
+  if (user.createdProjects.length !== 0)
+    user.populate(["CreatedProjects"]).exec();
   return user;
 };
 // find user using email id
 export const findByEmailId = async (email) => {
-  const user = await User.find({ emailAddress: email });
-  console.log(user);
+  const user = await User.find({ emailAddress: email }).populate(["projectsFollowed", "createdProjects"]);
+  console.log(user, "updated user");
+
   return user[0];
 };
 
 // find OAuth user in the DB
 export const findOAuthUser = async (email) => {
-  const user = await User.find({ emailAddress: email})
+  const user = await User.find({ emailAddress: email });
   return user;
-}
+};
 
 export const findByRefreshToken = async (userRefreshToken) => {
-  const user = await User.find({ refreshToken: userRefreshToken});
+  const user = await User.find({ refreshToken: userRefreshToken });
   return user[0];
 };
 
@@ -112,15 +112,12 @@ export const update = async (updateUser, id) => {
 };
 // update user by id
 export const updateByEmailAddress = async (updateUser, emailAddress) => {
-  console.log(updateUser,"update user");
-  console.log(emailAddress,"emailAddress");
   const updatedUser = await User.findOneAndUpdate(
     { emailAddress: emailAddress },
     { $set: updateUser },
     { new: true } // Return the updated document
   );
   console.log(updatedUser);
-
 };
 //remove user
 export const remove = async (id) => {
