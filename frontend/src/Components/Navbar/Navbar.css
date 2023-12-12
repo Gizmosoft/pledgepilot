@@ -19,8 +19,14 @@
   display: flex;
   gap: 3vw;
 }
-#img-logo{
-  height: 90px;
+#img-logo-text{
+  height: 45px;
+}
+#logo-img{
+  height: 100px;
+}
+#img-logo-spacer{
+  height: 54px;
 }
 #search-bar{
   padding: 5px;

@@ -1,0 +1,14 @@
+.dashboard-container{
+  margin-top: 12vh;
+  padding-left: 10vw;
+  padding-right: 10vw;
+}
+.projects-followed , .created-projects{
+  display: flex;
+  gap: 1vw;
+  margin-bottom: 10vh;
+  margin-top: 2vh;
+}
+.welcome-text{
+  margin-bottom: 5vh;
+}

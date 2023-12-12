@@ -8,6 +8,8 @@ import { UserState, userLogout } from "../../store/UserSlice";
 import { Dropdown, Menu, MenuButton, MenuItem } from "@mui/base";
 // const logo = require("../../assets/logo.png");
 const logo = require("../../assets/nav-logo.png");
+// const logoText = require("../../assets/pledge-pilot-text.png");
+// const logoSpacer = require("../../assets/spacer.png");
 
 function Navbar() {
   const dispatch = useDispatch<AppDispatch>();
@@ -35,7 +37,9 @@ function Navbar() {
     <header className="header">
 <nav className="navbar-component">
       <div id="logo-container">
-        <img id="img-logo" src={logo} alt="" />
+        <img  id="logo-img" src={logo} alt="" />
+        {/* <img className="img-logo" id="img-logo-spacer" src={logoSpacer} alt="" />
+        <img className="img-logo" id="img-logo-text" src={logoText} alt="" /> */}
         {/* <div id="nav-search">
           <input id="search-bar" type="text" placeholder="Search" />
         </div> */}
