@@ -26,10 +26,18 @@
   cursor: pointer;
 }
 
-/* .amount-input:not(:valid) + .donate-button{
-    cursor: not-allowed;
+.redirect-button {
+  background-color: #EF476F;
+  color: #ffffff;
+  font-size: medium;
+  width: 170px;
+  height: 50px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
-.amount-input:valid + .donate-button{
-    cursor: pointer;
-} */
+small {
+  color: #a29c9c;
+  font-size: x-small;
+  
+}

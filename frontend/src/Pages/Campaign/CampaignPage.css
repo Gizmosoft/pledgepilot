@@ -1,0 +1,29 @@
+.campaign-page {
+    margin-top: 110px;
+}
+
+.grid-container-campaign {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.campaign-info {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.grid-child-left {
+    
+}
+
+.grid-description {
+    display: flex;
+    justify-content: flex-start;
+    text-align: justify;
+}
+
+.grid-child-right {
+    display: flex;
+    justify-content: center;
+}
