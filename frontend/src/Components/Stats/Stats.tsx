@@ -1,5 +1,5 @@
 import { FC } from "react";
-
+import "./Stats.css"
 const Test: FC = () => {
     return (
         <div className="grid-container">

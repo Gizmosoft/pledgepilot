@@ -6,7 +6,7 @@ body {
     font-family: 'Quicksand', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  
+    height: 100vh;
 }
 *{
   box-sizing: border-box;
@@ -17,4 +17,7 @@ body {
 } */
 a{
   text-decoration: none;
+}
+#root{
+  height: 100%;
 }

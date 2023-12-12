@@ -69,14 +69,9 @@ function LoginComponent() {
         />
 
         <div className="btn-forgot-password">
-          <button type="submit">Login</button>
+          <button className="login-btn" type="submit">Login</button>
           <GoogleLoginComponent />
-          <br />
-          <div className="forgot-password">
-            <a className="forgot-password-link" href="#">
-              Forgot Password?
-            </a>
-          </div>
+         
         </div>
       </form>
     </>
