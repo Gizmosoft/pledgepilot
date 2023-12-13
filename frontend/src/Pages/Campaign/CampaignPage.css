@@ -1,5 +1,5 @@
 .campaign-page {
-    margin-top: 110px;
+    margin-top: 70px;
 }
 
 .grid-container-campaign {
@@ -13,10 +13,6 @@
     margin-bottom: 20px;
 }
 
-.grid-child-left {
-    
-}
-
 .grid-description {
     display: flex;
     justify-content: flex-start;
@@ -24,6 +20,18 @@
 }
 
 .grid-child-right {
-    display: flex;
+    /* display: flex;
     justify-content: center;
+    align-items: center; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.follow-button {
+    position: relative;
+    align-self: center;
+}
+
+.payment-button{
+    float: none;
 }

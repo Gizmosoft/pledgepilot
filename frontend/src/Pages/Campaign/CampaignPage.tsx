@@ -3,10 +3,13 @@ import { useParams } from 'react-router-dom'
 import { PaymentButton } from '../../Components/Payment/PaymentButton'
 import { getUserInTheSession } from '../../Utils/SessionStorage'
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import Button from '@mui/material/Button';
 import PersonIcon from '@mui/icons-material/Person';
 import './CampaignPage.css'
 import Gallery from '../../Components/ImageGrid/Gallery';
 import { RedirectButton } from '../../Components/Payment/RedirectButton';
+import Footer from '../../Components/Footer/Footer';
+import { Milestone } from '../../Components/Milestone/Milestone';
 
 const CampaignPage = () => {
     // define state for campaign
@@ -22,19 +25,19 @@ const CampaignPage = () => {
             const campaignResponse = await fetch('http://localhost:3001/campaigns/campaign/' + campaignId)
             // get campaign Data
             const campaignData = await campaignResponse.json()
-            
+
             // set the campaign data to be received by the UI
             setCampaign(campaignData)
             // fetchCampaignOwner()
             const userResponse = await fetch('http://localhost:3001/users/id/' + campaignData.owner)
-            const userData = await userResponse.json()            
+            const userData = await userResponse.json()
             // set user data
             setUser(userData)
         }
         fetchCampaign()
     }, []
     )
-    
+
     // const fetchCampaignOwner = async () => {          
     //     // fetch user
     //     const userResponse = await fetch('http://localhost:3001/users/id/' + campaign.owner)
@@ -42,7 +45,7 @@ const CampaignPage = () => {
     //     // set user data
     //     setUser(userData)
     // }
-    
+
     if (!campaign || !campaign._id) {
         return <h1>404: Campaign Not Found!</h1>
     }
@@ -66,12 +69,21 @@ const CampaignPage = () => {
                     </div>
                 </div>
                 <div className="grid-child-right">
+                    <div className='follow-button'>
+                    <Button variant="outlined" href="#outlined-buttons">
+                        Follow <BookmarkIcon fontSize='large' color='primary' />
+                    </Button>
+                    </div><br />
+                    <div className='payment-button'>
                     {sessionUser !== null ? <PaymentButton campaign={campaign} /> : <RedirectButton />}
+                    </div>
                 </div>
                 {/* <p>User in the session: {sessionUser.firstName}</p> */}
             </div>
-            
-            {/* <BookmarkIcon fontSize='large' color='primary' /> */}
+            <hr />
+            <Milestone campaignId={campaignId}/>
+            <hr />
+            {/* <Footer /> */}
         </div>
     )
 }
