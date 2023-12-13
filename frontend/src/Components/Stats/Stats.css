@@ -3,7 +3,8 @@
     display: grid;
     background-color: #fff;
     grid-template-columns: repeat(3,1fr);
-    
+    background-color: rgba(0,0,0,0.8);
+    color: #fff;
     padding: 10px;
     width: 100%;
     gap: 10px;

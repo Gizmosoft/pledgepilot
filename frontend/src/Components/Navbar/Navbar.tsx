@@ -43,14 +43,18 @@ function Navbar() {
     navigate("/dashboard");
     handleOpenMenu();
   }
-  const userString = sessionStorage.getItem("user") ?? "";
-  const user = JSON.parse(userString);
-  console.log(user.firstName);
+  let user;
+  if(sessionStorage.getItem("user")){
+    const userString = sessionStorage.getItem("user") ?? "";
+    user = JSON.parse(userString);
+  }
+
+  // console.log(user.firstName);
   return (
     <header className="header">
 <nav className="navbar-component">
       <div id="logo-container">
-        <img  id="logo-img" src={logo} alt="" />
+        <img onClick={()=>navigate("/")}  id="logo-img" src={logo} alt="" />
         {/* <img className="img-logo" id="img-logo-spacer" src={logoSpacer} alt="" />
         <img className="img-logo" id="img-logo-text" src={logoText} alt="" /> */}
         {/* <div id="nav-search">
@@ -73,7 +77,7 @@ function Navbar() {
               <div onClick={handleOpenMenu}>
                 {loggedInUser.loginResponse?.user.firstName}
               </div>
-            ) : user.firstName ? (<div onClick={handleOpenMenu}>{user.firstName}</div>) : (
+            ) : user ? (<div onClick={handleOpenMenu}>{user.firstName}</div>) : (
               <div onClick={navigateToLogin}>Login</div>
             ) }
             <div className="dropdown">

@@ -1,7 +1,7 @@
 .card-container {
     margin-top: 10vh;
     display: flex;
-    gap: 20px;
+    gap: 7vw;
     flex-wrap: wrap;
     padding: 30px;
     height: 100%;
