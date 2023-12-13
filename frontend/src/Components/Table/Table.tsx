@@ -1,11 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Table.css'
 import { User } from '../../types/User';
 
 export const Table = (user: any) => {
-    let profile: User | undefined = undefined;
-    profile = JSON.parse(user)
-    console.log(profile);
+    console.log(user.user._id);
+    const userId = user.user._id
+
+    // set states
+    const [campaignName, setCampaignName] = useState<any>()
+    const [donation, setDonation] = useState<any>()
+    const [reward, setReward] = useState<any>()
+
+    useEffect(() => {
+        const updateTableInfo = async () => {
+            const userPaymentObject = await fetch('http://localhost:3001/userpayments/' + userId)
+            const userPaymentInfo = await userPaymentObject.json()
+            const paymentArray = userPaymentInfo.payments
+            paymentArray.forEach((payment: any) => {
+                console.log(payment);
+            });
+            
+        }
+        updateTableInfo()
+   }, []
+   )
 
     return (
         <div className='tabular-data'>
@@ -15,56 +33,13 @@ export const Table = (user: any) => {
                         <th>Campaign Name</th>
                         <th>Donation</th>
                         <th>Reward Earned</th>
+                        <th>Payment #</th>
                     </tr>
                     <tr>
                         <td>Alfreds Futterkiste</td>
                         <td>Maria Anders</td>
                         <td>Germany</td>
-                    </tr>
-                    <tr>
-                        <td>Berglunds snabbköp</td>
-                        <td>Christina Berglund</td>
-                        <td>Sweden</td>
-                    </tr>
-                    <tr>
-                        <td>Centro comercial Moctezuma</td>
-                        <td>Francisco Chang</td>
-                        <td>Mexico</td>
-                    </tr>
-                    <tr>
-                        <td>Ernst Handel</td>
-                        <td>Roland Mendel</td>
-                        <td>Austria</td>
-                    </tr>
-                    <tr>
-                        <td>Island Trading</td>
-                        <td>Helen Bennett</td>
-                        <td>UK</td>
-                    </tr>
-                    <tr>
-                        <td>Königlich Essen</td>
-                        <td>Philip Cramer</td>
                         <td>Germany</td>
-                    </tr>
-                    <tr>
-                        <td>Laughing Bacchus Winecellars</td>
-                        <td>Yoshi Tannamuri</td>
-                        <td>Canada</td>
-                    </tr>
-                    <tr>
-                        <td>Magazzini Alimentari Riuniti</td>
-                        <td>Giovanni Rovelli</td>
-                        <td>Italy</td>
-                    </tr>
-                    <tr>
-                        <td>North/South</td>
-                        <td>Simon Crowther</td>
-                        <td>UK</td>
-                    </tr>
-                    <tr>
-                        <td>Paris spécialités</td>
-                        <td>Marie Bertrand</td>
-                        <td>France</td>
                     </tr>
                 </tbody>
             </table>

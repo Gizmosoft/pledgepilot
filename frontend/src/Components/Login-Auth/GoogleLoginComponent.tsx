@@ -17,7 +17,6 @@ const GoogleLoginComponent = () => {
             'email': userObject.email
         }
         try {
-            // const userDBResponse = await fetch('http://localhost:3001/users/' + 'kartikeyhebbar@gmail.com')
             const userDBResponse = await fetch('http://localhost:3001/users/oauth/' + user.email)
             console.log('userDBResponse:');
             console.log(userDBResponse);

@@ -2,22 +2,28 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { PaymentButton } from '../../Components/Payment/PaymentButton'
 import { getUserInTheSession } from '../../Utils/SessionStorage'
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import Button from '@mui/material/Button';
 import PersonIcon from '@mui/icons-material/Person';
 import './CampaignPage.css'
 import Gallery from '../../Components/ImageGrid/Gallery';
 import { RedirectButton } from '../../Components/Payment/RedirectButton';
 import Footer from '../../Components/Footer/Footer';
 import { Milestone } from '../../Components/Milestone/Milestone';
+import { useNavigate } from 'react-router-dom';
+import FollowButton from '../../Components/Buttons/FollowButton';
 
 const CampaignPage = () => {
     // define state for campaign
     const [campaign, setCampaign] = useState<any>([])
     // state for user
     const [user, setUser] = useState<any>([])
+
     // get campaignName from params
     const { campaignId } = useParams()
+
+    const navigate = useNavigate();
+
+    // get session user
+    const sessionUser = getUserInTheSession()
 
     useEffect(() => {
         const fetchCampaign = async () => {
@@ -33,13 +39,6 @@ const CampaignPage = () => {
             const userData = await userResponse.json()        
             // set user data
             if(userData.length === 0){
-                // const customUser = {
-                //     firstName: 'Admin',
-                //     lastName: ''
-                // }
-                // console.log(customUser);
-                // console.log('here');
-                
                 setUser({
                     firstName: 'Admin',
                     lastName: ''
@@ -52,20 +51,9 @@ const CampaignPage = () => {
     }, []
     )
 
-    // const fetchCampaignOwner = async () => {          
-    //     // fetch user
-    //     const userResponse = await fetch('http://localhost:3001/users/id/' + campaign.owner)
-    //     const userData = await userResponse.json()            
-    //     // set user data
-    //     setUser(userData)
-    // }
-
     if (!campaign || !campaign._id) {
         return <h1>404: Campaign Not Found!</h1>
     }
-
-    const sessionUser = getUserInTheSession()
-
 
     return (
         <div className='container campaign-page'>
@@ -83,11 +71,9 @@ const CampaignPage = () => {
                     </div>
                 </div>
                 <div className="grid-child-right">
-                    <div className='follow-button'>
-                    <Button variant="outlined" href="#outlined-buttons">
-                        Follow <BookmarkIcon fontSize='large' color='primary' />
-                    </Button>
-                    </div><br />
+                    {/* THIS IS BUGGY - NOT WORKING */}
+                    <FollowButton campaign={campaign}/>
+                    <br />
                     <div className='payment-button'>
                     {sessionUser !== null ? <PaymentButton campaign={campaign} /> : <RedirectButton />}
                     </div>
