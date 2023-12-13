@@ -90,7 +90,7 @@ export default function Footer() {
 
 
       </div>
-      <hr />
+     
       <div className="copyright-container">
         <div className="copyright-area">
           <div className="container">
