@@ -11,6 +11,8 @@ import DiscoverPage from './Pages/Discover/DiscoverPage';
 import HomePage from './Pages/Home/HomePage';
 import NavBar2 from './Components/Navbar2/NavBar2';
 import CreateCampaign from './Pages/CreateCampaign/CreateCampaign';
+import BlogPage from './Pages/Blog/CreateBlog';
+import CreateBlog from './Pages/Blog/CreateBlog';
 
 function App() {
   return (
@@ -60,6 +62,9 @@ function App() {
           }></Route>
           <Route path= '/create' element={
             <CreateCampaign/>
+          }></Route>
+          <Route path= '/AddBlog' element={
+            <CreateBlog/>
           }></Route>
         </Routes>
       </Router>
