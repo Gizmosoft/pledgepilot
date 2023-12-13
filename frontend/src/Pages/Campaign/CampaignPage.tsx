@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { PaymentButton } from '../../Components/Payment/PaymentButton'
 import { getUserInTheSession } from '../../Utils/SessionStorage'
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import Button from '@mui/material/Button';
 import PersonIcon from '@mui/icons-material/Person';
 import './CampaignPage.css'
 import Gallery from '../../Components/ImageGrid/Gallery';
@@ -9,22 +11,14 @@ import { RedirectButton } from '../../Components/Payment/RedirectButton';
 import Footer from '../../Components/Footer/Footer';
 import { Milestone } from '../../Components/Milestone/Milestone';
 import '../../assets/ckEditorStyles/ckEditorStyles.css'
-import { useNavigate } from 'react-router-dom';
-import FollowButton from '../../Components/Buttons/FollowButton';
 
 const CampaignPage = () => {
     // define state for campaign
     const [campaign, setCampaign] = useState<any>([])
     // state for user
     const [user, setUser] = useState<any>([])
-
     // get campaignName from params
     const { campaignId } = useParams()
-
-    const navigate = useNavigate();
-
-    // get session user
-    const sessionUser = getUserInTheSession()
 
     useEffect(() => {
         const fetchCampaign = async () => {
@@ -37,24 +31,44 @@ const CampaignPage = () => {
             setCampaign(campaignData)
             // fetchCampaignOwner()
             const userResponse = await fetch('http://localhost:3001/users/id/' + campaignData.owner)
-            const userData = await userResponse.json()        
+            const userData = await userResponse.json()
+            console.log(userData);
+            
             // set user data
-            if(userData.length === 0){
-                setUser({
-                    firstName: 'Admin',
-                    lastName: ''
-                })
-            }
-            else
+            // if (userData.length === 0) {
+            //     // const customUser = {
+            //     //     firstName: 'Admin',
+            //     //     lastName: ''
+            //     // }
+            //     // console.log(customUser);
+            //     // console.log('here');
+
+            //     setUser({
+            //         firstName: 'Admin',
+            //         lastName: ''
+            //     })
+            // }
+            // else
                 setUser(userData)
         }
         fetchCampaign()
     }, []
     )
 
+    // const fetchCampaignOwner = async () => {          
+    //     // fetch user
+    //     const userResponse = await fetch('http://localhost:3001/users/id/' + campaign.owner)
+    //     const userData = await userResponse.json()            
+    //     // set user data
+    //     setUser(userData)
+    // }
+
     if (!campaign || !campaign._id) {
         return <h1>404: Campaign Not Found!</h1>
     }
+
+    const sessionUser = getUserInTheSession()
+    const markup = { __html: campaign.description };
 
     return (
         <div className='container campaign-page'>
@@ -65,24 +79,28 @@ const CampaignPage = () => {
             <div className="grid-container-campaign">
                 <div className="grid-child-left">
                     <div className='grid-description'>
-                    <div className='campaignContainer ck-content' dangerouslySetInnerHTML={markup}></div>                        
+                        <div className='campaignContainer ck-content' dangerouslySetInnerHTML={markup}></div>
                     </div>
                     <div className='grid-owner'>
+                        {user !== null &&
                         <p><PersonIcon fontSize='medium' />{user.firstName} {user.lastName}</p>
+                        }
                     </div>
                 </div>
                 <div className="grid-child-right">
-                    {/* THIS IS BUGGY - NOT WORKING */}
-                    <FollowButton campaign={campaign}/>
-                    <br />
+                    <div className='follow-button'>
+                        <Button variant="outlined" href="#outlined-buttons">
+                            Follow <BookmarkIcon fontSize='large' color='primary' />
+                        </Button>
+                    </div><br />
                     <div className='payment-button'>
-                    {sessionUser !== null ? <PaymentButton campaign={campaign} /> : <RedirectButton />}
+                        {sessionUser !== null ? <PaymentButton campaign={campaign} /> : <RedirectButton />}
                     </div>
                 </div>
                 {/* <p>User in the session: {sessionUser.firstName}</p> */}
             </div>
             <hr />
-            <Milestone campaignId={campaignId}/>
+            <Milestone campaignId={campaignId} />
             <hr />
             {/* <Footer /> */}
         </div>
