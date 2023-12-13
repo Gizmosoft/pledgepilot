@@ -1,11 +1,17 @@
-.Search {
+.search {
+    position: relative;
     display: flex;
-    padding: 120px;
-    /* margin-left: 500px; */
-    width: 200px;
-    top: 150px;
-    margin-left: 390px;
-    border-radius: 10px;
-
+    justify-content: center;
+}
+.search-icon {
+    position: relative;
+    left: 470px;
+    cursor:pointer;
 }
 
+.search-box {
+    width: 400px;
+}
+input:focus {
+    outline: auto;
+}
