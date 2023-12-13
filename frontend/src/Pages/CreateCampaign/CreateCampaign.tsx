@@ -4,19 +4,23 @@ import { useNavigate, useParams } from "react-router-dom";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { Editor } from "@ckeditor/ckeditor5-core";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {saveCampaign,uploadAdapter} from "../../services/campaingServices";
+import { saveCampaign, updateCampaign, uploadAdapter } from "../../services/campaingServices";
 import "./CreateCampaign.css"
 
 const CampaignPage = () => {
   const navigate = useNavigate();
   const user = sessionStorage.getItem("user") ?? "";
   const profile = JSON.parse(user);
+  const { campaignId } = useParams()
+  let ckEdiorData= {};
+  let ckEditor = {};
+  let campaignDescription = "";
+
+
+
   const [campaignData, saveCampaignData] = useState({
     name: "",
     description: "",
-    // owner: {
-    //   userId: ""
-    // },
     owner: profile._id,
     community: {
       comment: {
@@ -41,21 +45,26 @@ const CampaignPage = () => {
     },
   });
 
-  let ckEdiorData = {};
-  let ckEditor = {};
+
   const duration = 4000;
   const [openSnackbar, setopenSnackbar] = useState(false)
 
-  const  saveData = async (e: React.FormEvent<HTMLFormElement>) => {
+  const saveData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(campaignData);
-    const campaign = await saveCampaign(campaignData);
-    console.log(campaign._id);
+    if(campaignId == undefined)
+    {
+      const campaign = await saveCampaign(campaignData);
+    }
+    else{
+      const campaign = await updateCampaign(campaignId, campaignData);
+    }
+    // console.log(campaign._id);
     console.log(user);
     setopenSnackbar(true);
-    setTimeout(()=>{
+    setTimeout(() => {
       navigate("/discover");
-    },duration);
+    }, duration);
   };
 
   const onChangeInEditor = (event: any, editor: any, name: string) => {
@@ -80,6 +89,24 @@ const CampaignPage = () => {
     };
   }
 
+  const fetchCampaign = (editor: any) => {
+    if (campaignId != undefined) {
+      const campaignResponse = fetch('http://localhost:3001/campaigns/campaign/' + campaignId).then(
+        async function(result) {
+          const campaignData = await result.json()
+          console.log(campaignData);
+          campaignDescription = campaignData.description;
+          console.log(campaignDescription)
+          editor.setData(campaignDescription);
+          saveCampaignData(campaignData);
+        }
+      )
+      // get campaign Data
+    }
+  }
+
+
+
   return (
     <div className="campaign-page">
       <div>
@@ -96,37 +123,39 @@ const CampaignPage = () => {
             required
           />
 
-            <div className="App ckStyle">
-              <h2>Using CKEditor&nbsp;5 build in React</h2>
-              <CKEditor
-                id="textInput"
-                editor={ClassicEditor}
-                data="<p>Hello from CKEditor&nbsp;5!</p>"
-                config={{
-                  extraPlugins: [uploadPlugin]
-                }}
-                onReady={(editor: {}) => {
-                  ckEditor = editor;
-                  // You can store the "editor" and use when it is needed.
-                  console.log('Editor is ready to use!', editor);
-                }}
-                onChange={(event: any, ckEditor: { getData: () => any; }) => {
-                  onChangeInEditor(event, ckEditor, "description");
-                }}
-                onBlur={(event: any, ckEditor: any) => {
-                }}
-                onFocus={(event: any, ckEditor: any) => {
-                }}
-              />
-            </div>
-            <div className="btn-forgot-password">
-              <button type="submit">Save</button>
-            </div>
-          </form>
-        </div>
+          <div className="App ckStyle">
+            <h2>Using CKEditor&nbsp;5 build in React</h2>
+            <CKEditor
+              id="textInput"
+              editor={ClassicEditor}
+              data= {campaignDescription}
+              config={{
+                extraPlugins: [uploadPlugin]
+              }}
+              onReady={(editor: {}) => {
+                ckEditor = editor;
+                // You can store the "editor" and use when it is needed.
+                console.log('Editor is ready to use!', editor);
+                fetchCampaign(ckEditor);
+              }}
+              onChange={(event: any, ckEditor: { getData: () => any; }) => {
+                onChangeInEditor(event, ckEditor, "description");
+              }}
+              onBlur={(event: any, ckEditor: any) => {
+              }}
+              onFocus={(event: any, ckEditor: any) => {
+              }}
+            />
+          </div>
+          <br />
+          <div className="btn-forgot-password">
+            <button type="submit">Save</button>
+          </div>
+        </form>
       </div>
-    )
-  }
+    </div>
+  )
+}
 
 export default CampaignPage;
 function dispatch(arg0: Promise<any>) {

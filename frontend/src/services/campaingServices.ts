@@ -53,3 +53,23 @@ export const uploadAdapter = (loader: FileLoader): UploadAdapter => {
     };
 }
 
+export const updateCampaign = async (campaignId:any, campaignData: any) => {
+    try {
+        const response = await axios.patch(
+            campaignURL + "/update/" + campaignId,
+            JSON.stringify(campaignData),
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                },
+                withCredentials: true,
+            }
+        )
+            return response.data;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+

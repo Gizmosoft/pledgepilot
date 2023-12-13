@@ -1,6 +1,7 @@
 import Campaign from "../models/Campaign.js";
 import multer from "multer";
 import path from "path";
+import campaignModel from "../models/Campaign.js";
 
 // searchAll is a helper service function
 export const searchAll = async (params = {}) => {
@@ -116,3 +117,8 @@ export const fileUpload = async (request, response) => {
   }
 };
 
+//Service to update a campaign
+export const updateCampaign = async(campaignId, updatedCampaign) => {
+  const campaign = await campaignModel.findByIdAndUpdate(campaignId, updatedCampaign).exec();
+  return campaign;
+}
