@@ -30,9 +30,23 @@ const CampaignPage = () => {
             setCampaign(campaignData)
             // fetchCampaignOwner()
             const userResponse = await fetch('http://localhost:3001/users/id/' + campaignData.owner)
-            const userData = await userResponse.json()
+            const userData = await userResponse.json()        
             // set user data
-            setUser(userData)
+            if(userData.length === 0){
+                // const customUser = {
+                //     firstName: 'Admin',
+                //     lastName: ''
+                // }
+                // console.log(customUser);
+                // console.log('here');
+                
+                setUser({
+                    firstName: 'Admin',
+                    lastName: ''
+                })
+            }
+            else
+                setUser(userData)
         }
         fetchCampaign()
     }, []
