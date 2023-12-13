@@ -67,7 +67,6 @@ const CampaignPage = () => {
     const sessionUser = getUserInTheSession()
     const markup = { __html: campaign.description };
 
-
     return (
         <div className='container campaign-page'>
             <div className='campaign-info'></div>
