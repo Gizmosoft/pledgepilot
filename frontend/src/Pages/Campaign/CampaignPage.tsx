@@ -65,6 +65,7 @@ const CampaignPage = () => {
     }
 
     const sessionUser = getUserInTheSession()
+    const markup = { __html: campaign.description };
 
 
     return (
@@ -76,7 +77,7 @@ const CampaignPage = () => {
             <div className="grid-container-campaign">
                 <div className="grid-child-left">
                     <div className='grid-description'>
-                        <p>{campaign.description} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae repellendus earum doloribus laboriosam totam inventore nihil officia fugiat maxime ex quisquam consectetur quia sed nisi, error vitae distinctio id architecto. Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium eaque nam, laboriosam laudantium, blanditiis ipsum veritatis sunt suscipit at excepturi architecto libero sed tempore similique quos reprehenderit. Ad, dicta ex.</p>
+                    <div className='campaingContainer' dangerouslySetInnerHTML={markup}></div>                        
                     </div>
                     <div className='grid-owner'>
                         <p><PersonIcon fontSize='medium' />{user.firstName} {user.lastName}</p>

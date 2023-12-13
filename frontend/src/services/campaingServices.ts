@@ -1,8 +1,9 @@
 import axios from "axios";
+import { UploadAdapter, FileLoader } from "@ckeditor/ckeditor5-upload/src/filerepository";
 
 const campaignURL = "/campaigns"
 
-const saveCampaign = async (campaignData: any) => {
+export const saveCampaign = async (campaignData: any) => {
     try {
         const response = await axios.post(
             campaignURL + "/create",
@@ -22,4 +23,32 @@ const saveCampaign = async (campaignData: any) => {
     }
 }
 
-export default saveCampaign;
+export const uploadAdapter = (loader: FileLoader): UploadAdapter => {
+    return {
+        upload: () => {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    const file = await loader.file;
+                    const response = await axios.request({
+                        method: "POST",
+                        url: campaignURL + `/upload`,
+                        data: {
+                            files: file
+                        },
+                        headers: {
+                            "Content-Type": "multipart/form-data"
+                        }
+                    });
+                    resolve({
+                        default: `${response.data.filename}`
+                    });
+                } catch (error) {
+                    console.log(error);
+                    reject("Hello");
+                }
+            });
+        },
+        abort: () => { }
+    };
+}
+
