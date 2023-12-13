@@ -95,6 +95,7 @@ const CreateBlog = () => {
                 }}
               />
             </div>
+            <br/>
             <div className="btn-forgot-password">
               <button type="submit">Save</button>
             </div>
