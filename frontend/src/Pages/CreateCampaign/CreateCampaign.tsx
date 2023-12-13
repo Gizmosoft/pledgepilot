@@ -51,7 +51,7 @@ const CampaignPage = () => {
     e.preventDefault();
     console.log(campaignData);
     const campaign = await saveCampaign(campaignData);
-    // console.log(campaign._id);
+    console.log(campaign._id);
     console.log(user);
     setopenSnackbar(true);
     setTimeout(()=>{

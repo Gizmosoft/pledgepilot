@@ -18,8 +18,10 @@ export const userLogin = createAsyncThunk<any, UserCredentials>(
   "user/loginUser",
   async (userCredentials: UserCredentials) => {
     const response = await loginUser(userCredentials);
+    console.log(response);
     if(response?.status == 200){
       localStorage.setItem("user",JSON.stringify(response?.data))
+      sessionStorage.setItem("user",JSON.stringify(response.data?.user));
     }
     return response?.data; // Assuming the response includes a data property
   }
