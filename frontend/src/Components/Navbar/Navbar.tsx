@@ -38,9 +38,13 @@ function Navbar() {
     navigate("/dashboard");
     handleOpenMenu();
   }
-  const userString = sessionStorage.getItem("user") ?? "";
-  const user = JSON.parse(userString);
-  console.log(user.firstName);
+  let user;
+  if(sessionStorage.getItem("user")){
+    const userString = sessionStorage.getItem("user") ?? "";
+    user = JSON.parse(userString);
+  }
+
+  // console.log(user.firstName);
   return (
     <header className="header">
 <nav className="navbar-component">
@@ -68,7 +72,7 @@ function Navbar() {
               <div onClick={handleOpenMenu}>
                 {loggedInUser.loginResponse?.user.firstName}
               </div>
-            ) : user.firstName ? (<div onClick={handleOpenMenu}>{user.firstName}</div>) : (
+            ) : user ? (<div onClick={handleOpenMenu}>{user.firstName}</div>) : (
               <div onClick={navigateToLogin}>Login</div>
             ) }
             <div className="dropdown">

@@ -47,9 +47,12 @@ const CampaignPage = () => {
   const duration = 4000;
   const [openSnackbar, setopenSnackbar] = useState(false)
 
-  const saveData = (e: React.FormEvent<HTMLFormElement>) => {
+  const  saveData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    saveCampaign(campaignData);
+    console.log(campaignData);
+    const campaign = await saveCampaign(campaignData);
+    // console.log(campaign._id);
+    console.log(user);
     setopenSnackbar(true);
     setTimeout(()=>{
       navigate("/discover");
