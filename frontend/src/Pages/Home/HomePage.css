@@ -252,7 +252,7 @@ body {
     text-align: center;
   }
   
-  .card-container {
+  .card-container-home {
     display: flex;
     justify-content: space-between;
     overflow-x: scroll; /* Enable horizontal scrolling */

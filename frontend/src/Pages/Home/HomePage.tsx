@@ -86,7 +86,7 @@ function HomePage() {
       </div>
       <section className="browse-campaigns">
         <h2>Browse Featured Campaigns</h2>
-        <div className="card-container">
+        <div className="card-container-home">
           {campaigns &&
             campaigns.map((campaign: any, index: number) => {
               if (index < 3) {

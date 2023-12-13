@@ -69,6 +69,9 @@ function App() {
             <NavBar2 />
             </>
           }></Route>
+          <Route path= '/create/:campaignId' element={
+            <CreateCampaign/>
+          }></Route>
           <Route path= '/create' element={
             <CreateCampaign/>
           }></Route>
