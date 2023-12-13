@@ -7,6 +7,8 @@ import { getUserInTheSession } from '../../Utils/SessionStorage';
 async function fetchCurrentUser(user: any) {
   const currUser = await fetch('http://localhost:3001/users/id/' + user._id)
   const currUserData = await currUser.json()
+  console.log(currUserData, ' inside fetch');
+  
   return currUserData
 }
 
@@ -27,12 +29,14 @@ const FollowButton = (campaign: any) => {
       navigate('/login')
     }
     else {
+      console.log(getUserInTheSession());
       const currUserData = await fetchCurrentUser(getUserInTheSession())
       console.log(currUserData);
+      // check if the current campaign in followed by the user
       console.log(Object.values(currUserData.projectsFollowed).indexOf(campaign.campaign._id));
       if (Object.values(currUserData.projectsFollowed).indexOf(campaign.campaign._id) === -1) {
-        currUserData.projectsFollowed.unshift(campaign.campaign._id)
-        console.log(currUserData);
+        currUserData.projectsFollowed.push(campaign.campaign._id)
+        // console.log(currUserData);
       }
       
       

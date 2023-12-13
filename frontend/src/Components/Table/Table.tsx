@@ -1,46 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import './Table.css'
-import { User } from '../../types/User';
 
-export const Table = (user: any) => {
-    console.log(user.user._id);
-    const userId = user.user._id
-
-    // set states
-    const [campaignName, setCampaignName] = useState<any>()
-    const [donation, setDonation] = useState<any>()
-    const [reward, setReward] = useState<any>()
-
-    useEffect(() => {
-        const updateTableInfo = async () => {
-            const userPaymentObject = await fetch('http://localhost:3001/userpayments/' + userId)
-            const userPaymentInfo = await userPaymentObject.json()
-            const paymentArray = userPaymentInfo.payments
-            paymentArray.forEach((payment: any) => {
-                console.log(payment);
-            });
-            
-        }
-        updateTableInfo()
-   }, []
-   )
-
+export const Table = ({payArr}:any) => {
+    const [payments, setPayments] = useState(payArr)
+    console.log('payArr');
+    
+    console.log(payArr);
+    
+    // console.log(Array.isArray(payments));
+    
     return (
         <div className='tabular-data'>
             <table id="customers">
-                <tbody>
+                <thead>
                     <tr>
-                        <th>Campaign Name</th>
+                        <th>Payment #</th>
                         <th>Donation</th>
                         <th>Reward Earned</th>
-                        <th>Payment #</th>
                     </tr>
-                    <tr>
-                        <td>Alfreds Futterkiste</td>
-                        <td>Maria Anders</td>
-                        <td>Germany</td>
-                        <td>Germany</td>
-                    </tr>
+                </thead>
+                <tbody>
+                    {payments.map((payItem: any, index: React.Key | null | undefined) => (
+                        <tr key={index}>
+                            <td>{payItem.paymentId}</td>
+                            <td>{payItem.amount}</td>
+                            <td>{payItem.reward}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
