@@ -25,4 +25,8 @@ router.route('/campaign/:campaignId')
 router.route('/upload')
     .post(campaignController.uploadCampaignImages)
 
+// '/update' API to create a update Campaign
+router.route('/update/:campaignId')
+.patch(campaignController.updateCampaign)   // call addCampaign function in controller
+
 export default router
