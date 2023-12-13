@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './Table.css'
 
 export const Table = ({payArr}:any) => {
     const [payments, setPayments] = useState(payArr)
     console.log('payArr');
     
-    console.log(payArr);
+    console.log(payments);
     
     // console.log(Array.isArray(payments));
     
