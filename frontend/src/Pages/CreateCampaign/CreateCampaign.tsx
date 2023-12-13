@@ -75,13 +75,6 @@ const CampaignPage = () => {
     });
   }
 
-  function uploadPlugin(editor: Editor) {
-    editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
-      return uploadAdapter(loader);
-    };
-  }
-
-
   return (
     <div className="campaign-page">
       <div>
