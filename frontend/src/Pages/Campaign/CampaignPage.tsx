@@ -27,6 +27,7 @@ const CampaignPage = () => {
     }
 
     const sessionUser = getUserInTheSession()
+    const markup = { __html: campaign.description };
 
     if (sessionUser === null) {
         return (
@@ -44,6 +45,7 @@ const CampaignPage = () => {
                 <p>We are on the campaign page... It will be updated soon!</p>
                 <label>Donate to {campaign.name}</label>
                 <p>User in the session: {sessionUser.firstName}</p>
+                <div className='campaingContainer' dangerouslySetInnerHTML={markup}></div>
                 <PaymentButton campaign={campaign} />
             </div>
         )

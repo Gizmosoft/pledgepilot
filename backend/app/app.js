@@ -16,7 +16,7 @@ const initialize = (app) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   // Serve uploaded images statically
-  app.use('/uploads', express.static('public'));
+  app.use('/', express.static('public'));
 
   app.use(cookieParser());
   // Separate DB configs for the scope of assignment

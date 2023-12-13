@@ -2,9 +2,9 @@ import React, { useState, useEffect, ChangeEvent } from 'react'
 import { useParams } from 'react-router-dom'
 // import Editor from '../../Components/Editor/Editor'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
+import { Editor } from "@ckeditor/ckeditor5-core";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import campaignServices from "../../services/campaingServices";
-import saveCampaign from '../../services/campaingServices';
+import {saveCampaign,uploadAdapter} from "../../services/campaingServices";
 import "./CreateCampaign.css"
 
 const CampaignPage = () => {
@@ -68,6 +68,12 @@ const CampaignPage = () => {
     });
   }
 
+  function uploadPlugin(editor: Editor) {
+    editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+      return uploadAdapter(loader);
+    };
+  }
+
 
     return (
       <div className='campaign-page'>
@@ -92,6 +98,9 @@ const CampaignPage = () => {
                 id="textInput"
                 editor={ClassicEditor}
                 data="<p>Hello from CKEditor&nbsp;5!</p>"
+                config={{
+                  extraPlugins: [uploadPlugin]
+                }}
                 onReady={(editor: {}) => {
                   ckEditor = editor;
                   // You can store the "editor" and use when it is needed.
