@@ -18,7 +18,8 @@
 
  .campaign-description{
   font-style: italic;
-  color: black;
+  font-size: 17px;
+  color: rgb(117, 110, 110);
  }
 
   .campaign-name{
@@ -29,5 +30,17 @@
     margin-top: 30px;
     color: #000;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: underline;
+
   }
  
+  .campaign-owner {
+       position: relative;
+       top: 90px;
+       font-size: 10px;
+  }
+
+  .extended_view {
+    text-decoration: underline;
+
+  }
