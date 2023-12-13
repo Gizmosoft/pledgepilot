@@ -11,6 +11,7 @@ import DiscoverPage from './Pages/Discover/DiscoverPage';
 import HomePage from './Pages/Home/HomePage';
 import NavBar2 from './Components/Navbar2/NavBar2';
 import CreateCampaign from './Pages/CreateCampaign/CreateCampaign';
+import { UserProfile } from './Pages/UserProfile/UserProfile';
 
 function App() {
   return (
@@ -41,13 +42,21 @@ function App() {
           }>
           </Route>
           {/* /dashboard goes through a protected route - only authenticated users can access this URL */}
-          {/* <Route element={
+          <Route path='/dashboard' element={
             <ProtectedRoutes />
-          }> */}
+          }>
             <Route path='/dashboard' element={
               <Dashboard />
             }>
-            {/* </Route> */}
+            </Route>
+          </Route>
+          <Route path='/profile' element={
+            <ProtectedRoutes />
+          }>
+            <Route path='/profile' element={
+              <UserProfile />
+            }>
+            </Route>
           </Route>
           <Route path='/campaigns/campaign/:campaignId' element={
             <CampaignPage />

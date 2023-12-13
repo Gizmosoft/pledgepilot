@@ -18,6 +18,11 @@ function Navbar() {
     (state: RootState) => state.user as UserState
   );
 
+  const handleProfileClick = () => {
+    navigate('/profile')
+    return
+  }
+
   const handleLogout = () => {
     console.log("logout");
     if (sessionStorage.getItem("user")) {
@@ -84,7 +89,7 @@ function Navbar() {
               {loggedInUser.loginResponse || user ? (
                 <>
                 <div onClick={redirectToDashboard} className="dropdown-options">Dashboard</div>
-                  <div className="dropdown-options">Profile</div>
+                  <div className="dropdown-options" onClick={handleProfileClick}>Profile</div>
                   <div id="logout" className="dropdown-options" onClick={handleLogout}>
                     Logout
                   </div>
