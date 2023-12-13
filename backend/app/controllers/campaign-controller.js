@@ -50,9 +50,12 @@ export const getCampaignById = async(request, response) => {
 // TESTING: DO NOT TOUCH
 export const uploadCampaignImages = async(request, response) => {
     try {
-        const uploadResponse = campaignService.uploadImages(request, response)
-        setDataResponse(uploadResponse, response)
+        //const uploadResponse = campaignService.uploadImages(request, response)
+        // const uploadResponse = 
+        await campaignService.fileUpload(request, response);
+        //setDataResponse(uploadResponse, uploadResponse)
     } catch (error) {
+        //console.log(response);
         setDataErrorResponse(error, response)
     }
 }

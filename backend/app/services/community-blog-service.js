@@ -2,7 +2,7 @@ import blogModel from '../models/Blog.js'
 
 //creating new blogpost
 export const createNewBlog = async (newBlog) => {
-    const blogPost = new communityModel(newBlog);
+    const blogPost = new blogModel(newBlog);
     return await blogPost.save();    // save() is a model function
 }
 

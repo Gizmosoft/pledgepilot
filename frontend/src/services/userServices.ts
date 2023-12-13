@@ -1,5 +1,7 @@
 import axios from "axios";
-
+import { User } from "../types/User";
+import { setUser } from '../store/UserSlice';
+import { store } from "../store/store";
 const usersURL = "users";
 
 export const registerUser = async (registerValues: any) => {
@@ -55,6 +57,61 @@ export const logoutUser = async () => {
       }
     );
     return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const updateUserByEmail = async (email:string, user:User) => {
+  
+  try {
+    const response = await axios.post(`/users/email/${email}`,
+      JSON.stringify(user),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        withCredentials: true,
+      }
+    );
+    console.log(response,"updated User")
+    
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getUserByEmail = async (email:string) => {
+  
+  try {
+    const response = await axios.get(`/users/email/${email}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getUserById = async (id:string) => {
+  
+  try {
+    const response = await axios.get(`/users/email/${id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        withCredentials: true,
+      }
+    );
+    console.log(response);
+    return response.data;
   } catch (error) {
     console.log(error);
   }

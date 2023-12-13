@@ -18,7 +18,7 @@ export const userLogin = createAsyncThunk<any, UserCredentials>(
   "user/loginUser",
   async (userCredentials: UserCredentials) => {
     const response = await loginUser(userCredentials);
-    console.log(response);
+    console.log(response, "login response user slice");
     if(response?.status == 200){
       localStorage.setItem("user",JSON.stringify(response?.data))
       sessionStorage.setItem("user",JSON.stringify(response.data?.user));
@@ -34,6 +34,7 @@ export const userLogout = createAsyncThunk<any, void>(
       const response  = await logoutUser(); // You need to implement the logout service
       if(response?.status == 204){
         localStorage.removeItem("user");
+        sessionStorage.removeItem("user");
       }
       // If needed, you can dispatch additional actions or perform cleanup here
       return {}; // You can return an empty object or any data as needed
@@ -51,7 +52,8 @@ const userSlice : any = createSlice<UserState,SliceCaseReducers<UserState>,any,a
     error: null,
   } as UserState,
   reducers: {
-    setUser: (state, action: PayloadAction<LoginResponse>) => {
+    setUser: (state, action) => {
+      console.log(state,"state");
       state.loginResponse = action.payload;
     },
     clearUser: (state) => {

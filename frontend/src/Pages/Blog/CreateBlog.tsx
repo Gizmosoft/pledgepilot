@@ -1,49 +1,22 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from 'react'
 import { useNavigate, useParams } from "react-router-dom";
-// import Editor from '../../Components/Editor/Editor'
-import { CKEditor } from "@ckeditor/ckeditor5-react";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { Editor } from "@ckeditor/ckeditor5-core";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import {saveCampaign,uploadAdapter} from "../../services/campaingServices";
-import "./CreateCampaign.css";
-import { CustomSnackbar } from "../../Components/Snackbar/CustomSnackbar";
-import { User } from "../../types/User";
-import { updateUserByEmail } from "../../services/userServices";
-import { setUser } from "../../store/UserSlice";
-import { store } from "../../store/store";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {uploadAdapter} from "../../services/campaingServices";
+import {saveBlog} from "../../services/blogServices";
+ import "./CreateBlog.css"
 
-const CampaignPage = () => {
+const CreateBlog = () => {
   const navigate = useNavigate();
   const user = sessionStorage.getItem("user") ?? "";
-  const profile: User = JSON.parse(user);
-  const [campaignData, saveCampaignData] = useState({
-    name: "",
-    description: "",
-    // owner: {
-    //   userId: ""
-    // },
-    owner: profile.Id,
-    community: {
-      comment: {
-        id: "",
-        body: "",
-        owner: "",
-      },
-      blog: {
-        id: "",
-        body: "",
-        owner: {
-          id: "",
-        },
-      },
-    },
-    milestone: {
-      target: "",
-      progress: "",
-    },
-    payments: {
-      count: "",
-    },
+  const profile = JSON.parse(user);
+
+  const [blogData, saveBlogData] = useState({
+    blogTitle: "",
+    blogDescription: "",
+    owner: profile._id,
+    campaignID: "6575c614b00a5e74cc660250"
   });
 
   let ckEdiorData = {};
@@ -53,14 +26,10 @@ const CampaignPage = () => {
 
   const  saveData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(campaignData);
-    const campaign = await saveCampaign(campaignData);
-    console.log(JSON.parse(user));
-    console.log(campaign);
-    profile.createdProjects.push(campaign._id);  
-    let updateUser = await updateUserByEmail(profile.emailAddress,profile);
-    sessionStorage.setItem("user",JSON.stringify(profile))
-    console.log(profile);
+    //console.log(blogData);
+    const savedBlogData = await saveBlog(blogData);
+    console.log(savedBlogData._id);
+    //console.log(user);
     setopenSnackbar(true);
     setTimeout(()=>{
       navigate("/discover");
@@ -70,16 +39,16 @@ const CampaignPage = () => {
   const onChangeInEditor = (event: any, editor: any, name: string) => {
     const data = editor.getData();
     ckEdiorData = data;
-    saveCampaignData({
-      ...campaignData,
+    saveBlogData({
+      ...blogData,
       [name]: data,
     });
   };
 
   const assignValue = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    saveCampaignData({
-      ...campaignData,
+    saveBlogData({
+      ...blogData,
       [name]: value,
     });
   }
@@ -90,23 +59,22 @@ const CampaignPage = () => {
   }
 
   return (
-    <div className="campaign-page">
+    <div className="blog-page">
       <div>
-        <form className="campaign-form" onSubmit={saveData}>
-          <label htmlFor="title">Campaign Title:</label>
+        <form className="blog-form" onSubmit={saveData}>
+          <label htmlFor="title">Blog Title:</label>
           <input
             className="name-input"
             type="text"
-            id="name"
-            name="name"
+            id="blogTitle"
+            name="blogTitle"
             placeholder="Enter Title"
             onChange={assignValue}
-            value={campaignData.name}
+            value={blogData.blogTitle}
             required
           />
 
             <div className="App ckStyle">
-              <h2>Using CKEditor&nbsp;5 build in React</h2>
               <CKEditor
                 id="textInput"
                 editor={ClassicEditor}
@@ -116,7 +84,6 @@ const CampaignPage = () => {
                 }}
                 onReady={(editor: {}) => {
                   ckEditor = editor;
-                  // You can store the "editor" and use when it is needed.
                   console.log('Editor is ready to use!', editor);
                 }}
                 onChange={(event: any, ckEditor: { getData: () => any; }) => {
@@ -137,7 +104,7 @@ const CampaignPage = () => {
     )
   }
 
-export default CampaignPage;
+export default CreateBlog;
 function dispatch(arg0: Promise<any>) {
   throw new Error("Function not implemented.");
 }

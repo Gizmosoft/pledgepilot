@@ -1,11 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import '../../Components/Campaign/CampaignTile.css'
+import { getUserById } from '../../services/userServices';
 
 const cardImg = require('../../assets/sample-image.jpg')
 
 const CampaignTile = ({ campaignObject }: any) => {
+
+  const description_threshold = 40;
+
+
+  const descriptionContent =
+    campaignObject.description.length > description_threshold
+      ? `${campaignObject.description.substring(0, description_threshold)}...`
+      : campaignObject.description;
+
+
+    useEffect(()=>{
+      console.log(campaignObject.owner);
+      const fetchUser = async () => {
+        let user =  await getUserById(campaignObject.owner);
+        console.log(user,"user");
+      }
+      fetchUser();
+    },[])
+
   return (
     <div className='campaign-tile'>
       <h5 className='campaign-links'>
@@ -17,7 +37,16 @@ const CampaignTile = ({ campaignObject }: any) => {
             </div>
             <div className='cardText'>
               <div className="campaign-name">{campaignObject.name}</div>
-              <div className="campaign-description">{campaignObject.description}</div>
+
+              <div className="campaign-description">{descriptionContent}</div>
+
+              {campaignObject.description.length > description_threshold ? (
+                <label className='extended_view'>View campaign</label>
+              ) : null}
+
+
+
+              <div className='campaign-owner'>{campaignObject.owner}</div>
             </div>
 
           </div>

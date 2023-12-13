@@ -4,8 +4,8 @@ import { setResponse, setErrorResponse } from './response-handler.js'
 // API for creating a new blog post
 export const createBlogPost = async (request, response) => {
     try {
-        const neBlogPost = {...request.body};
-        const createNewBlog = await blogService.createBlogPost(neBlogPost);
+        const newBlogPost = {...request.body};
+        const createNewBlog = await blogService.createNewBlog(newBlogPost);
         setResponse(createNewBlog, response);        
     } catch (error) {
         setErrorResponse(error, response);

@@ -5,7 +5,7 @@ import campaign from './Campaign.js';
 const Schema = mongoose.Schema
 
 const blogSchema = new Schema({
-    _id: Schema.Types.ObjectId,
+    // _id: Schema.Types.ObjectId,
     blogTitle: String,
     blogBody: String,
     owner: { type: Schema.Types.ObjectId, ref: UserModel },
