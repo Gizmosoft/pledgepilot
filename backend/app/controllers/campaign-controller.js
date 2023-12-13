@@ -51,9 +51,11 @@ export const getCampaignById = async(request, response) => {
 export const uploadCampaignImages = async(request, response) => {
     try {
         //const uploadResponse = campaignService.uploadImages(request, response)
-        const uploadResponse = await campaignService.fileUpload(request, response);
-        setDataResponse(uploadResponse, uploadResponse)
+        // const uploadResponse = 
+        await campaignService.fileUpload(request, response);
+        //setDataResponse(uploadResponse, uploadResponse)
     } catch (error) {
+        //console.log(response);
         setDataErrorResponse(error, response)
     }
 }
