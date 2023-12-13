@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { PaymentButton } from '../../Components/Payment/PaymentButton'
 import { getUserInTheSession } from '../../Utils/SessionStorage'
 import BookmarkIcon from '@mui/icons-material/Bookmark';
@@ -20,9 +20,11 @@ const CampaignPage = () => {
     // get campaignName from params
     const { campaignId } = useParams()
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchCampaign = async () => {
-            // collect response
+            // collect response 
             const campaignResponse = await fetch('http://localhost:3001/campaigns/campaign/' + campaignId)
             // get campaign Data
             const campaignData = await campaignResponse.json()
@@ -31,16 +33,16 @@ const CampaignPage = () => {
             setCampaign(campaignData)
             // fetchCampaignOwner()
             const userResponse = await fetch('http://localhost:3001/users/id/' + campaignData.owner)
-            const userData = await userResponse.json()        
+            const userData = await userResponse.json()
             // set user data
-            if(userData.length === 0){
+            if (userData.length === 0) {
                 // const customUser = {
                 //     firstName: 'Admin',
                 //     lastName: ''
                 // }
                 // console.log(customUser);
                 // console.log('here');
-                
+
                 setUser({
                     firstName: 'Admin',
                     lastName: ''
@@ -60,9 +62,25 @@ const CampaignPage = () => {
     //     // set user data
     //     setUser(userData)
     // }
+    const editCampaign = () =>{
+        navigate("/create/"+campaignId);
+    }
 
     if (!campaign || !campaign._id) {
         return <h1>404: Campaign Not Found!</h1>
+    }
+
+    const loggedInUser = user._id;
+
+    function Greeting() {
+        if (loggedInUser == campaign.owner) {
+            return (<div className="btn-forgot-password">
+            <button type="submit" onClick={editCampaign}>Edit</button>
+          </div>)
+        }
+        else{
+            return (<></>)
+        }
     }
 
     const sessionUser = getUserInTheSession()
@@ -72,12 +90,12 @@ const CampaignPage = () => {
         <div className='container campaign-page'>
             <div className='campaign-info'></div>
             <h1>{campaign.name}</h1>
-            <Gallery />
-            <hr />
+            {/* <Gallery /> */}
+            {/* <hr /> */}
             <div className="grid-container-campaign">
                 <div className="grid-child-left">
                     <div className='grid-description'>
-                    <div className='campaignContainer ck-content' dangerouslySetInnerHTML={markup}></div>                        
+                        <div className='campaignContainer ck-content' dangerouslySetInnerHTML={markup}></div>
                     </div>
                     <div className='grid-owner'>
                         <p><PersonIcon fontSize='medium' />{user.firstName} {user.lastName}</p>
@@ -85,18 +103,19 @@ const CampaignPage = () => {
                 </div>
                 <div className="grid-child-right">
                     <div className='follow-button'>
-                    <Button variant="outlined" href="#outlined-buttons">
-                        Follow <BookmarkIcon fontSize='large' color='primary' />
-                    </Button>
+                        <Button variant="outlined" href="#outlined-buttons">
+                            Follow <BookmarkIcon fontSize='large' color='primary' />
+                        </Button>
                     </div><br />
                     <div className='payment-button'>
-                    {sessionUser !== null ? <PaymentButton campaign={campaign} /> : <RedirectButton />}
+                        {sessionUser !== null ? <PaymentButton campaign={campaign} /> : <RedirectButton />}
                     </div>
                 </div>
                 {/* <p>User in the session: {sessionUser.firstName}</p> */}
             </div>
+            <Greeting/>
             <hr />
-            <Milestone campaignId={campaignId}/>
+            <Milestone campaignId={campaignId} />
             <hr />
             {/* <Footer /> */}
         </div>

@@ -59,3 +59,16 @@ export const uploadCampaignImages = async(request, response) => {
         setDataErrorResponse(error, response)
     }
 }
+
+// Controller for updating API
+export const updateCampaign = async (request, response) => {
+    try {
+        const newCampaign = {...request.body}
+        const campaignId = request.params.campaignId
+        const campaign = await campaignService.updateCampaign(campaignId, newCampaign)
+        setDataResponse(campaign, response) 
+    } catch (error) {
+        console.log(error);
+        setDataErrorResponse(error, response)
+    }
+}
