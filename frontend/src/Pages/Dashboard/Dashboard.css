@@ -8,6 +8,7 @@
   gap: 1vw;
   margin-bottom: 10vh;
   margin-top: 2vh;
+  flex-wrap: wrap;
 }
 .welcome-text{
   margin-bottom: 5vh;
@@ -17,4 +18,5 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  
 }

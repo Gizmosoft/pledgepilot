@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import '../../Components/Campaign/CampaignTile.css'
+import { getUserById } from '../../services/userServices';
 
 const cardImg = require('../../assets/sample-image.jpg')
 
@@ -16,6 +17,14 @@ const CampaignTile = ({ campaignObject }: any) => {
       : campaignObject.description;
 
 
+    useEffect(()=>{
+      console.log(campaignObject.owner);
+      const fetchUser = async () => {
+        let user =  await getUserById(campaignObject.owner);
+        console.log(user,"user");
+      }
+      fetchUser();
+    },[])
 
   return (
     <div className='campaign-tile'>
