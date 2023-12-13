@@ -72,7 +72,9 @@ const CampaignPage = () => {
     console.log(profile);
     setopenSnackbar(true);
     setTimeout(() => {
+    setTimeout(() => {
       navigate("/discover");
+    }, duration);
     }, duration);
   };
 
