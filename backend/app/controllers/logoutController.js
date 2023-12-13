@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import { findByRefreshToken } from "../services/user-service.js";
+import { setErrorResponse } from "./response-handler.js";
 
 export const handleLogout = async (request, response) => {
   try {
@@ -17,9 +18,7 @@ export const handleLogout = async (request, response) => {
     const foundUser = new User(foundUserByToken);
     foundUser.refreshToken = "";
     foundUser.save();
-    response.clearCookie("jwt", { httpOnly: true });
-    response.sendStatus(204);
-    response.redirect('/')
+    response.clearCookie("jwt", { httpOnly: true }).sendStatus(204);
   } catch (error) {
     setErrorResponse(error, response);
   }

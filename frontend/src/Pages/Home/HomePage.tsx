@@ -8,9 +8,9 @@ import Footer from "../../Components/Footer/Footer";
 import Stats from "../../Components/Stats/Stats";
 import { Link } from 'react-router-dom'
 
-// // const pledgePilotVideo = require("../../assets/videos/pledge-pilot-landing-page.mp4");
+const pledgePilotVideo = require("../../assets/videos/pledge-pilot-landing-page.mp4");
 // import Test from './components/Test';
-const pledgePilotVideo = require("../../assets/videos/landing.gif");
+// const pledgePilotVideo = require("../../assets/videos/landing.gif");
 
 function HomePage() {
   return (
@@ -20,10 +20,10 @@ function HomePage() {
         {/* <Header /> */}
         {/* Search Bar */}
         <div className="hero-section">
-          <img id="home-page-video" src={pledgePilotVideo} alt="landing-gif" />
-          {/* <video id="home-page-video" muted autoPlay loop>
-            <source src={pledgePilotVideo} type="video/gif"></source>
-          </video> */}
+          {/* <img id="home-page-video" src={pledgePilotVideo} alt="landing-gif" /> */}
+          <video id="home-page-video" muted autoPlay loop>
+            <source src={pledgePilotVideo} type="video/mp4"></source>
+          </video>
           <div className="stats-container">
             <Stats />
             <Link to='/login'>

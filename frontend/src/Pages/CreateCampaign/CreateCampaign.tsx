@@ -1,23 +1,28 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 // import Editor from '../../Components/Editor/Editor'
-import { CKEditor } from '@ckeditor/ckeditor5-react';
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { Editor } from "@ckeditor/ckeditor5-core";
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {saveCampaign,uploadAdapter} from "../../services/campaingServices";
-import "./CreateCampaign.css"
+import "./CreateCampaign.css";
+import { CustomSnackbar } from "../../Components/Snackbar/CustomSnackbar";
+import { User } from "../../types/User";
+import { updateUserByEmail } from "../../services/userServices";
+import { setUser } from "../../store/UserSlice";
+import { store } from "../../store/store";
 
 const CampaignPage = () => {
   const navigate = useNavigate();
   const user = sessionStorage.getItem("user") ?? "";
-  const profile = JSON.parse(user);
+  const profile: User = JSON.parse(user);
   const [campaignData, saveCampaignData] = useState({
     name: "",
     description: "",
     // owner: {
     //   userId: ""
     // },
-    owner: profile._id,
+    owner: profile.Id,
     community: {
       comment: {
         id: "",
@@ -50,8 +55,12 @@ const CampaignPage = () => {
     e.preventDefault();
     console.log(campaignData);
     const campaign = await saveCampaign(campaignData);
-    console.log(campaign._id);
-    console.log(user);
+    console.log(JSON.parse(user));
+    console.log(campaign);
+    profile.createdProjects.push(campaign._id);  
+    let updateUser = await updateUserByEmail(profile.emailAddress,profile);
+    sessionStorage.setItem("user",JSON.stringify(profile))
+    console.log(profile);
     setopenSnackbar(true);
     setTimeout(()=>{
       navigate("/discover");
