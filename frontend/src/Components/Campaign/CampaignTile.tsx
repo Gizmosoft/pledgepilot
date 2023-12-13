@@ -26,6 +26,8 @@ const CampaignTile = ({ campaignObject }: any) => {
       fetchUser();
     },[])
 
+    const regex = /(<([^>]+)>)/gi;
+
   return (
     <div className='campaign-tile'>
       <h5 className='campaign-links'>
@@ -38,7 +40,7 @@ const CampaignTile = ({ campaignObject }: any) => {
             <div className='cardText'>
               <div className="campaign-name">{campaignObject.name}</div>
 
-              <div className="campaign-description">{descriptionContent}</div>
+              <div className="campaign-description">{descriptionContent.replace(regex,"")}</div>
 
               {campaignObject.description.length > description_threshold ? (
                 <label className='extended_view'>View campaign</label>
