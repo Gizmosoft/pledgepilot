@@ -10,6 +10,7 @@ import Gallery from '../../Components/ImageGrid/Gallery';
 import { RedirectButton } from '../../Components/Payment/RedirectButton';
 import Footer from '../../Components/Footer/Footer';
 import { Milestone } from '../../Components/Milestone/Milestone';
+import '../../assets/ckEditorStyles/ckEditorStyles.css'
 
 const CampaignPage = () => {
     // define state for campaign
@@ -76,7 +77,7 @@ const CampaignPage = () => {
             <div className="grid-container-campaign">
                 <div className="grid-child-left">
                     <div className='grid-description'>
-                    <div className='campaingContainer' dangerouslySetInnerHTML={markup}></div>                        
+                    <div className='campaignContainer ck-content' dangerouslySetInnerHTML={markup}></div>                        
                     </div>
                     <div className='grid-owner'>
                         <p><PersonIcon fontSize='medium' />{user.firstName} {user.lastName}</p>

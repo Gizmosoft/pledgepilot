@@ -43,8 +43,9 @@ export const uploadAdapter = (loader: FileLoader): UploadAdapter => {
                         default: `${response.data.filename}`
                     });
                 } catch (error) {
+                    console.log("error occured");
                     console.log(error);
-                    reject("Hello");
+                    reject(error);
                 }
             });
         },
