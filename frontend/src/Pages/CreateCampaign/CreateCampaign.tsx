@@ -2,8 +2,8 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 // import Editor from '../../Components/Editor/Editor'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Editor } from "@ckeditor/ckeditor5-core";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {saveCampaign,uploadAdapter} from "../../services/campaingServices";
 import "./CreateCampaign.css"
 
@@ -74,6 +74,7 @@ const CampaignPage = () => {
       [name]: value,
     });
   }
+
   function uploadPlugin(editor: Editor) {
     editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
       return uploadAdapter(loader);
