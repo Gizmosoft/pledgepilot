@@ -15,7 +15,7 @@ const saveCampaign = async (campaignData: any) => {
                 withCredentials: true,
             }
         )
-        console.log(campaignData);
+            return response.data;
     }
     catch (error) {
         console.log(error);

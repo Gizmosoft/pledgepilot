@@ -78,6 +78,11 @@
 #logout{
   background-color: #EF476F;
   color: #fff;
+  transition: 0.3s all ease;
+}
+#logout:hover{
+  background-color: #FFCA2C;
+  color: #000;
 }
 .dropdown-options:hover{
   background-color:#88f7da ;
