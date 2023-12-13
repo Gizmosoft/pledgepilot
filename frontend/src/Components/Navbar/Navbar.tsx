@@ -20,6 +20,11 @@ function Navbar() {
 
   const handleLogout = () => {
     console.log("logout");
+    if (sessionStorage.getItem("user")) {
+      sessionStorage.removeItem("user");
+      navigate('/login')
+      return;
+    }
     dispatch(userLogout());
     navigate("/login");
     handleOpenMenu();

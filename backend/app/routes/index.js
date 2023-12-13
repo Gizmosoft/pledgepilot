@@ -5,6 +5,7 @@ import blogsRouter from "./community-blog-routes.js"
 import paymentRouter from './payment-routes.js'
 import refreshRouter from './refresh-token-route.js'
 import logoutRouter from './logout.js'
+import campaignpaymentsRouter from './campaignpayments.js'
 
 // define endpoints related to campaign model
 export default (app) => {
@@ -14,5 +15,6 @@ export default (app) => {
     app.use("/community", communityRouter);
     app.use("/blog", blogsRouter);
     app.use("/payments", paymentRouter);
-    app.use("/logout",logoutRouter)
+    app.use("/campaignpayments", campaignpaymentsRouter);
+    app.use("/logout",logoutRouter);
 }

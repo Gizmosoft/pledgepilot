@@ -5,26 +5,10 @@ import { CustomSnackbar } from "../Snackbar/CustomSnackbar";
 import { getUserInTheSession } from "../../Utils/SessionStorage";
 import { dateGen } from "../../Utils/CurrentDateGenerator";
 import { rewardGen } from "../../Utils/RewardGenerator";
+import { Label } from "@mui/icons-material";
 
-export const PaymentButton = ({campaign}) => {
-  // const [product, setProduct] = useState({
-  //     name: "React from Campaign",
-  //     price: 10,
-  //     productBy: "PledgePilot"
-  //   })
-
+export const PaymentButton = ({ campaign }) => {
   const [donationAmount, setDonationAmount] = useState("");
-  const [showSnackbar, setShowSnackbar] = useState(false);
-
-  const handleShowSnackbar = () => {
-    setShowSnackbar(true);
-  };
-
-  const handleSnackbarClose = () => {
-    // Handle any actions you want when the Snackbar is closed
-    // For example, reset state, navigate, etc.
-    setShowSnackbar(false);
-  };
 
   const handleInputChange = (event) => {
     setDonationAmount(event.target.value);
@@ -47,24 +31,26 @@ export const PaymentButton = ({campaign}) => {
         body: JSON.stringify(body),
       });
       const { status } = response;
-      if(status === 200){
+      if (status === 200) {
         console.log(campaign);
         console.log(getUserInTheSession());
-        try{
-
-          const paymentDbResponse = await fetch('http://localhost:3001/payments/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              campaignName: campaign,
-              paidBy: getUserInTheSession(),
-              amount: donationAmount,
-              rewardGenerated: rewardGen(donationAmount),
-              txnDate: dateGen() 
-            })
-          })
+        try {
+          const paymentDbResponse = await fetch(
+            "http://localhost:3001/payments/create",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                campaignName: campaign,
+                paidBy: getUserInTheSession(),
+                amount: donationAmount,
+                rewardGenerated: rewardGen(donationAmount),
+                txnDate: dateGen(),
+              }),
+            }
+          );
         } catch (error) {
           return console.log(error);
         }
@@ -76,8 +62,8 @@ export const PaymentButton = ({campaign}) => {
   };
   return (
     <div className="payment-box">
+      <small>Donate to {campaign.name}</small>
       <h4>Donate❤️</h4>
-      <p></p>
       <div className="amount-box">
         <input
           className="amount-input"
@@ -99,11 +85,6 @@ export const PaymentButton = ({campaign}) => {
           Donate
         </button>
       </StripeCheckout>
-      {/* <CustomSnackbar
-        open={handleShowSnackbar}
-        message="Hello World!"
-        handleClose={handleSnackbarClose}
-      /> */}
     </div>
   );
 };
