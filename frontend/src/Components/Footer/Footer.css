@@ -1,0 +1,37 @@
+footer{
+  background-color: #06D6A0;
+  
+}
+.footer-container{
+  display: flex;
+  width: 100%;
+  padding: 2vw;
+  justify-content: space-around;
+}
+.social-container{
+  display: flex;
+  flex-direction: column;
+}
+.footer-logo{
+  width: 100px;
+  height: 25px;
+  object-fit: contain;
+}
+.social-icons{
+display: flex;
+flex-direction: column;
+}
+.icon-text{
+  margin-left: 10px;
+}
+.quick-links{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.pledge-pilot-footer-logo{
+  flex: 1;
+}
+.connect-container{
+  flex: 1;
+}

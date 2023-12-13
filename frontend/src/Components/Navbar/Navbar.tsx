@@ -45,7 +45,7 @@ function Navbar() {
     <header className="header">
 <nav className="navbar-component">
       <div id="logo-container">
-        <img  id="logo-img" src={logo} alt="" />
+        <img onClick={()=>navigate("/")}  id="logo-img" src={logo} alt="" />
         {/* <img className="img-logo" id="img-logo-spacer" src={logoSpacer} alt="" />
         <img className="img-logo" id="img-logo-text" src={logoText} alt="" /> */}
         {/* <div id="nav-search">
