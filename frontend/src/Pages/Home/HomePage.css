@@ -163,7 +163,7 @@ body {
   .home-page{
     width: 100%;
     height: 100%;
-    /* overflow: hidden; */
+    overflow: hidden;
 
   }
   .hero-section{
@@ -181,3 +181,140 @@ body {
     z-index: -1;
 
   }
+
+  .how-it-works {
+    padding: 50px;
+    background-color: #f2f2f2;
+    text-align: center;
+  }
+  
+  .steps-wrapper {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .step {
+    margin: 15px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .step img {
+    margin-bottom: 10px;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .step h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .step p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+  
+  .step a {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+  }
+  .developers {
+    padding: 50px;
+    text-align: center;
+  }
+  
+  .developer-photos {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .developer-photos img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  .browse-campaigns {
+    padding: 50px;
+    text-align: center;
+  }
+  
+  .card-container {
+    display: flex;
+    justify-content: space-between;
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent cards from wrapping */
+    scroll-snap-type: x mandatory; /* Enable scroll snapping for smooth transitions */
+    scroll-padding: 10px; /* Add padding on both ends to avoid abrupt scroll stops */
+  }
+  
+  .card {
+    width: 300px; /* Adjust card width based on content */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 0 5px; /* Add slight margin for scroll snapping effect */
+  }
+  
+  .card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .card-content {
+    margin-top: 10px;
+  }
+  
+  .card h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .card p {
+    line-height: 1.5;
+  }
+  
+  .progress-bar {
+    background-color: #ddd;
+    height: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .progress-bar span {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 0 5px;
+    font-size: 12px;
+    line-height: 5px;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    margin-top: 10px;
+  }
+  
+  .btn-secondary {
+    background-color: #ddd;
+    color: #333;
+  }
+  
