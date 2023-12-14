@@ -29,8 +29,6 @@ function Navbar() {
   }
 
   const handleLogout = () => {
-    console.log("logout");
-
     dispatch(userLogout());
 
     user = null;
@@ -45,7 +43,6 @@ function Navbar() {
   };
 
   function handleOpenMenu(): void {
-    console.log(document.querySelector(".dropdown"));
     document.querySelector(".dropdown")?.classList.toggle("show");
   }
   function redirectToDashboard(): void {
@@ -53,8 +50,6 @@ function Navbar() {
     handleOpenMenu();
   }
 
-  console.log(loggedInUser, "loggedIn user");
-  // console.log(user.firstName);
   return (
     <header className="header">
       <nav className="navbar-component">
@@ -78,11 +73,7 @@ function Navbar() {
           {/* Your other content */}
           <div className="nav-links" id="profile-container">
             <div id="profile" className="nav-links">
-              {loggedInUser.loginResponse ? (
-                <div onClick={handleOpenMenu}>
-                  {loggedInUser.loginResponse?.user.firstName}
-                </div>
-              ) : userString ? (
+              {userString ? (
                 <div onClick={handleOpenMenu}>{user?.firstName}</div>
               ) : (
                 <div onClick={navigateToLogin}>Login</div>

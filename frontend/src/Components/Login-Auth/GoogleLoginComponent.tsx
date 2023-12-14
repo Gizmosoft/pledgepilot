@@ -48,7 +48,8 @@ const GoogleLoginComponent = () => {
                         const addedUser = await fetch('http://localhost:3001/users/oauth/' + user.email)
                         const addedUserJson = await addedUser.json()
                         console.log(addedUser);
-                        sessionStorage.setItem("user", JSON.stringify(addedUserJson[0]))
+                        sessionStorage.setItem("user", JSON.stringify(addedUserJson[0]));
+                        localStorage.setItem("user",JSON.stringify(addedUserJson[0]));
                         navigate('/dashboard')
                     }
                     else {
@@ -60,7 +61,8 @@ const GoogleLoginComponent = () => {
             }
             // if user Exists, then login the user
             else {
-                sessionStorage.setItem("user", JSON.stringify(userJsonResponse[0]))
+                sessionStorage.setItem("user", JSON.stringify(userJsonResponse[0]));
+                localStorage.setItem("user",JSON.stringify(userJsonResponse[0]));
                 navigate('/dashboard')
             }
         } catch (error: any) {
