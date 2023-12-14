@@ -14,6 +14,7 @@ import CreateCampaign from './Pages/CreateCampaign/CreateCampaign';
 import BlogPage from './Pages/Blog/CreateBlog';
 import CreateBlog from './Pages/Blog/CreateBlog';
 import { UserProfile } from './Pages/UserProfile/UserProfile';
+import BlogDashboard from './Pages/BlogDashboard/BlogDashboard';
 
 function App() {
   return (
@@ -75,7 +76,10 @@ function App() {
           <Route path= '/create' element={
             <CreateCampaign/>
           }></Route>
-          <Route path= '/AddBlog' element={
+          <Route path= '/BlogDashboard/:campaignId' element={
+            <BlogDashboard/>
+          }></Route>
+          <Route path= '/AddBlog/:campaignId' element={
             <CreateBlog/>
           }></Route>
         </Routes>
