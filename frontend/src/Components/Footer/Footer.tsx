@@ -75,10 +75,10 @@ export default function Footer() {
 
         <div className="quick-links">
           <h6>QUICK LINKS</h6>
-          <a href="#about">About Us</a>
-          <a href="#stats">Stats</a>
-          <a href="#careers">Careers</a>
-          <a href="#faq">FAQ</a>
+          <a href="about">About Us</a>
+          <a href="stats">Stats</a>
+          <a href="careers">Careers</a>
+          <a href="faq">FAQ</a>
         </div>
 
         <div className="pledge-pilot-footer-logo">

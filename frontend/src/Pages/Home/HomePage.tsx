@@ -103,7 +103,7 @@ function HomePage() {
               Tell your story, set your funding goal, and offer exciting
               rewards.
             </p>
-            <Button variant="contained" color="primary">
+            <Button onClick={redirectUser} variant="contained" color="primary">
               Get Started
             </Button>
           </div>
@@ -111,7 +111,7 @@ function HomePage() {
             <FaShareAlt />
             <h3>Spread the Word</h3>
             <p>Share your campaign on social media, email, and your network.</p>
-            <Button variant="contained" color="primary">
+            <Button  variant="contained" color="primary">
               Learn More
             </Button>
           </div>
@@ -119,7 +119,7 @@ function HomePage() {
             <FaTrophy />
             <h3>Pledges and Rewards</h3>
             <p>Backers support your campaign and receive your rewards.</p>
-            <Button variant="contained" color="primary">
+            <Button onClick={()=>navigate("/rewards")} variant="contained" color="primary">
               Learn About Rewards
             </Button>
           </div>
