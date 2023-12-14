@@ -8,7 +8,7 @@ export const createNewBlog = async (newBlog) => {
 
 // funtion to get all blog posts for the particular community
 export const getBlogPostsForCampaign = async (communityID) => {
-    const blogPosts = await blogModel.findById(communityID).exec();
+    const blogPosts = await blogModel.find({campaignID:communityID});
     return blogPosts;
 }
 

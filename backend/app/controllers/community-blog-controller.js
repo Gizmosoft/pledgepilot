@@ -26,9 +26,9 @@ export const getBlogPost = async (request, response) => {
 // API for fetching blog data for a specific campaign
 export const getBlogPostsForCampaign = async (request, response) => {
     try {
-        const campaignId = request.params.id;
+        const campaignId = request.params.campaignId;
         const blogPosts = await blogService.getBlogPostsForCampaign(campaignId);
-        setResponse(blogPosts, response);
+        setResponse({type:"getBlog", data:blogPosts}, response);
     } catch (error) {
         setErrorResponse(error, response);
     }

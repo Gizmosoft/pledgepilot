@@ -7,7 +7,7 @@ const router = express.Router()
 router.route('/')
     .post(blogController.createBlogPost)
   
-router.route('/:id')
+router.route('/:campaignId')
     .get(blogController.getBlogPostsForCampaign)
     .patch(blogController.updateBlog)
 
