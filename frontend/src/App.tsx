@@ -14,6 +14,8 @@ import CreateCampaign from './Pages/CreateCampaign/CreateCampaign';
 import BlogPage from './Pages/Blog/CreateBlog';
 import CreateBlog from './Pages/Blog/CreateBlog';
 import { UserProfile } from './Pages/UserProfile/UserProfile';
+import About from './Pages/About/About';
+import Rewards from './Pages/Rewards/Rewards';
 
 function App() {
   return (
@@ -77,6 +79,12 @@ function App() {
           }></Route>
           <Route path= '/AddBlog' element={
             <CreateBlog/>
+          }></Route>
+          <Route path= '/about' element={
+            <About/>
+          }></Route>
+          <Route path= '/rewards' element={
+            <Rewards/>
           }></Route>
         </Routes>
       </Router>
