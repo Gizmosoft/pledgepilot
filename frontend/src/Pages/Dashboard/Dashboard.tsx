@@ -9,40 +9,39 @@ import { useNavigate } from "react-router-dom";
 import { getUserByEmail } from "../../services/userServices";
 
 function Dashboard() {
-    const dispatch = useDispatch();
-  let user = sessionStorage.getItem("user") ?? "";
+  const navigate = useNavigate();
   const [profile, setProfile] = useState<User | null>(null);
+
   useEffect(() => {
-//     console.log("hello")
-    const fetchData = async () => {
+    const fetchUserProfile = async () => {
       try {
-        const response = await getUserByEmail(JSON.parse(user).emailAddress);
-        console.log(response, "response");
+        const userString = sessionStorage.getItem("user") ?? "";
+        const emailAddress = JSON.parse(userString).emailAddress;
+        
+        const response = await getUserByEmail(emailAddress);
         setProfile(response);
-        let userFromLocalStorage = localStorage.getItem("user") ?? "";
-        // let loginResponse: LoginResponse  = JSON.parse(userFromLocalStorage);
-        // loginResponse.user = response;
-        dispatch(setUser(JSON.parse(userFromLocalStorage)));
+        sessionStorage.setItem("user", JSON.stringify(response));
+    
       } catch (error) {
         console.error("Error fetching user:", error);
       }
     };
-    fetchData();
+
+    fetchUserProfile();
   }, []);
 
-  const navigate = useNavigate();
-  function exploreCampaigns() {
+  const exploreCampaigns = () => {
     navigate("/discover");
-  }
-  function createCampaign() {
+  };
+
+  const createCampaign = () => {
     navigate("/create");
-  }
-  console.log(profile)
+  };
   return (
     <>
     {profile && <div className="dashboard-container">
       <div className="welcome-text">
-        <h2>Welcome {profile!.firstName + " " + profile!.lastName}</h2>
+        <h2>Welcome { profile && profile!.firstName + " " + profile!.lastName}</h2>
       </div>
       <div className="follow-campaigns">
         <h4>Campaigns Followed</h4>
@@ -55,7 +54,7 @@ function Dashboard() {
         {profile!.projectsFollowed.map((campaign: any) => (
           <CampaignTile key={campaign._id} campaignObject={campaign} />
         ))}
-        {profile!.createdProjects == undefined
+        {profile!.projectsFollowed.length == 0
           ? "You are not following any projects"
           : ""}
       </div>
