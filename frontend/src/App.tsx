@@ -13,9 +13,9 @@ import CreateCampaign from './Pages/CreateCampaign/CreateCampaign';
 import BlogPage from './Pages/Blog/CreateBlog';
 import CreateBlog from './Pages/Blog/CreateBlog';
 import { UserProfile } from './Pages/UserProfile/UserProfile';
+import BlogDashboard from './Pages/BlogDashboard/BlogDashboard';
 import About from './Pages/About/About';
 import Rewards from './Pages/Rewards/Rewards';
-import BlogDashboard from './Pages/BlogDashboard/BlogDashboard';
 
 function App() {
   return (
