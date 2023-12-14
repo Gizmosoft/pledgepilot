@@ -1,0 +1,15 @@
+.grid-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+    text-align: center;
+    margin-top: 200px;
+}
+
+.grid-stats-left {
+    text-align: center;
+}
+
+.grid-stats-left {
+    text-align: center;
+}
