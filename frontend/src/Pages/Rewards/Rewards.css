@@ -1,0 +1,86 @@
+.rewards {
+  padding: 50px;
+  text-align: center;
+}
+
+.tier {
+  margin-bottom: 50px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tier h3 {
+  margin-bottom: 20px;
+}
+
+.offer-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.offer-card:hover {
+  background-color: #f5f5f5;
+}
+
+.offer-card img {
+  width: 50px;
+  margin-right: 10px;
+}
+
+.offer-card p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.offer-card span {
+  font-style: italic;
+  font-size: 14px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+/* Additional styles for different tiers (optional) */
+
+.tier:nth-child(2) h3 {
+  color: #ff9800; /* Gold tier accent color */
+}
+
+.tier:nth-child(2) .offer-card {
+  border-color: #ff9800; /* Gold tier border color */
+}
+
+/* Customize further based on your brand colors and preferences */
+
+.tier:nth-child(2) h3 {
+  color: #ff9800;
+}
+
+.tier:nth-child(2) .offer-card {
+  border-color: #ff9800;
+}
+
+/* Optional style adjustments for Gold Patron cards: */
+
+.tier:nth-child(2) .offer-card:hover {
+  background-color: #fffeea; /* Slightly lighter gold hover effect */
+}
+
+.tier:nth-child(2) .offer-card p {
+  font-weight: 500; /* Slightly bolder font for emphasis */
+}
+
+.tier:nth-child(2) .offer-card img {
+  filter: brightness(0.85); /* Slightly muted icon colors */
+}
