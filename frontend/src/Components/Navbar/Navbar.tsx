@@ -23,6 +23,11 @@ function Navbar() {
       
     user = JSON.parse(userString);
   }
+  const handleProfileClick = () => {
+    navigate('/profile')
+    return
+  }
+
   const handleLogout = () => {
     dispatch(userLogout());
 
@@ -82,7 +87,7 @@ function Navbar() {
                     >
                       Dashboard
                     </div>
-                    <div className="dropdown-options">Profile</div>
+                    <div className="dropdown-options" onClick={handleProfileClick}>Profile</div>
                     <div
                       id="logout"
                       className="dropdown-options"

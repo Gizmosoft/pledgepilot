@@ -11,6 +11,7 @@ import { RedirectButton } from '../../Components/Payment/RedirectButton';
 import Footer from '../../Components/Footer/Footer';
 import { Milestone } from '../../Components/Milestone/Milestone';
 import '../../assets/ckEditorStyles/ckEditorStyles.css'
+import FollowButton from '../../Components/Buttons/FollowButton';
 
 const CampaignPage = () => {
     // define state for campaign
@@ -32,24 +33,27 @@ const CampaignPage = () => {
             // set the campaign data to be received by the UI
             setCampaign(campaignData)
             // fetchCampaignOwner()
-            const userResponse = await fetch('http://localhost:3001/users/id/' + campaignData.owner)
-            const userData = await userResponse.json()
-            // set user data
-            if (userData.length === 0) {
-                // const customUser = {
-                //     firstName: 'Admin',
-                //     lastName: ''
-                // }
-                // console.log(customUser);
-                // console.log('here');
-
-                setUser({
-                    firstName: 'Admin',
-                    lastName: ''
-                })
-            }
-            else
+            if(campaignData.owner !== undefined){
+                const userResponse = await fetch('http://localhost:3001/users/id/' + campaignData.owner)
+                const userData = await userResponse.json()
                 setUser(userData)
+            }
+            
+            // set user data
+            // if (userData.length === 0) {
+            //     // const customUser = {
+            //     //     firstName: 'Admin',
+            //     //     lastName: ''
+            //     // }
+            //     // console.log(customUser);
+            //     // console.log('here');
+
+            //     setUser({
+            //         firstName: 'Admin',
+            //         lastName: ''
+            //     })
+            // }
+            // else
         }
         fetchCampaign()
     }, []
@@ -73,7 +77,7 @@ const CampaignPage = () => {
     const loggedInUser = user._id;
 
     function Greeting() {
-        if (loggedInUser == campaign.owner) {
+        if (loggedInUser === campaign.owner) {
             return (<div className="btn-forgot-password">
             <button type="submit" onClick={editCampaign}>Edit</button>
           </div>)
@@ -98,14 +102,14 @@ const CampaignPage = () => {
                         <div className='campaignContainer ck-content' dangerouslySetInnerHTML={markup}></div>
                     </div>
                     <div className='grid-owner'>
-                        <p><PersonIcon fontSize='medium' />{user.firstName} {user.lastName}</p>
+                        {user !== undefined && 
+                            <p><PersonIcon fontSize='medium' />{user.firstName} {user.lastName}</p>
+                        }
                     </div>
                 </div>
                 <div className="grid-child-right">
                     <div className='follow-button'>
-                        <Button variant="outlined" href="#outlined-buttons">
-                            Follow <BookmarkIcon fontSize='large' color='primary' />
-                        </Button>
+                        <FollowButton campaign={campaign} />
                     </div><br />
                     <div className='payment-button'>
                         {sessionUser !== null ? <PaymentButton campaign={campaign} /> : <RedirectButton />}
