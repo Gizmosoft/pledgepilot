@@ -9,7 +9,6 @@ import ProtectedRoutes from './Utils/ProtectedRoutes';
 import CampaignPage from './Pages/Campaign/CampaignPage';
 import DiscoverPage from './Pages/Discover/DiscoverPage';
 import HomePage from './Pages/Home/HomePage';
-import NavBar2 from './Components/Navbar2/NavBar2';
 import CreateCampaign from './Pages/CreateCampaign/CreateCampaign';
 import BlogPage from './Pages/Blog/CreateBlog';
 import CreateBlog from './Pages/Blog/CreateBlog';
@@ -20,7 +19,7 @@ import Rewards from './Pages/Rewards/Rewards';
 function App() {
   return (
     <div className='App'>
-      {/* <NavBar2 /> */}
+   
       
       <Router>
       <Navbar/>
@@ -66,11 +65,6 @@ function App() {
             <CampaignPage />
           }>
           </Route>
-          <Route path='/test' element={
-            <>
-            <NavBar2 />
-            </>
-          }></Route>
           <Route path= '/create/:campaignId' element={
             <CreateCampaign/>
           }></Route>

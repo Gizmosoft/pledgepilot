@@ -13,10 +13,16 @@ const FollowButton = (campaign: any) => {
   // get session user
   const user = getUserInTheSession()
   const campaignId = campaign.campaign._id
-
+  const [follow, setFollow] = useState("FOLLOW")
 
   const handleFollowClick = async () => {
+    if(follow === "FOLLOW"){
+      setFollow("FOLLOWING")
+    }else{
+      setFollow("FOLLOW")
+    }
     console.log(campaignId);
+    document.querySelector(".follow-btn")?.classList.toggle("clicked");
     const currUser = await fetch('http://localhost:3001/users/id/' + user._id)
     const currUserData = await currUser.json()
     currUserData.projectsFollowed.push(campaignId)
@@ -73,8 +79,8 @@ const FollowButton = (campaign: any) => {
 
   return (
     <div className='follow-button'>
-      <Button variant="outlined" onClick={handleFollowClick}>
-        Follow <BookmarkIcon fontSize='medium' color='primary' />
+      <Button className='follow-btn' variant="outlined" onClick={handleFollowClick}>
+        {follow} <BookmarkIcon fontSize='medium' color='primary' />
       </Button>
     </div>
   )

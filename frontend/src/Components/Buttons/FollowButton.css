@@ -2,3 +2,6 @@
     position: relative;
     align-self: center;
 }
+.clicked{
+    background-color: aliceblue;
+}

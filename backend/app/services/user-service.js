@@ -2,7 +2,7 @@ import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-// create is a helper service function
+// create function will create a user and store it in the DB
 const salt = 10;
 export const create = async (newUser) => {
   try {
@@ -28,7 +28,7 @@ export const create = async (newUser) => {
     console.log(error);
   }
 };
-
+//createOauthUser will create an Oauth user
 export const createOauthUser = async (newUser) => {
   try {
     const user = new User(newUser);
@@ -37,7 +37,7 @@ export const createOauthUser = async (newUser) => {
     console.log(error);
   }
 };
-
+//userLogin is there for login and creating JWT
 export const userLogin = async (email, password) => {
   const user = await findByEmailId(email);
   if (!user) {
@@ -93,7 +93,7 @@ export const findOAuthUser = async (email) => {
   const user = await User.find({ emailAddress: email });
   return user;
 };
-
+//findByRefreshToken finds refresh token in the db and returns the user 
 export const findByRefreshToken = async (userRefreshToken) => {
   const user = await User.find({ refreshToken: userRefreshToken });
   return user[0];

@@ -135,7 +135,6 @@ const CampaignPage = () => {
           />
 
           <div className="App ckStyle">
-            <h2>Using CKEditor&nbsp;5 build in React</h2>
             <CKEditor
               id="textInput"
               editor={ClassicEditor}
