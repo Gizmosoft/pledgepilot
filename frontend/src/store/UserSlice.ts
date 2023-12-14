@@ -13,7 +13,7 @@ export interface UserState {
   loginResponse : LoginResponse | null; // Define a more specific type if possible
   error: string | null | undefined;
 }
-
+//ASunc thunk for user login
 export const userLogin = createAsyncThunk<any, UserCredentials>(
   "user/loginUser",
   async (userCredentials: UserCredentials) => {
@@ -23,27 +23,28 @@ export const userLogin = createAsyncThunk<any, UserCredentials>(
       localStorage.setItem("user",JSON.stringify(response?.data))
       sessionStorage.setItem("user",JSON.stringify(response.data?.user));
     }
-    return response?.data; // Assuming the response includes a data property
+    return response?.data; 
   }
 );
-
+//Async thunk to logout user
 export const userLogout = createAsyncThunk<any, void>(
   "user/logoutUser",
   async () => {
     try {
-      const response  = await logoutUser(); // You need to implement the logout service
+      
+      const response  = await logoutUser();
       if(response?.status == 204){
         localStorage.removeItem("user");
         sessionStorage.removeItem("user");
       }
-      // If needed, you can dispatch additional actions or perform cleanup here
-      return {}; // You can return an empty object or any data as needed
+      
+      return {};
     } catch (error) {
       console.log(error)
     }
   }
 );
-
+//user slice to store user state in the redux
 const userSlice : any = createSlice<UserState,SliceCaseReducers<UserState>,any,any>({
   name: "user",
   initialState: {

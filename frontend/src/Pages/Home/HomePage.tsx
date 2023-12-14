@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import logo from './logo.svg';
 import "./HomePage.css";
-
-import Header from "../../Components/Navbar2/NavBar2";
 import Search from "../../Components/SearchBar/SearchBar";
 import Footer from "../../Components/Footer/Footer";
 import Stats from "../../Components/Stats/Stats";

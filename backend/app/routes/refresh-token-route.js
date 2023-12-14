@@ -1,7 +1,7 @@
 import express from "express";
 import * as refreshTokenController from "../controllers/refresh-token-controller.js"
 
-// initialize an express Router object
+// refresh token route
 const refreshRouter = express.Router();
 
 refreshRouter
