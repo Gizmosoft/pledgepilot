@@ -96,7 +96,7 @@ const CampaignPage = () => {
   const sessionUser = getUserInTheSession();
   const markup = { __html: campaign.description };
   function redirectToBlog(){
-    navigate("/AddBlog");
+    navigate("/BlogDashboard/" + campaignId);
   }
 
   return (

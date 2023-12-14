@@ -16,7 +16,7 @@ const CreateBlog = () => {
     blogTitle: "",
     blogDescription: "",
     owner: profile._id,
-    campaignID: "6575c614b00a5e74cc660250"
+    campaignID: "657a0125d6d48c5a1cf6479d"
   });
 
   let ckEdiorData = {};
