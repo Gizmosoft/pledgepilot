@@ -24,9 +24,7 @@ const kartik = require("../../assets/kartik.jpeg");
 // const pledgePilotVideo = require("../../assets/videos/landing.gif");
 
 function HomePage() {
-  const loggedInUser: UserState = useSelector(
-    (state: RootState) => state.user as UserState
-  );
+  const loggedInUser = sessionStorage.getItem("user")
   const navigate = useNavigate();
   function redirectUser(): void {
     if (loggedInUser) {
