@@ -1,0 +1,17 @@
+.search {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.search-icon {
+    position: relative;
+    left: 470px;
+    cursor:pointer;
+}
+
+.search-box {
+    width: 400px;
+}
+input:focus {
+    outline: auto;
+}

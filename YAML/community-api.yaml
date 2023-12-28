@@ -1,0 +1,77 @@
+openapi: 3.1.0
+info:
+  title: Pledge Pilot API
+  description: REST API of Pledge Pilot
+  version: "v1.0"
+servers:
+  - url: http://localhost:8080
+paths:
+  /campaign/{id}/community:
+    get:
+      operationId: get-community
+      description: gets community data
+      parameters:
+        - name: id
+          in: path
+          required: true
+          example: 12
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Community found
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Community"
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Community:
+      type: object
+      properties:
+        name:
+          type: string
+          example:
+            - XYZ
+        noOfPosts:
+          type: number
+          example:
+            - 123
+        postsID:
+          type: string
+          example:
+            - "1,2,3,12,54"
+        commentsCount:
+          type: number
+          example:
+            - 123
+        schedule:
+          $ref: "#/components/schemas/CreatedDate"
+    CreatedDate:
+      type: object
+      properties:
+        created-date-time:
+          type: string
+          format: date-time
+          example:
+            - "2023-11-12T13:14:15Z"
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+          example:
+            - CNF
+        message:
+          type: string
+          description: Error message
+          example:
+            - Community not Found

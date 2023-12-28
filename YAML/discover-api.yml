@@ -1,0 +1,53 @@
+openapi: 3.1.0
+info:
+  title: PledgePilot Discover API
+  description: REST API for returning the campaigns of PledgePilot.
+  version: 'v1.0'
+servers:
+  - url: http://localhost:8080
+paths:
+  /discover:
+    get:
+      operationId: discover-campaigns
+      description: List of campaigns posted by users
+      responses:
+        "200":
+          description: Successful response for displaying campaigns
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Campaign"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Campaign:
+      type: object
+      properties:
+        id:
+          type: string
+          examples:
+            - "596495c994ff4a37988e8f99"
+        name:
+          type: string
+          examples:
+            - "ProjectOne"
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+          examples:
+            - "Server Error"
+        message:
+          type: string
+          description: Error message
+          examples:
+            - "Bad Gateway"

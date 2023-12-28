@@ -1,0 +1,62 @@
+.about-us {
+  margin-top: 10vh;
+  padding: 50px;
+  text-align: center;
+}
+
+.mission-statement {
+  margin-bottom: 50px;
+}
+
+.highlights h3 {
+  margin-bottom: 20px;
+}
+
+.highlights ul li {
+  margin-bottom: 10px;
+}
+.highlights ul{
+  list-style-type: none;
+}
+.team {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-evenly;
+}
+
+.team-member {
+  width: 200px;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.team-member img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.success-stories {
+  margin-top: 50px;
+}
+
+.story-card {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 3px;
+
+}
