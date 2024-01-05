@@ -8,6 +8,7 @@ import logoutRouter from './logout.js'
 import campaignpaymentsRouter from './campaignpayment-route.js'
 import milestoneRouter from './milestone-routes.js'
 import userpaymentRouter from './userpayment-route.js'
+import statsRouter from './stats-routes.js'
 
 
 // define endpoints related to campaign model
@@ -22,4 +23,5 @@ export default (app) => {
     app.use("/milestones", milestoneRouter);
     app.use("/logout",logoutRouter);
     app.use("/userpayments", userpaymentRouter);
+    app.use("/stats", statsRouter);
 }
