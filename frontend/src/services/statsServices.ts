@@ -2,7 +2,7 @@
 
 export const campaignStats = async () => {
     try {
-        const campaignStats = await fetch('http://localhost:3001/stats/campaign');
+        const campaignStats = await fetch('http://localhost:3001/stats');
         if(!campaignStats.ok) {
             throw new Error(`HTTP error! Status: ${campaignStats.status}`);
         }

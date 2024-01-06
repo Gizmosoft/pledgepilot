@@ -4,6 +4,8 @@ import { campaignStats } from "../../services/statsServices";
 
 const Stats = () => {
     const [campaignStatsData, setCampaignStatsData]: any = useState<any>();
+    const [paymentStatsData, setPaymentStatsData]: any = useState<any>();
+    const [rewardStatsData, setRewardStatsData]: any = useState<any>();
 
     useEffect(()=> {
         const campaignData = async () => {
@@ -11,7 +13,10 @@ const Stats = () => {
                 const response:any = await campaignStats();
                 const data = await response.json(); // Assuming the data is in JSON format
                 console.log(data, 'response of stats in UI')
-                setCampaignStatsData(data); // Set the data in the component state
+                // Set the data in the component state
+                setCampaignStatsData(data.campaignCount); 
+                setPaymentStatsData(data.paymentCount);
+                setRewardStatsData(data.rewardCount);
             } catch (error) {
                 console.error('Error fetching campaign stats:', error);
             }
@@ -22,8 +27,8 @@ const Stats = () => {
     return (
         <div className="grid-container">
             <div className="grid-item">{campaignStatsData !== null ? `${campaignStatsData}` : 'N/A'} <br/> campaigns listed</div>
-            <div className="grid-item">$7,726,720,380 <br/> total donations made</div>
-            <div className="grid-item">92,096,771 <br/> total rewards earned</div>
+            <div className="grid-item">{paymentStatsData !== null ? `$${paymentStatsData}` : 'N/A'} <br/> total donations made</div>
+            <div className="grid-item">{rewardStatsData !== null ? `$${rewardStatsData}` : 'N/A'} <br/> total rewards earned</div>
         </div>
     )
 }

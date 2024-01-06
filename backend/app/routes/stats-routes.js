@@ -5,7 +5,7 @@ import * as statsController from '../controllers/stats-controller.js'
 const router = express.Router()
 
 // get call to get campaign stats
-router.route('/campaign')
-    .get(statsController.getCampaignStats)
+router.route('')
+    .get(statsController.getAllStats)
 
 export default router

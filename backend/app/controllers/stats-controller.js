@@ -2,9 +2,9 @@ import { response } from 'express'
 import * as statsService from '../services/stats-service.js'
 import {setDataResponse, setDataErrorResponse} from './simple-response-handler.js';
 
-export const getCampaignStats = async (request, response) => {
+export const getAllStats = async (request, response) => {
     try {
-        const campaignCount = await statsService.getCampaignStats()
+        const campaignCount = await statsService.statsHandler()
         setDataResponse(campaignCount, response);
     } catch (error) {
         console.log(error);
