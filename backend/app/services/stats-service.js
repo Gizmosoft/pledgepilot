@@ -2,11 +2,11 @@ import { response } from "express";
 import { MongoClient } from "mongodb";
 
 export const statsHandler = async () => {
-  const mongoURL =
-    "mongodb+srv://vijayakumarhebbark:2AeWNGNkb3k0MNeK@info6150db.5uhtxqa.mongodb.net/";
-  const dbName = "pledgepilotdb";
+  const mongoURL = process.env.DB_CONNECTION_STRING;
+  const dbName = process.env.DB_NAME;
   let client;
 
+  // initializing statsObj to populate later
   let statsObj = {
     'campaignCount': 0,
     'paymentCount': 0,
