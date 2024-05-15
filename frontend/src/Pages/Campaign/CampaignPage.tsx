@@ -12,6 +12,7 @@ import Footer from "../../Components/Footer/Footer";
 import { Milestone } from "../../Components/Milestone/Milestone";
 import "../../assets/ckEditorStyles/ckEditorStyles.css";
 import FollowButton from "../../Components/Buttons/FollowButton";
+import MilestoneTracker from '../../Components/Milestone/MilestoneTracker';
 
 const CampaignPage = () => {
   // define state for campaign
@@ -137,6 +138,10 @@ const CampaignPage = () => {
               <RedirectButton />
             )}
           </div>
+          {/* Add a milestone tracking UI here
+              Show a progress bar of how much current milestone is completed
+          */}
+          <MilestoneTracker campaignId={campaignId} />
         </div>
         {/* <p>User in the session: {sessionUser.firstName}</p> */}
       </div>

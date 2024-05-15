@@ -41,9 +41,11 @@ export const Milestone = (campaignId: any) => {
         <div className='grid-milestone-left'>
           <p>Last Milestone</p>
           <small>Target</small>
-          <h6>${milestoneTarget}</h6>
-          <small>Received</small>
-          <h6>${milestoneReceived}</h6>
+          <h6>
+            { milestoneTarget === 0 ? "No Milestone set" : milestoneTarget }
+          </h6>
+          {/* <small>Received</small>
+          <h6>${milestoneReceived}</h6> */}
         </div>
         <div className='grid-milestone-right'>
           <p>Total Donations Received</p>
