@@ -1,59 +1,114 @@
-import React, { useEffect, useState } from 'react'
-import './Milestone.css'
+import React, { useEffect, useState } from "react";
+import { Box, Typography, Grid, Divider } from "@mui/material";
 
-export const Milestone = (campaignId: any) => {
-  const [txns, setTxns] = useState<any>()
-  const [donationsReceived, setDonationsReceived] = useState<any>()
-  const [milestoneTarget, setmilestoneTarget] = useState<any>()
-  const [milestoneReceived, setMilestoneReceived] = useState<any>()
+export const Milestone = ({ campaignId }: { campaignId: string | undefined }) => {
+  const [txns, setTxns] = useState<number>(0);
+  const [donationsReceived, setDonationsReceived] = useState<number>(0);
+  const [milestoneTarget, setMilestoneTarget] = useState<number>(0);
+  const [milestoneReceived, setMilestoneReceived] = useState<number>(0);
 
   useEffect(() => {
     const getMilestoneStats = async () => {
-      const paymentInfo = await fetch('http://localhost:3001/campaignpayments/' + campaignId.campaignId)
-      const paymentInfoData = await paymentInfo.json()
-      const milestoneStats = await fetch('http://localhost:3001/milestones/' + campaignId.campaignId)
-      const milestoneStatsData = await milestoneStats.json()
-      // if there are no payments recieved yet for this campaign
-      if (paymentInfoData === null) {
-        setTxns(0)
-        setDonationsReceived(0)
-      } else {
-        setTxns(paymentInfoData.users.length)
-        setDonationsReceived(paymentInfoData.totalDonations)
+      try {
+        const paymentInfo = await fetch(
+          `http://localhost:3001/campaignpayments/${campaignId}`
+        );
+        const paymentInfoData = await paymentInfo.json();
+
+        const milestoneStats = await fetch(
+          `http://localhost:3001/milestones/${campaignId}`
+        );
+        const milestoneStatsData = await milestoneStats.json();
+
+        // Handle payments
+        if (!paymentInfoData) {
+          setTxns(0);
+          setDonationsReceived(0);
+        } else {
+          setTxns(paymentInfoData.users.length);
+          setDonationsReceived(paymentInfoData.totalDonations);
+        }
+
+        // Handle milestones
+        if (!milestoneStatsData) {
+          setMilestoneTarget(0);
+          setMilestoneReceived(0);
+        } else {
+          setMilestoneTarget(milestoneStatsData.target);
+          setMilestoneReceived(milestoneStatsData.received);
+        }
+      } catch (error) {
+        console.error("Error fetching milestone stats:", error);
       }
-      // if milestone is not yet created for this campaign
-      if (milestoneStatsData === null) {
-        setmilestoneTarget(0)
-        setMilestoneReceived(0)
-      } else {
-        setmilestoneTarget(milestoneStatsData.target)
-        setMilestoneReceived(milestoneStatsData.received)
-      }
-    }
-    getMilestoneStats()
-  }, [])
+    };
+
+    getMilestoneStats();
+  }, [campaignId]);
 
   return (
-    <div className='milestones'>
-      <h1>Milestones</h1>
-      <div className='grid-milestone'>
-        {/* TODO: Data fetch from milestone DB */}
-        <div className='grid-milestone-left'>
-          <p>Last Milestone</p>
-          <small>Target</small>
-          <h6>${milestoneTarget}</h6>
-          <small>Received</small>
-          <h6>${milestoneReceived}</h6>
-        </div>
-        <div className='grid-milestone-right'>
-          <p>Total Donations Received</p>
-          <h2>${donationsReceived}</h2>
-        </div>
-        <div className='grid-milestone-right'>
-          <p>Number of Transactions</p>
-          <h2>{txns}</h2>
-        </div>
-      </div>
-    </div>
-  )
-}
+    <Box sx={{ padding: 4, borderRadius: 2 }}>
+      <Typography
+        variant="h4"
+        gutterBottom
+        sx={{ color: "#333", textAlign: "center",marginBottom:4 }}
+      >
+        Milestones
+      </Typography>
+      <Grid container spacing={4} sx={{ textAlign: "center" }}>
+        {/* Left Section: Last Milestone */}
+        <Grid
+          item
+          xs={12}
+          md={4}
+          sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+        >
+          <Typography variant="body1" sx={{ color: "#666" }}>
+            Last Milestone
+          </Typography>
+          <Typography variant="subtitle2" sx={{ color: "#888" }}>
+            Target
+          </Typography>
+          <Typography variant="h6" sx={{ color: "#06D6A0" }}>
+            ${milestoneTarget}
+          </Typography>
+          <Typography variant="subtitle2" sx={{ color: "#888" }}>
+            Received
+          </Typography>
+          <Typography variant="h6" sx={{ color: "#06D6A0" }}>
+            ${milestoneReceived}
+          </Typography>
+        </Grid>
+
+        {/* Center Section: Total Donations */}
+        <Grid
+          item
+          xs={12}
+          md={4}
+          sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+        >
+          <Typography variant="body1" sx={{ color: "#666" }}>
+            Total Donations Received
+          </Typography>
+          <Typography variant="h4" sx={{ color: "#06D6A0" }}>
+            ${donationsReceived}
+          </Typography>
+        </Grid>
+
+        {/* Right Section: Number of Transactions */}
+        <Grid
+          item
+          xs={12}
+          md={4}
+          sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+        >
+          <Typography variant="body1" sx={{ color: "#666" }}>
+            Number of Transactions
+          </Typography>
+          <Typography variant="h4" sx={{ color: "#06D6A0" }}>
+            {txns}
+          </Typography>
+        </Grid>
+      </Grid>
+    </Box>
+  );
+};

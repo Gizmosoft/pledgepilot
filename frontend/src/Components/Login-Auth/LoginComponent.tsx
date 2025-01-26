@@ -1,32 +1,26 @@
-import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
-import "./LoginComponent.css";
-import GoogleLoginComponent from "./GoogleLoginComponent";
-
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { userLogin} from "../../store/UserSlice";
-import { loginUser } from "../../services/userServices";
+import { userLogin } from "../../store/UserSlice";
 import { AppDispatch } from "../../store/store";
+import { Box, TextField, Typography, Button, Stack } from "@mui/material";
+import GoogleLoginComponent from "./GoogleLoginComponent";
 
-function LoginComponent() {
+const LoginComponent: React.FC = () => {
   const navigate = useNavigate();
-  const [formData, setFormData]  = useState({
+  const dispatch: AppDispatch = useDispatch();
+  const [formData, setFormData] = useState({
     emailAddress: "",
     password: "",
   });
-  const dispatch : AppDispatch = useDispatch();
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(userLogin(formData)).then((result)=>{
-      if(result.payload){
+    dispatch(userLogin(formData)).then((result) => {
+      if (result.payload) {
         navigate("/dashboard");
       }
     });
-    // const user = await loginUser(formData);
-    // console.log(user);
-    // if (user) {
-    //   navigate("/discover");
-    // }
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -38,44 +32,72 @@ function LoginComponent() {
   };
 
   return (
-    <>
-      <h2 className="login-text">Login to your Account</h2>
-      <p className="welcome-text">
-        Login to experience a new world of PledgePilot
-      </p>
-      <form className="login-form" onSubmit={handleLogin}>
-        <label htmlFor="emailAddress">Email:</label>
-        <input
-          className="login-input"
-          type="text"
-          id="login-username"
-          name="emailAddress"
-          placeholder="email"
-          onChange={handleChange}
-          value={formData.emailAddress}
-          required
-        />
-
-        <label htmlFor="password">Password:</label>
-        <input
-          className="login-input"
-          type="password"
-          id="login-password"
-          name="password"
-          placeholder="password"
-          onChange={handleChange}
-          value={formData.password}
-          required
-        />
-
-        <div className="btn-forgot-password">
-          <button className="login-btn" type="submit">Login</button>
+    <Box
+      sx={{
+        maxWidth: 400,
+        width: "100%",
+        margin: "0 auto",
+        padding: 4,
+        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+        borderRadius: 2,
+        backgroundColor: "#ffffff",
+      }}
+    >
+      <Typography
+        variant="h4"
+        align="center"
+        gutterBottom
+        sx={{ fontWeight: "bold", color: "#333" }}
+      >
+        Login to Your Account
+      </Typography>
+      <Typography
+        variant="body1"
+        align="center"
+        sx={{ marginBottom: 3, color: "#555" }}
+      >
+        Login to experience a new world of PledgePilot.
+      </Typography>
+      <form onSubmit={handleLogin}>
+        <Stack spacing={2}>
+          <TextField
+            label="Email Address"
+            type="email"
+            name="emailAddress"
+            value={formData.emailAddress}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            required
+          />
+          <TextField
+            label="Password"
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            required
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            sx={{
+              backgroundColor: "#0B3D3A",
+              "&:hover": { backgroundColor: "#05B589" },
+              padding: "10px",
+              fontSize: "16px",
+            }}
+          >
+            Login
+          </Button>
           <GoogleLoginComponent />
-         
-        </div>
+        </Stack>
       </form>
-    </>
+    </Box>
   );
-}
+};
 
 export default LoginComponent;

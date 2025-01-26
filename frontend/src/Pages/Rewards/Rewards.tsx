@@ -10,7 +10,7 @@ function Rewards() {
       <div className="tier">
         <h3>Silver Champion ($100-$249)</h3>
         <div className="offer-card">
-          <img src={deepansh} alt="E-book" />
+          {/* <img src={deepansh} alt="E-book" /> */}
           <p>
             Download the exclusive "Making of X-men" e-book (available at $100
             minimum)
@@ -20,7 +20,7 @@ function Rewards() {
           </a>
         </div>
         <div className="offer-card">
-          <img src={deepansh} alt="Video message" />
+          {/* <img src={deepansh} alt="Video message" /> */}
           <p>
             Receive a personalized video message from the creator (available at
             $150 minimum)
@@ -30,7 +30,7 @@ function Rewards() {
           </a>
         </div>
         <div className="offer-card">
-          <img src={deepansh} alt="Merchandise" />
+          {/* <img src={deepansh} alt="Merchandise" /> */}
           <p>
             Get a limited-edition Deepansh Figurine (available at $200 minimum)
           </p>
@@ -39,7 +39,7 @@ function Rewards() {
           </a>
         </div>
         <div className="offer-card">
-          <img src={deepansh} alt="Beta access" />
+          {/* <img src={deepansh} alt="Beta access" /> */}
           <p>
             Be one of the first to try the beta version and provide feedback
             (available at $249 minimum)
@@ -53,7 +53,7 @@ function Rewards() {
       <div className="tier">
         <h3>Gold Patron ($250-$499)</h3>
         <div className="offer-card">
-          <img src={kartik} alt="Event invitation" />
+          {/* <img src={kartik} alt="Event invitation" /> */}
           <p>
             Attend an exclusive event hosted by the creators (available at $250
             minimum)
@@ -63,7 +63,7 @@ function Rewards() {
           </a>
         </div>
         <div className="offer-card">
-          <img src={kartik} alt="Project credits" />
+          {/* <img src={kartik} alt="Project credits" /> */}
           <p>
             Get your name listed on something (available at $300
             minimum)
@@ -73,7 +73,7 @@ function Rewards() {
           </a>
         </div>
         <div className="offer-card">
-          <img src={kartik} alt="Behind-the-scenes tour" />
+          {/* <img src={kartik} alt="Behind-the-scenes tour" /> */}
           <p>
             Enjoy a guided tour of the project's workspace or set (available at
             $400 minimum)
@@ -83,7 +83,7 @@ function Rewards() {
           </a>
         </div>
         <div className="offer-card">
-          <img src={kartik} alt="Personalized artwork" />
+          {/* <img src={kartik} alt="Personalized artwork" /> */}
           <p>
             Receive a personalized piece of artwork or design (available at $499
             minimum)
