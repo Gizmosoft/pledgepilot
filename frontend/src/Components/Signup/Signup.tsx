@@ -1,22 +1,22 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
-import "./Signup.css"
-import { registerUser } from '../../services/userServices';
+import React, { useState, ChangeEvent, FormEvent } from "react";
+import { Box, TextField, Typography, Button, Stack } from "@mui/material";
+import { registerUser } from "../../services/userServices";
 
 interface FormData {
-  firstName: string,
-  lastName:string,
-  emailAddress: string,
-  password: string,
-  accountCreationDate:string
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+  password: string;
+  accountCreationDate: string;
 }
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    firstName: '',
-    lastName:'',
-    emailAddress: '',
-    password: '',
-    accountCreationDate:''
+    firstName: "",
+    lastName: "",
+    emailAddress: "",
+    password: "",
+    accountCreationDate: "",
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,74 +25,101 @@ const SignUp: React.FC = () => {
       ...formData,
       [name]: value,
     });
-
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const date = new Date();
+    registerUser({
+      ...formData,
+      accountCreationDate: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+    });
     setFormData({
-      ...formData, accountCreationDate : `${date.getFullYear}-${date.getMonth}-${date.getDate}`
-    })
-    registerUser(formData);
-    setFormData({
-      firstName: '',
-      lastName: '',
-      emailAddress: '',
-      password: '',
-      accountCreationDate:''
+      firstName: "",
+      lastName: "",
+      emailAddress: "",
+      password: "",
+      accountCreationDate: "",
     });
   };
 
   return (
-    <div>
-      <h1 id='sign-up-text'>Register</h1>
-      <form id='signup-form' onSubmit={handleSubmit}>
-        <label htmlFor="firstName">First Name:</label>
-        <input
-          type="text"
-          id="signup-firstname"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-          placeholder="first name"
-          required
-        />
-        <label htmlFor="lastName">Last Name:</label>
-        <input
-          type="text"
-          id="signup-lastname"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-          placeholder="last name"
-          required
-        />
-        <label htmlFor="emailAddress">Email:</label>
-        <input
-          type="email"
-          id="signup-email"
-          name="emailAddress"
-          value={formData.emailAddress}
-          onChange={handleChange}
-          placeholder="email"
-          required
-        />
-
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="signup-password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="password"
-          required
-        />
-
-        <button id='signup-btn' type="submit">Sign Up</button>
+    <Box
+      sx={{
+        maxWidth: 400,
+        margin: "0 auto",
+        padding: 4,
+        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+        borderRadius: 2,
+        backgroundColor: "#ffffff",
+      }}
+    >
+      <Typography
+        variant="h4"
+        align="center"
+        gutterBottom
+        sx={{ fontWeight: "bold", color: "#333" }}
+      >
+        Register
+      </Typography>
+      <form onSubmit={handleSubmit}>
+        <Stack spacing={2}>
+          <TextField
+            label="First Name"
+            type="text"
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            required
+          />
+          <TextField
+            label="Last Name"
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            required
+          />
+          <TextField
+            label="Email Address"
+            type="email"
+            name="emailAddress"
+            value={formData.emailAddress}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            required
+          />
+          <TextField
+            label="Password"
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            required
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            sx={{
+              backgroundColor: "#06D6A0",
+              "&:hover": { backgroundColor: "#05B589" },
+              padding: "10px",
+              fontSize: "16px",
+            }}
+          >
+            Sign Up
+          </Button>
+        </Stack>
       </form>
-    </div>
+    </Box>
   );
 };
 

@@ -1,65 +1,54 @@
-import React from 'react';
-import { useState } from 'react';
-import { MDBInputGroup, MDBInput, MDBIcon, MDBBtn } from 'mdb-react-ui-kit';
-import './SearchBar.css';
-import Button from 'react-bootstrap/Button';
-import { FaSearch } from 'react-icons/fa';
-import { response } from 'express';
-import { json } from 'stream/consumers';
+import React, { useState } from "react";
+import { Box, TextField, IconButton } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
+export default function Search({
+  campaigns,
+  onSearch,
+}: {
+  campaigns: any[];
+  onSearch: (searchQuery: string) => void;
+}) {
+  const [input, setInput] = useState("");
 
-export default function Search(props: { campaigns: any; getmyCampaign: any; }) {
- 
-    const [input,setInput]=useState("");
+  const handleSearch = () => {
+    onSearch(input);
+  };
 
-    const {campaigns,getmyCampaign}=props;
-   
-
-
-   const handleCampaign=()=>{
-
-            //  checls made to filter the array according to search field
-             getmyCampaign(campaigns,input);
-
-   }
-
-   const handleKeyPress = (e: { key: string; }) => {
-    if (e.key === 'Enter') {
-      handleCampaign();
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
     }
   };
-   
 
-    // const fetchData=(value:any)=>{
-    //       fetch("https://jsonplaceholder.typicode.com/users").then((response)=>response.json).then((json)=>{
-    //         const results=json.filter((user:any)=>{
-    //             return user && user.name && user.name.toLowerCase().includes(value); 
-    //             console.log(results);
-    //         });
-    //       })
-    // };
-
-    const handleSearch=()=>{
-        console.log("searching")
-        // searchCampaign(input);
-      handleCampaign();
-
-    }
-
-    const handleChange=(value:any)=>{
-        setInput(value);
-        console.log(input);
-        // console.log(placeholderText);
-        // fetchData(value);
-    }
-
-    return (
-        <>
-        <div className='input-wrapper search'>
-        <FaSearch className='search-icon' onClick={()=>handleSearch()}/>
-        <input placeholder='Search for a campaign' className='search-box' value={input} onChange={(e)=>handleChange(e.target.value)}  onKeyPress={handleKeyPress}/>
-        </div>
-      </>
-        
-    ); 
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        gap: 1,
+        backgroundColor: "#fff",
+        borderRadius: "5px",
+        padding: "0 10px",
+        boxShadow: "0 1px 4px rgba(0, 0, 0, 0.1)",
+        maxWidth: 500,
+        width: "100%",
+      }}
+    >
+      <TextField
+        placeholder="Search campaigns"
+        variant="standard"
+        InputProps={{
+          disableUnderline: true,
+        }}
+        sx={{ flex: 1 }}
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        onKeyPress={handleKeyPress}
+      />
+      <IconButton onClick={handleSearch} sx={{ color: "#06D6A0" }}>
+        <SearchIcon />
+      </IconButton>
+    </Box>
+  );
 }

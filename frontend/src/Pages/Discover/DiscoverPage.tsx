@@ -1,60 +1,112 @@
-import React, { useEffect, useState } from 'react'
-import CampaignTile from '../../Components/Campaign/CampaignTile';
-import './DiscoverPage.css';
-import Search from '../../Components/SearchBar/SearchBar';
-import { discoverCampaign } from '../../services/discoverServices';
+import React, { useEffect, useState } from "react";
+import { Box, Grid, Typography, Container, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import CampaignTile from "../../Components/Campaign/CampaignTile";
+import Search from "../../Components/SearchBar/SearchBar";
+import { discoverCampaign } from "../../services/discoverServices";
+import Footer from "../../Components/Footer/Footer";
+
 const DiscoverPage = () => {
-    // create a state for campaigns
-    const [campaigns, setCampaigns] = useState<any>()
+  const [campaigns, setCampaigns] = useState<any[]>([]);
+  const [filteredCampaigns, setFilteredCampaigns] = useState<any[]>([]);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchAllCampaigns = async () => {
+      const campaignsData = await discoverCampaign();
+      setCampaigns(campaignsData);
+      setFilteredCampaigns(campaignsData);
+    };
+    fetchAllCampaigns();
+  }, []);
 
-    // function to get required campaigns corresponding to the search results
-
-    const handleCampaign = (arr: any[], search_field: any) => {
-        const result = arr.filter(item => item.name === search_field);
-        console.log(JSON.stringify(result));
-        if (result != null) {
-            setCampaigns(result);
-        }else {
-            setCampaigns("");
-
-        }
+  const handleSearch = (searchQuery: string) => {
+    if (searchQuery.trim() === "") {
+      setFilteredCampaigns(campaigns); // Reset to all campaigns if search is empty
+    } else {
+      const results = campaigns.filter((campaign) =>
+        campaign.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredCampaigns(results);
     }
+  };
 
+  return (
+    <>
+      <Box sx={{ padding: "40px 0" }}>
+        <Container maxWidth="lg">
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: "bold",
+              textAlign: "center",
+              marginBottom: "24px",
+              color: "#0B3D3A",
+            }}
+          >
+            Discover Campaigns
+          </Typography>
 
-    // onpageload operations
-    useEffect(() => {
-        const fetchAllCampaigns = async () => {
-            // call Discover API
-            // const campaignsResponse = await fetch('http://localhost:3001/campaigns/discover')
-            const campaignsData = await discoverCampaign();
-            // get the response in json
-            // const campaignsData = await campaignsResponse.json()
-            console.log(campaignsData);
-            // set the campaignData to the state to be received by the UI
-            setCampaigns(campaignsData)
-        }
-        fetchAllCampaigns()
-        // below empty array is called dependecy list which tells about how many times the useEffect needs to be called. Not defining this will cause an infinte loop of useEffects being called. Empty array signifies that call useEffect only once at 
-    }, [])
+          {/* Create Campaign Button */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "24px",
+            }}
+          >
+          </Box>
 
-    if (!campaigns) {
-        return <p>No campaigns in the database!</p>
-    }
-    return (
-        <div className='discover-page'>
-            <Search campaigns={campaigns} getmyCampaign={handleCampaign} />
-            <div className='card-container' id='content-display'>
-                {
-                    campaigns.map((campaign: any) => <CampaignTile key={campaign._id} campaignObject={campaign} />)
-                }
-            </div>
-            {/* Grid to show the campaigns in UI */}
-            {/* <div className='campaigns-grid'>
-            { campaigns.map((campaign: { _id: any; name: any; }) => <CampaignTile key={campaign._id} campaignId={campaign._id} campaignName={campaign.name} />)}
-        </div> */}
-        </div>
-    )
-}
+          {/* Search Bar */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-around",
+              marginBottom: "40px",
+            }}
+          >
+            <Search campaigns={campaigns} onSearch={handleSearch} />
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              sx={{
+                backgroundColor: "#EF476F", // Pink color
+                "&:hover": { backgroundColor: "#D3365E" }, // Darker pink
+                textTransform: "none",
+                fontWeight: "bold",
+                borderRadius: "8px",
+              }}
+              onClick={() => navigate("/create")}
+            >
+              Create Campaign +
+            </Button>
+          </Box>
 
-export default DiscoverPage
+          {/* Campaigns Grid */}
+          {filteredCampaigns.length > 0 ? (
+            <Grid container spacing={3} justifyContent="center">
+              {filteredCampaigns.map((campaign: any) => (
+                <CampaignTile campaignObject={campaign} key={campaign._id} />
+              ))}
+            </Grid>
+          ) : (
+            <Typography
+              variant="body1"
+              sx={{
+                textAlign: "center",
+                color: "#888",
+                marginTop: "40px",
+              }}
+            >
+              No campaigns found.
+            </Typography>
+          )}
+        </Container>
+      </Box>
+      <Footer />
+    </>
+  );
+};
+
+export default DiscoverPage;

@@ -1,154 +1,132 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-// import Editor from '../../Components/Editor/Editor'
+import {
+  Box,
+  TextField,
+  Typography,
+  Button,
+  Paper,
+  Container,
+} from "@mui/material";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { Editor } from "@ckeditor/ckeditor5-core";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { saveCampaign, updateCampaign, uploadAdapter } from "../../services/campaingServices";
-import "./CreateCampaign.css";
-import { CustomSnackbar } from "../../Components/Snackbar/CustomSnackbar";
 import { User } from "../../types/User";
 import { updateUserByEmail } from "../../services/userServices";
-import { setUser } from "../../store/UserSlice";
-import { store } from "../../store/store";
 
 const CampaignPage = () => {
+
   const navigate = useNavigate();
   const user = sessionStorage.getItem("user") ?? "";
   const profile: User = JSON.parse(user);
-  const { campaignId } = useParams()
-  let ckEdiorData= {};
+  const { campaignId } = useParams();
+
   let ckEditor = {};
-  let campaignDescription = "";
-
-
-
-  const [campaignData, saveCampaignData] = useState({
+  const [campaignDescription, setCampaignDescription] = useState("");
+  const [campaignData, setCampaignData] = useState({
     name: "",
     description: "",
     owner: profile.Id,
-    community: {
-      comment: {
-        id: "",
-        body: "",
-        owner: "",
-      },
-      blog: {
-        id: "",
-        body: "",
-        owner: {
-          id: "",
-        },
-      },
-    },
-    milestone: {
-      target: "",
-      progress: "",
-    },
-    payments: {
-      count: "",
-    },
   });
+  const [loading, setLoading] = useState(false);
 
-
-  const duration = 4000;
-  const [openSnackbar, setopenSnackbar] = useState(false)
-
-  const saveData = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(campaignData);
-    let campaign: any;
-    if(campaignId == undefined)
-    {
-        campaign = await saveCampaign(campaignData);
-    }
-    else{
-        campaign = await updateCampaign(campaignId, campaignData);
-    }
-    // console.log(JSON.parse(user));
-    profile.createdProjects.push(campaign._id);  
-    let updateUser = await updateUserByEmail(profile.emailAddress,profile);
-    sessionStorage.setItem("user",JSON.stringify(profile))
-    console.log(profile);
-    setopenSnackbar(true);
-    setTimeout(() => {
-    setTimeout(() => {
-      navigate("/discover");
-    }, duration);
-    }, duration);
-  };
-
+  // Function to handle CKEditor changes
   const onChangeInEditor = (event: any, editor: any, name: string) => {
     const data = editor.getData();
-    ckEdiorData = data;
-    saveCampaignData({
-      ...campaignData,
-      [name]: data,
-    });
+    setCampaignData((prev) => ({ ...prev, [name]: data }));
   };
 
-  const assignValue = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    saveCampaignData({
-      ...campaignData,
-      [name]: value,
-    });
-  }
+  // Function to fetch existing campaign data for editing
+  const fetchCampaign = async (editor: any) => {
+    if (campaignId) {
+      try {
+        const response = await fetch(
+          `http://localhost:3001/campaigns/campaign/${campaignId}`
+        );
+        const campaign = await response.json();
+        setCampaignDescription(campaign.description);
+        setCampaignData(campaign);
+        editor.setData(campaign.description);
+      } catch (error) {
+        console.error("Error fetching campaign data:", error);
+      }
+    }
+  };
+
+  // Upload plugin for CKEditor
   function uploadPlugin(editor: Editor) {
     editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
-      return uploadAdapter(loader);
+      return uploadAdapter(loader); // Use the provided `uploadAdapter` logic
     };
   }
 
-  const fetchCampaign = (editor: any) => {
-    if (campaignId != undefined) {
-      const campaignResponse = fetch('http://localhost:3001/campaigns/campaign/' + campaignId).then(
-        async function(result) {
-          const campaignData = await result.json()
-          console.log(campaignData);
-          campaignDescription = campaignData.description;
-          console.log(campaignDescription)
-          editor.setData(campaignDescription);
-          saveCampaignData(campaignData);
-        }
-      )
-      // get campaign Data
+  // Function to handle form submission
+  const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      let campaign;
+      if (!campaignId) {
+        campaign = await saveCampaign(campaignData);
+      } else {
+        campaign = await updateCampaign(campaignId, campaignData);
+      }
+
+      profile.createdProjects.push(campaign._id);
+      await updateUserByEmail(profile.emailAddress, profile);
+      sessionStorage.setItem("user", JSON.stringify(profile));
+      navigate("/discover");
+    } catch (error) {
+      console.error("Error saving campaign:", error);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
-
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setCampaignData((prev) => ({ ...prev, [name]: value }));
+  };
 
   return (
-    <div className="campaign-page">
-      <div>
-        <form className="campaign-form" onSubmit={saveData}>
-          <label htmlFor="title">Campaign Title:</label>
-          <input
-            className="name-input"
-            type="text"
-            id="name"
+    <Container maxWidth="md" sx={{ mt: 4 }}>
+      <Paper elevation={3} sx={{ p: 4, borderRadius: 2 }}>
+        <Typography
+          variant="h4"
+          gutterBottom
+          sx={{ textAlign: "center", fontWeight: "bold", mb: 4 }}
+        >
+          {campaignId ? "Edit Campaign" : "Create Campaign"}
+        </Typography>
+        <form onSubmit={handleSave}>
+          {/* Campaign Title */}
+          <TextField
+            label="Campaign Title"
+            variant="outlined"
+            fullWidth
             name="name"
-            placeholder="Enter Title"
-            onChange={assignValue}
             value={campaignData.name}
+            onChange={handleInputChange}
             required
+            sx={{ mb: 3 }}
           />
 
-          <div className="App ckStyle">
+          {/* CKEditor Section - UNTOUCHED */}
+          <div className="App ckStyle" style={{width:"100%",height:"100%"}}>
             <CKEditor
               id="textInput"
               editor={ClassicEditor}
-              data= {campaignDescription}
+              data={campaignDescription}
               config={{
-                extraPlugins: [uploadPlugin]
+                extraPlugins: [uploadPlugin],
+                toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', '|', 'formatPainter' ],
               }}
-              onReady={(editor: {}) => {
+              onReady={(editor: any) => {
                 ckEditor = editor;
-                // You can store the "editor" and use when it is needed.
-                console.log('Editor is ready to use!', editor);
                 fetchCampaign(ckEditor);
               }}
-              onChange={(event: any, ckEditor: { getData: () => any; }) => {
+              onChange={(event: any, ckEditor: { getData: () => any }) => {
                 onChangeInEditor(event, ckEditor, "description");
               }}
               onBlur={(event: any, ckEditor: any) => {
@@ -158,16 +136,26 @@ const CampaignPage = () => {
             />
           </div>
           <br />
-          <div className="btn-forgot-password">
-            <button type="submit">Save</button>
-          </div>
+
+          {/* Save Button */}
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            disabled={loading}
+            sx={{
+              backgroundColor: "#EF476F",
+              "&:hover": { backgroundColor: "#D3365E" },
+              padding: "10px",
+              fontWeight: "bold",
+            }}
+          >
+            {loading ? "Saving..." : "Save Campaign"}
+          </Button>
         </form>
-      </div>
-    </div>
-  )
-}
+      </Paper>
+    </Container>
+  );
+};
 
 export default CampaignPage;
-function dispatch(arg0: Promise<any>) {
-  throw new Error("Function not implemented.");
-}
