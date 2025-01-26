@@ -1,89 +1,80 @@
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import Button from '@mui/material/Button';
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { getUserInTheSession } from '../../Utils/SessionStorage';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import { getUserInTheSession } from "../../Utils/SessionStorage";
 
-const FollowButton = (campaign: any) => {
-  // state for following
-  const [isFollowing, setIsFollowing] = useState<boolean>()
-  // const [user, setUser] = useState<any>()
+const FollowButton = ({ campaign }: { campaign: any }) => {
+  const [isFollowing, setIsFollowing] = useState<boolean>(false);
+  const [buttonText, setButtonText] = useState<string>("FOLLOW");
+  const [loading, setLoading] = useState<boolean>(false);
+  const user = getUserInTheSession();
   const navigate = useNavigate();
 
-  // get session user
-  const user = getUserInTheSession()
-  const campaignId = campaign.campaign._id
-  const [follow, setFollow] = useState("FOLLOW")
+  useEffect(() => {
+    const checkIfFollowing = async () => {
+      if (!user) return;
+      try {
+        const response = await fetch(`http://localhost:3001/users/id/${user._id}`);
+        const userData = await response.json();
+        const isAlreadyFollowing = userData.projectsFollowed.includes(campaign._id);
+        setIsFollowing(isAlreadyFollowing);
+        setButtonText(isAlreadyFollowing ? "FOLLOWING" : "FOLLOW");
+      } catch (error) {
+        console.error("Error checking following status:", error);
+      }
+    };
 
-  const handleFollowClick = async () => {
-    if(follow === "FOLLOW"){
-      setFollow("FOLLOWING")
-    }else{
-      setFollow("FOLLOW")
-    }
-    console.log(campaignId);
-    document.querySelector(".follow-btn")?.classList.toggle("clicked");
-    const currUser = await fetch('http://localhost:3001/users/id/' + user._id)
-    const currUserData = await currUser.json()
-    currUserData.projectsFollowed.push(campaignId)
-    console.log(currUserData);
-    const userResponse = await fetch('http://localhost:3001/users/id/' + currUserData._id, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ projectsFollowed: currUserData.projectsFollowed })
-        })
+    checkIfFollowing();
+  }, [campaign._id, user]);
+
+  const handleButtonClick = async () => {
+    if (!user) {
+      navigate("/login");
+      return;
     }
 
+    try {
+      setLoading(true);
+      const updatedProjects = isFollowing
+        ? user.projectsFollowed.filter((id: string) => id !== campaign._id)
+        : [...user.projectsFollowed, campaign._id];
 
-    // if (user === null) {
-    //   navigate('/login')
-    // }
-    // else {
-    //   console.log(getUserInTheSession());
-    //   const currUserData = await fetchCurrentUser(getUserInTheSession())
-    //   console.log(currUserData);
-    //   // check if the current campaign in followed by the user
-    //   console.log(Object.values(currUserData.projectsFollowed).indexOf(campaign.campaign._id));
-    //   if (Object.values(currUserData.projectsFollowed).indexOf(campaign.campaign._id) === -1) {
-    //     currUserData.projectsFollowed.push(campaign.campaign._id)
-    //     // console.log(currUserData);
-    //   }
-      
-      
-      
-      
-    //   // pass this updated user object to the model
-    //   // if (Object.values(currUserData.projectsFollowed).indexOf(campaign.campaign._id) === -1) {
-    //   //   const userResponse = await fetch('http://localhost:3001/users/id/' + currUserData._id, {
-    //   //     method: 'PUT',
-    //   //     headers: {
-    //   //       'Content-Type': 'application/json',
-    //   //     },
-    //   //     body: JSON.stringify({ projectsFollowed: currUserData.projectsFollowed })
-    //   //   })
-    //   //   // set isFollowing Flag correctly
-    //   //   setIsFollowing(true)
-    //   //   setUser(currUserData)
-    //   // }
+      await fetch(`http://localhost:3001/users/id/${user._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ projectsFollowed: updatedProjects }),
+      });
 
-      
-    //   // console.log(typeof currUser);
-
-    //   // setUser(JSON.parse(JSON.stringify(currUser)))
-    //   // console.log(isFollowing);
-    //   // console.log(isFollowing);
-    // }
- 
+      setIsFollowing(!isFollowing);
+      setButtonText(!isFollowing ? "FOLLOWING" : "FOLLOW");
+    } catch (error) {
+      console.error("Error updating follow status:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className='follow-button'>
-      <Button className='follow-btn' variant="outlined" onClick={handleFollowClick}>
-        {follow} <BookmarkIcon fontSize='medium' color='primary' />
-      </Button>
-    </div>
-  )
-}
+    <Button
+      variant={isFollowing ? "contained" : "outlined"}
+      onClick={handleButtonClick}
+      startIcon={<BookmarkIcon />}
+      sx={{
+        backgroundColor: isFollowing ? "#EF476F" : "transparent",
+        color: isFollowing ? "#fff" : "#EF476F",
+        "&:hover": {
+          backgroundColor: isFollowing ? "#D3365E" : "rgba(239, 71, 111, 0.1)",
+        },
+        borderColor: "#EF476F",
+      }}
+      disabled={loading}
+    >
+      {buttonText}
+    </Button>
+  );
+};
 
-export default FollowButton
+export default FollowButton;

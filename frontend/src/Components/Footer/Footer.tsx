@@ -1,109 +1,194 @@
 import React from "react";
-import {
-  MDBFooter,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBIcon,
-} from "mdb-react-ui-kit";
-// import logo from '../Footer/'
+import { Box, Typography, Link, Grid, Container } from "@mui/material";
 import { FaTwitter, FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa";
-import "./Footer.css";
 const Logo = require("../../assets/pledge-pilot-text.png");
 
 export default function Footer() {
   return (
-    // <MDBFooter id='footer'  className='text-center text-lg-left footer-container'>
-    //   <MDBContainer className='p-4'>
-    //     <MDBRow>
-    //       <MDBCol lg='6' md='12' className='mb-4 mb-md-0'>
-    //         {/* The logo component for image is called below */}
-    //         <img src={Logo} alt='logo' className='logo'/>
+    <Box
+      component="footer"
+      sx={{
+        backgroundColor: "#0B3D3A",
+        color: "#fff",
+        padding: "40px 0", // Vertical padding for footer
+        marginTop: "40px",
+      }}
+    >
+      <Container maxWidth="lg">
+        <Grid container spacing={4} justifyContent="space-between">
+          {/* Connect with Us Section */}
+          <Grid item xs={12} sm={4}>
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: "bold", marginBottom: 2 }}
+            >
+              Connect with PledgePilot:
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "12px",
+              }}
+            >
+              <Link
+                href="#"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  textDecoration: "none",
+                  color: "#fff",
+                  "&:hover": { color: "#06D6A0" },
+                }}
+              >
+                <FaTwitter style={{ marginRight: "8px" }} />
+                Twitter
+              </Link>
+              <Link
+                href="#"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  textDecoration: "none",
+                  color: "#fff",
+                  "&:hover": { color: "#06D6A0" },
+                }}
+              >
+                <FaInstagram style={{ marginRight: "8px" }} />
+                Instagram
+              </Link>
+              <Link
+                href="#"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  textDecoration: "none",
+                  color: "#fff",
+                  "&:hover": { color: "#06D6A0" },
+                }}
+              >
+                <FaFacebook style={{ marginRight: "8px" }} />
+                Facebook
+              </Link>
+              <Link
+                href="#"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  textDecoration: "none",
+                  color: "#fff",
+                  "&:hover": { color: "#06D6A0" },
+                }}
+              >
+                <FaYoutube style={{ marginRight: "8px" }} />
+                YouTube
+              </Link>
+            </Box>
+          </Grid>
 
-    //       </MDBCol>
+          {/* Quick Links Section */}
+          <Grid item xs={12} sm={4}>
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: "bold", marginBottom: 2 }}
+            >
+              Quick Links
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "12px",
+              }}
+            >
+              <Link
+                href="about"
+                sx={{
+                  textDecoration: "none",
+                  color: "#fff",
+                  "&:hover": { color: "#06D6A0" },
+                }}
+              >
+                About Us
+              </Link>
+              <Link
+                href="careers"
+                sx={{
+                  textDecoration: "none",
+                  color: "#fff",
+                  "&:hover": { color: "#06D6A0" },
+                }}
+              >
+                Careers
+              </Link>
+              <Link
+                href="faq"
+                sx={{
+                  textDecoration: "none",
+                  color: "#fff",
+                  "&:hover": { color: "#06D6A0" },
+                }}
+              >
+                FAQ
+              </Link>
+            </Box>
+          </Grid>
 
-    //       <MDBCol lg='6' md='12' className='mb-4 mb-md-0'>
-    //         <div className='footer-list'>
-    //           <h6 ><a href='#about'>About Us</a></h6>
-    //           <h6 ><a href='#stats'>Stats</a></h6>
-    //         </div>
+          {/* Logo and Text Section */}
+          <Grid item xs={12} sm={4}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+              }}
+            >
+              <Box
+                component="img"
+                src={Logo}
+                alt="PledgePilot Logo"
+                sx={{
+                  width: "180px",
+                  marginBottom: "16px",
+                }}
+              />
+              <Typography
+                variant="body2"
+                sx={{ lineHeight: 1.6, color: "#ddd" }}
+              >
+                Navigating Dreams, Funding Journeys. Elevate your ambitions with
+                our crowdfunding platform that empowers creators, dreamers, and
+                innovators.
+              </Typography>
+            </Box>
+          </Grid>
+        </Grid>
 
-    //         <div className='social-container'>
-
-    //           <h5>Connect with PledgePilot :  </h5>
-    //           <br/>
-
-    //           <FaTwitter className='icon' />
-    //           <FaInstagram className='icon' />
-    //           <FaFacebook className='icon' />
-    //           <FaYoutube className='icon' />
-    //         </div>
-    //       </MDBCol>
-    //     </MDBRow>
-    //   </MDBContainer>
-    //   <div className='text-center p-3 footer-container' style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}>
-    //     &copy; {new Date().getFullYear()} Copyright:{' '}
-    //     <a className='text-dark' href='https://mdbootstrap.com/'>
-    //       pledgepilot.com
-    //     </a>
-    //   </div>
-    // </MDBFooter>
-
-    <footer>
-      <div className="footer-container">
-      <div className="connect-container">
-          <div className="social-icons">
-            <h6>Connect with PledgePilot : </h6>
-            <div>
-              <FaTwitter className="footer-icon" />
-              <span className="icon-text">Twitter</span>
-            </div>
-            <div>
-              <FaInstagram className="footer-icon" />
-              <span className="icon-text">Instagram</span>
-            </div>
-            <div>
-              <FaFacebook className="footer-icon" />
-              <span className="icon-text">Facebook</span>
-            </div>
-            <div>
-              <FaYoutube className="footer-icon" />
-              <span className="icon-text">Youtube</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="quick-links">
-          <h6>QUICK LINKS</h6>
-          <a href="about">About Us</a>
-          <a href="stats">Stats</a>
-          <a href="careers">Careers</a>
-          <a href="faq">FAQ</a>
-        </div>
-
-        <div className="pledge-pilot-footer-logo">
-          <img src={Logo} alt="logo" className="footer-logo" />
-          <div className="footer-text">
-          Navigating Dreams, Funding Journeys. Elevate your ambitions with our crowdfunding platform that empowers creators, dreamers, and innovators.
-          </div>
-        </div>
-
-
-      </div>
-     
-      <div className="copyright-container">
-        <div className="copyright-area">
-          <div className="container">
-            
-                <div className="copyright-text">
-                  <p>
-                    Copyright © 2018, All Right Reserved{" "}
-                    <a href="#">PledgePilot</a>
-                  </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+        {/* Copyright Section */}
+        <Box
+          sx={{
+            marginTop: "40px",
+            textAlign: "center",
+            borderTop: "1px solid #555",
+            paddingTop: "20px",
+          }}
+        >
+          <Typography variant="body2" sx={{ color: "#aaa" }}>
+            Copyright © {new Date().getFullYear()}, All Rights Reserved{" "}
+            <Link
+              href="#"
+              sx={{
+                color: "#FFD700",
+                textDecoration: "none",
+                "&:hover": { color: "#FFD700" },
+              }}
+            >
+              PledgePilot
+            </Link>
+          </Typography>
+        </Box>
+      </Container>
+    </Box>
   );
 }

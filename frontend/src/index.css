@@ -25,18 +25,26 @@ a{
   width: 10px;
 }
 
-/* Track */
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 12px; /* Adjust scrollbar width */
+}
+
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #0B3D3A; /* Dark green for track */
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #323941;
-  border-radius: 10px;
+  background-color: #06D6A0; /* Vibrant turquoise for thumb */
+  border-radius: 6px; /* Rounded edges */
+  border: 3px solid #0B3D3A; /* Add padding between thumb and track */
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background-color: #05B589; /* Darker turquoise on hover */
 }
+
+::-webkit-scrollbar-corner {
+  background: #0B3D3A; /* Dark green for corner */
+}
+

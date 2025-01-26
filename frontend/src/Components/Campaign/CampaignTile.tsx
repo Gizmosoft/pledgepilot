@@ -1,67 +1,93 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
-import '../../Components/Campaign/CampaignTile.css'
-import { getUserById } from '../../services/userServices';
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
+import { getUserById } from "../../services/userServices";
 
-const cardImg = require('../../assets/sample-image.jpg')
+const cardImg = require("../../assets/sample-image.jpg");
 
 const CampaignTile = ({ campaignObject }: any) => {
-
-  const description_threshold = 40;
-
+  const DESCRIPTION_THRESHOLD = 35;
 
   const descriptionContent =
-    campaignObject.description.length > description_threshold
-      ? `${campaignObject.description.substring(0, description_threshold)}...`
+    campaignObject.description.length > DESCRIPTION_THRESHOLD
+      ? `${campaignObject.description.substring(0, DESCRIPTION_THRESHOLD)}...`
       : campaignObject.description;
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await getUserById(campaignObject.owner);
+      console.log(user, "user");
+    };
+    fetchUser();
+  }, [campaignObject.owner]);
 
-    useEffect(()=>{
-      console.log(campaignObject.owner);
-      const fetchUser = async () => {
-        let user =  await getUserById(campaignObject.owner);
-        console.log(user,"user");
-      }
-      fetchUser();
-    },[])
-
-    const regex = /(<([^>]+)>)/gi;
+  const regex = /(<([^>]+)>)/gi;
 
   return (
-    <div className='campaign-tile'>
-      <h5 className='campaign-links'>
-        <Link to={`/campaigns/campaign/${campaignObject._id}`}>
-          {/* {campaignObject.name} */}
-          <div>
-            <div className="campaign-image-container">
-              <img src={cardImg} alt="campaign-img" className="campaign-image" />
-            </div>
-            <div className='cardText'>
-              <div className="campaign-name">{campaignObject.name}</div>
+    <Card
+      sx={{
+        maxWidth: 345,
+        margin: "16px", // Spacing between cards
+        borderRadius: "12px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow
+        transition: "transform 0.3s ease, box-shadow 0.3s ease", // Smooth hover animation
+        "&:hover": {
+          transform: "translateY(-10px)", // Slight lift on hover
+          boxShadow: "0 12px 24px rgba(0, 0, 0, 0.2)", // Enhanced shadow on hover
+        },
+        textDecoration: "none",
+        overflow: "hidden",
+      }}
+      component={Link}
+      to={`/campaigns/campaign/${campaignObject._id}`}
+    >
+      {/* Campaign Image */}
+      <CardMedia
+        component="img"
+        height="180"
+        image={cardImg}
+        alt={`${campaignObject.name} campaign`}
+        sx={{
+          objectFit: "cover",
+          borderBottom: "1px solid #ddd", // Separator between image and content
+        }}
+      />
+      {/* Campaign Content */}
+      <CardContent>
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: "bold",
+            color: "#333",
+            marginBottom: "8px",
+          }}
+        >
+          {campaignObject.name}
+        </Typography>
+        <Typography
+          variant="body2"
+          sx={{
+            color: "#555",
+            fontStyle: "italic",
+            marginBottom: "12px",
+          }}
+        >
+          {descriptionContent.replace(regex, "")}
+        </Typography>
+        <Box>
+          <Typography
+            variant="caption"
+            sx={{
+              color: "#777",
+              fontSize: "0.85rem",
+            }}
+          >
+            Created by: {campaignObject.owner}
+          </Typography>
+        </Box>
+      </CardContent>
+    </Card>
+  );
+};
 
-              <div className="campaign-description">{descriptionContent.replace(regex,"")}</div>
-
-              {campaignObject.description.length > description_threshold ? (
-                <label className='extended_view'>View campaign</label>
-              ) : null}
-
-
-
-              <div className='campaign-owner'>{campaignObject.owner}</div>
-            </div>
-
-          </div>
-
-        </Link>
-      </h5>
-      {/* <h3 className="campaign-links">
-                <Link to={`/campaigns/${campaignId}`}>
-                    {campaignName}
-                </Link>
-        </h3> */}
-    </div>
-  )
-}
-
-export default CampaignTile
+export default CampaignTile;

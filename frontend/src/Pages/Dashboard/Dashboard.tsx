@@ -1,80 +1,144 @@
 import React, { useState, useEffect } from "react";
-import { UserState, setUser } from "../../store/UserSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { LoginResponse, User } from "../../types/User";
-import "./Dashboard.css";
-import CampaignTile from "../../Components/Campaign/CampaignTile";
 import { useNavigate } from "react-router-dom";
+import {
+  Box,
+  Button,
+  Typography,
+  Grid,
+  CircularProgress,
+  Container,
+} from "@mui/material";
+import CampaignTile from "../../Components/Campaign/CampaignTile";
 import { getUserByEmail } from "../../services/userServices";
+import { User } from "../../types/User";
+import Footer from "../../Components/Footer/Footer";
 
 function Dashboard() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        const userString = sessionStorage.getItem("user") ?? "";
-        const emailAddress = JSON.parse(userString).emailAddress;
-        
-        const response = await getUserByEmail(emailAddress);
-        setProfile(response);
-        sessionStorage.setItem("user", JSON.stringify(response));
-    
+        const userString = sessionStorage.getItem("user");
+        if (userString) {
+          const emailAddress = JSON.parse(userString).emailAddress;
+          const response = await getUserByEmail(emailAddress);
+          setProfile(response);
+          sessionStorage.setItem("user", JSON.stringify(response));
+        }
       } catch (error) {
-        console.error("Error fetching user:", error);
+        console.error("Error fetching user profile:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUserProfile();
   }, []);
 
-  const exploreCampaigns = () => {
-    navigate("/discover");
-  };
+  const exploreCampaigns = () => navigate("/discover");
+  const createCampaign = () => navigate("/create");
 
-  const createCampaign = () => {
-    navigate("/create");
-  };
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (!profile) {
+    return (
+      <Box sx={{ textAlign: "center", mt: 4 }}>
+        <Typography variant="h6">Failed to load profile.</Typography>
+      </Box>
+    );
+  }
+
   return (
     <>
-    {profile && <div className="dashboard-container">
-      <div className="welcome-text">
-        <h2>Welcome { profile && profile!.firstName + " " + profile!.lastName}</h2>
-      </div>
-      <div className="follow-campaigns">
-        <h4>Campaigns Followed</h4>
-        <button onClick={exploreCampaigns} className="follow-campaign">
-          Explore Campaigns{" "}
-        </button>
-      </div>
+      <Container sx={{ py: 4 }}>
+        {/* Welcome Section */}
+        <Box sx={{ textAlign: "center", mb: 4 }}>
+          <Typography variant="h4" gutterBottom>
+            Welcome {profile.firstName} {profile.lastName}
+          </Typography>
+        </Box>
 
-      <div className="projects-followed">
-        {profile!.projectsFollowed.map((campaign: any) => (
-          <CampaignTile key={campaign._id} campaignObject={campaign} />
-        ))}
-        {profile!.projectsFollowed.length == 0
-          ? "You are not following any projects"
-          : ""}
-      </div>
+        {/* Followed Campaigns Section */}
+        <Box sx={{ mb: 6 }}>
+          <Typography variant="h5" gutterBottom>
+            Campaigns Followed
+          </Typography>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#06D6A0",
+              "&:hover": { backgroundColor: "#05C293" },
+              mb: 4,
+            }}
+            onClick={exploreCampaigns}
+          >
+            Explore Campaigns
+          </Button>
+          <Grid container spacing={3} justifyContent="center">
+            {profile.projectsFollowed.length > 0 ? (
+              profile.projectsFollowed.map((campaign: any) => (
+                // <Grid item xs={12} sm={6} md={4} key={campaign._id}>
+                <CampaignTile campaignObject={campaign} />
+                // </Grid>
+              ))
+            ) : (
+              <Typography variant="body1" color="textSecondary">
+                You are not following any projects.
+              </Typography>
+            )}
+          </Grid>
+        </Box>
 
-      <div className="created-campaigns">
-        <h4>Created Campaigns</h4>
-        <button onClick={createCampaign} className="create-campaign">
-          Create Campaign +{" "}
-        </button>
-      </div>
-      <div className="created-projects">
-        {profile!.createdProjects.map((campaign: any) => (
-          <CampaignTile key={campaign._id} campaignObject={campaign} />
-        ))}
-        {profile!.createdProjects == undefined
-          ? "You have not created any projects"
-          : ""}
-      </div>
-    </div>}
+        {/* Created Campaigns Section */}
+        <Box>
+          <Typography variant="h5" gutterBottom>
+            Created Campaigns
+          </Typography>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#EF476F",
+              "&:hover": { backgroundColor: "#D3365E" },
+              mb: 4,
+            }}
+            onClick={createCampaign}
+          >
+            Create Campaign +
+          </Button>
+          <Grid container spacing={3} justifyContent="center">
+            {profile.createdProjects?.length > 0 ? (
+              profile.createdProjects.map((campaign: any) => (
+                // <Grid item xs={12} sm={6} md={4} key={campaign._id}>
+                <CampaignTile campaignObject={campaign} />
+                // </Grid>
+              ))
+            ) : (
+              <Typography variant="body1" color="textSecondary">
+                You have not created any projects.
+              </Typography>
+            )}
+          </Grid>
+        </Box>
+      </Container>
+      <Footer />
     </>
   );
 }
+
 export default Dashboard;
