@@ -112,3 +112,5 @@ export const Milestone = ({ campaignId }: { campaignId: string | undefined }) =>
     </Box>
   );
 };
+  )
+}
