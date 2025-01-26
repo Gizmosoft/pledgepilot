@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
-import '../../Components/Campaign/CampaignTile.css'
 import { getUserById } from '../../services/userServices';
 
 const cardImg = require('../../assets/sample-image.jpg')
