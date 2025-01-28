@@ -2,7 +2,6 @@ import MilestoneModel from "../models/Milestone.js"
 
 export const createNewMilestone = async (milestoneObj) => {
     const checkMilestone = await getMilestoneByCampaignId(milestoneObj.campaignId)
-    console.log(checkMilestone);
     if(checkMilestone !== null){
         await removeMilestoneByCampaignId(checkMilestone.campaignId)
     }

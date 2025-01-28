@@ -22,6 +22,7 @@ export const addPaymentToPaymentDB = async (request, response) => {
         // update stripe backend with the payment
         // update Payment DB of the app
         const payment = await paymentService.createPayment(newPayment)
+
         // update reward DB
         const reward = {
             paymentId: payment._id,

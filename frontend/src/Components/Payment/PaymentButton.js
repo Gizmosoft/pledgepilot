@@ -11,13 +11,13 @@ import {
 import { getUserInTheSession } from "../../Utils/SessionStorage";
 import { dateGen } from "../../Utils/CurrentDateGenerator";
 import { rewardGen } from "../../Utils/RewardGenerator";
+import { createPayments, makePaymentService } from "../../services/campaingServices";
 
 export const PaymentButton = ({ campaign }) => {
   const [donationAmount, setDonationAmount] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
-
   const handleInputChange = (event) => {
     setDonationAmount(event.target.value);
   };
@@ -36,27 +36,17 @@ export const PaymentButton = ({ campaign }) => {
     };
 
     try {
-      const response = await fetch(`http://localhost:3001/payments`, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(body),
-      });
+      const response = await makePaymentService(body);
       const { status } = response;
       if (status === 200) {
         try {
-          await fetch("http://localhost:3001/payments/create", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              campaignName: campaign.name,
-              paidBy: getUserInTheSession(),
-              amount: donationAmount,
-              rewardGenerated: rewardGen(donationAmount),
-              txnDate: dateGen(),
-            }),
-          });
+          await createPayments({
+            campaignName: campaign._id,
+            paidBy: getUserInTheSession(),
+            amount: donationAmount,
+            rewardGenerated: rewardGen(donationAmount),
+            txnDate: dateGen(),
+          },)
           setSnackbarMessage("Donation successful! Thank you!");
           setSnackbarSeverity("success");
         } catch (error) {
