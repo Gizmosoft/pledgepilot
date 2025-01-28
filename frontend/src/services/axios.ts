@@ -3,7 +3,7 @@ import axios from "axios";
 // Set base URL dynamically based on environment
 axios.defaults.baseURL =
   process.env.NODE_ENV === "production"
-    ? "http://localhost:8000/" // Production base URL
+    ? "https://pledgepilot-backend.onrender.com/" // Production base URL
     : "http://localhost:3001/"; // Development base URL
 
 axios.interceptors.response.use(
