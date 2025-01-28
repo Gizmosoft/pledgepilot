@@ -6,10 +6,13 @@ import models from "./models/index.js";
 import cookieParser from "cookie-parser";
 
 // receives an object of app and initializes it
+const allowedOrigins = [
+  'https://pledgepilot-olg9.onrender.com', 'http://localhost:3000'
+];
 const initialize = (app) => {
   app.use(
     cors({
-      origin: "http://localhost:3000",
+      origin: allowedOrigins,
       credentials: true,
     })
   );
