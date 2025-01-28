@@ -45,7 +45,6 @@ export const getUser = async (request, response) => {
   try {
     const id = request.params.id;
     const user = await userService.findById(id);
-    console.log(user);
     setResponse({"type":"GET_USER_BY_ID","data":user}, response);
   } catch (error) {
     setErrorResponse(error, response);

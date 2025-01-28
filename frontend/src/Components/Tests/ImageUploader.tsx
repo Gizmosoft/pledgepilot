@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { uploadCampaignImage } from '../../services/campaingServices';
 
 export const ImageUploader = () => {
     const [formData, setFormData] = useState({
@@ -22,18 +23,10 @@ export const ImageUploader = () => {
         formDataObject.append('image', image);
     
         try {
-          const response = await fetch('http://localhost:3001/campaigns/upload', {
-            method: 'POST',
-            body: formDataObject,
-          });
-    
-          if (!response.ok) {
+          const uploadCampaignResponse = await uploadCampaignImage(formDataObject);
+          if (!uploadCampaignResponse) {
             throw new Error('Network response was not ok');
           }
-    
-          // Handle the response data, if needed
-          const data = await response.json();
-          console.log(data);
         } catch (error:any) {
           console.error('There was a problem with the fetch operation:', error.message);
         }

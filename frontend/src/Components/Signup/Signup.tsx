@@ -49,7 +49,7 @@ const SignUp: React.FC = () => {
         maxWidth: 400,
         margin: "0 auto",
         padding: 4,
-        boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+        // boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
         borderRadius: 2,
         backgroundColor: "#ffffff",
       }}
@@ -109,7 +109,7 @@ const SignUp: React.FC = () => {
             variant="contained"
             fullWidth
             sx={{
-              backgroundColor: "#06D6A0",
+              backgroundColor: "#0B3D3A",
               "&:hover": { backgroundColor: "#05B589" },
               padding: "10px",
               fontSize: "16px",

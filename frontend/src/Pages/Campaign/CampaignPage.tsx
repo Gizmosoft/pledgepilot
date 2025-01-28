@@ -9,9 +9,11 @@ import FollowButton from "../../Components/Buttons/FollowButton";
 import { Milestone } from "../../Components/Milestone/Milestone";
 import { getUserInTheSession } from "../../Utils/SessionStorage";
 import "../../assets/ckEditorStyles/ckEditorStyles.css";
+import { getCampaign } from "../../services/campaingServices";
+import { getUserById } from "../../services/userServices";
 
 const CampaignPage = () => {
-  const [campaign, setCampaign] = useState<any>(null);
+  let [campaign, setCampaign] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
   const { campaignId } = useParams();
   const navigate = useNavigate();
@@ -19,18 +21,13 @@ const CampaignPage = () => {
   useEffect(() => {
     const fetchCampaign = async () => {
       try {
-        const campaignResponse = await fetch(
-          `http://localhost:3001/campaigns/campaign/${campaignId}`
-        );
-        const campaignData = await campaignResponse.json();
-        setCampaign(campaignData);
+        const campaignResponse = await getCampaign(campaignId);
+        
+        setCampaign(campaignResponse);
 
-        if (campaignData.owner) {
-          const userResponse = await fetch(
-            `http://localhost:3001/users/id/${campaignData.owner}`
-          );
-          const userData = await userResponse.json();
-          setUser(userData);
+        if (campaignResponse) {
+          const userResponse = await getUserById(campaignResponse._id);
+          setUser(userResponse);
         }
       } catch (error) {
         console.error("Error fetching campaign or user data:", error);

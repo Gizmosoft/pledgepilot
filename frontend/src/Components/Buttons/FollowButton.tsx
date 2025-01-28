@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { getUserInTheSession } from "../../Utils/SessionStorage";
+import { getUserById, updateUserByID } from "../../services/userServices";
 
 const FollowButton = ({ campaign }: { campaign: any }) => {
   const [isFollowing, setIsFollowing] = useState<boolean>(false);
@@ -15,7 +16,7 @@ const FollowButton = ({ campaign }: { campaign: any }) => {
     const checkIfFollowing = async () => {
       if (!user) return;
       try {
-        const response = await fetch(`http://localhost:3001/users/id/${user._id}`);
+        const response = await getUserById(user._id);
         const userData = await response.json();
         const isAlreadyFollowing = userData.projectsFollowed.includes(campaign._id);
         setIsFollowing(isAlreadyFollowing);
@@ -39,15 +40,7 @@ const FollowButton = ({ campaign }: { campaign: any }) => {
       const updatedProjects = isFollowing
         ? user.projectsFollowed.filter((id: string) => id !== campaign._id)
         : [...user.projectsFollowed, campaign._id];
-
-      await fetch(`http://localhost:3001/users/id/${user._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ projectsFollowed: updatedProjects }),
-      });
-
+      await updateUserByID(user._id,{ projectsFollowed: updatedProjects })
       setIsFollowing(!isFollowing);
       setButtonText(!isFollowing ? "FOLLOWING" : "FOLLOW");
     } catch (error) {

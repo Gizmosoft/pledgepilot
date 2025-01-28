@@ -18,19 +18,13 @@ const Editor = () => {
                     data="<p>Hello from CKEditor&nbsp;5!</p>"
                     onReady={editor => {
                         ckEditor = editor;
-                        // You can store the "editor" and use when it is needed.
-                        console.log('Editor is ready to use!', editor);
                     }}
                     onChange={(event, ckEditor) => {
-                        console.log(event);
-                        console.log(ckEditor.getData());
                        // onChangeInEditor(event, ckEditor);
                     }}
                     onBlur={(event, ckEditor) => {
-                        console.log('Blur.', ckEditor);
                     }}
                     onFocus={(event, ckEditor) => {
-                        console.log('Focus.', ckEditor);
                     }}
                 />
                 <div className="btn-forgot-password">

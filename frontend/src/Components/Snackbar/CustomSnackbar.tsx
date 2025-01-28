@@ -21,8 +21,6 @@ export const CustomSnackbar: React.FC<CustomSnackbarProps> = ({
   handleClose,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(message);
-
   useEffect(() => {
     setIsOpen(open);
   }, [open]);

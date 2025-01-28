@@ -18,10 +18,8 @@ debugger;
 
     useEffect(()=>{
         debugger;
-      console.log(blogTile.owner);
       const fetchUser = async () => {
         let user =  await getUserById(blogTile.owner);
-        console.log(user,"user");
       }
       fetchUser();
     },[])

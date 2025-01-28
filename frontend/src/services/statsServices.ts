@@ -1,14 +1,16 @@
-
+import axios from "axios";
 
 export const campaignStats = async () => {
-    try {
-        const campaignStats = await fetch('http://localhost:3001/stats');
-        if(!campaignStats.ok) {
-            throw new Error(`HTTP error! Status: ${campaignStats.status}`);
-        }
-        console.log(campaignStats, 'inside stats services');
-        return campaignStats;
-    } catch (error) {
-        console.log(error);
-    }
-}
+  try {
+    const response = await axios.get(`/stats`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

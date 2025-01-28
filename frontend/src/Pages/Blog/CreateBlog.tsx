@@ -26,10 +26,7 @@ const CreateBlog = () => {
 
   const  saveData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //console.log(blogData);
     const savedBlogData = await saveBlog(blogData);
-    console.log(savedBlogData._id);
-    //console.log(user);
     setopenSnackbar(true);
     setTimeout(()=>{
       navigate("/discover");
@@ -84,7 +81,6 @@ const CreateBlog = () => {
                 }}
                 onReady={(editor: {}) => {
                   ckEditor = editor;
-                  console.log('Editor is ready to use!', editor);
                 }}
                 onChange={(event: any, ckEditor: { getData: () => any; }) => {
                   onChangeInEditor(event, ckEditor, "description");
