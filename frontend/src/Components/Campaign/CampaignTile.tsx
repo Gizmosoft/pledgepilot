@@ -12,15 +12,6 @@ const CampaignTile = ({ campaignObject }: any) => {
     campaignObject.description.length > DESCRIPTION_THRESHOLD
       ? `${campaignObject.description.substring(0, DESCRIPTION_THRESHOLD)}...`
       : campaignObject.description;
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const user = await getUserById(campaignObject.owner);
-      console.log(user, "user");
-    };
-    fetchUser();
-  }, [campaignObject.owner]);
-
   const regex = /(<([^>]+)>)/gi;
 
   return (
@@ -82,7 +73,7 @@ const CampaignTile = ({ campaignObject }: any) => {
               fontSize: "0.85rem",
             }}
           >
-            Created by: {campaignObject.owner}
+            Created by: {campaignObject.ownerName}
           </Typography>
         </Box>
       </CardContent>

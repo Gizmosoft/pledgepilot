@@ -22,7 +22,6 @@ export const stripePaymentService = async (
         customer: customer.id,
         receipt_email: token.email,
       });
-      console.log("Payment success!");
     })
     .then((result) => response.status(200).json(result))
     .catch((err) => console.log(err));
@@ -31,7 +30,8 @@ export const stripePaymentService = async (
 export const createPayment = async (newPayment) => {
   try {
     const payment = new PaymentModel(newPayment);
-    return payment.save();
+    let paymentSaved =  await payment.save();
+    return paymentSaved;
   } catch (error) {
     console.log(error);
   }
@@ -60,11 +60,7 @@ export const findUserPaymentByUserId = async (userId) => {
 
 export const addUserPayment = async (payment) => {
   try {
-    console.log(payment);
     const userPaymentObject = await findUserPaymentByUserId(payment.paidBy)
-    // if(Object.keys(userPaymentObject.userId).length===0){
-    //   userPaymentObject.userId = payment.paidBy
-    // }
     userPaymentObject.userId = payment.paidBy
     userPaymentObject.totalDonations += payment.amount
     userPaymentObject.totalRewards += payment.rewardGenerated

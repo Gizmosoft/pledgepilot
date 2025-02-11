@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const verifyJWT = (req,res,next)=>{
-  console.log(req);
   const authHeader = req.headers["authorization"];
   if(!authHeader){
     return res.sendStatus(401);

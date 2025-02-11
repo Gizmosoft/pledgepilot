@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography, Grid, Divider } from "@mui/material";
+import { getMilestones, getPaymentInfo } from "../../services/campaingServices";
 
 export const Milestone = ({ campaignId }: { campaignId: string | undefined }) => {
   const [txns, setTxns] = useState<number>(0);
@@ -10,16 +11,11 @@ export const Milestone = ({ campaignId }: { campaignId: string | undefined }) =>
   useEffect(() => {
     const getMilestoneStats = async () => {
       try {
-        const paymentInfo = await fetch(
-          `http://localhost:3001/campaignpayments/${campaignId}`
-        );
+        const paymentInfo = await getPaymentInfo(campaignId);
         const paymentInfoData = await paymentInfo.json();
 
-        const milestoneStats = await fetch(
-          `http://localhost:3001/milestones/${campaignId}`
-        );
-        const milestoneStatsData = await milestoneStats.json();
-
+        const milestoneStats = await getMilestones(campaignId);
+        const milestoneStatsData = milestoneStats.json();
         // Handle payments
         if (!paymentInfoData) {
           setTxns(0);
@@ -112,5 +108,3 @@ export const Milestone = ({ campaignId }: { campaignId: string | undefined }) =>
     </Box>
   );
 };
-  )
-}

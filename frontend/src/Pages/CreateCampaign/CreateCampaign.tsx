@@ -11,7 +11,7 @@ import {
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { Editor } from "@ckeditor/ckeditor5-core";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { saveCampaign, updateCampaign, uploadAdapter } from "../../services/campaingServices";
+import { getCampaign, saveCampaign, updateCampaign, uploadAdapter } from "../../services/campaingServices";
 import { User } from "../../types/User";
 import { updateUserByEmail } from "../../services/userServices";
 
@@ -19,7 +19,7 @@ const CampaignPage = () => {
 
   const navigate = useNavigate();
   const user = sessionStorage.getItem("user") ?? "";
-  const profile: User = JSON.parse(user);
+  const profile = JSON.parse(user);
   const { campaignId } = useParams();
 
   let ckEditor = {};
@@ -27,7 +27,20 @@ const CampaignPage = () => {
   const [campaignData, setCampaignData] = useState({
     name: "",
     description: "",
-    owner: profile.Id,
+    ownerName: profile.firstName + " " + profile.lastName, 
+    owner:profile._id,// Use the user's unique ID as the owner
+    createdAt: new Date(), // Automatically set the creation date
+    community: {
+      blogs: [], // Initialize as an empty array for blogs
+      comments: [], // Initialize as an empty array for comments
+    },
+    milestone: {
+      target: "", // Target milestone value
+      progress: "", // Progress milestone value
+    },
+    payments: {
+      count: "", // Number of payments
+    },
   });
   const [loading, setLoading] = useState(false);
 
@@ -41,13 +54,10 @@ const CampaignPage = () => {
   const fetchCampaign = async (editor: any) => {
     if (campaignId) {
       try {
-        const response = await fetch(
-          `http://localhost:3001/campaigns/campaign/${campaignId}`
-        );
-        const campaign = await response.json();
-        setCampaignDescription(campaign.description);
-        setCampaignData(campaign);
-        editor.setData(campaign.description);
+        const getCampaignResponse = await getCampaign(campaignId);
+        setCampaignDescription(getCampaignResponse.description);
+        setCampaignData(getCampaignResponse);
+        editor.setData(getCampaignResponse.description);
       } catch (error) {
         console.error("Error fetching campaign data:", error);
       }
@@ -124,7 +134,7 @@ const CampaignPage = () => {
               }}
               onReady={(editor: any) => {
                 ckEditor = editor;
-                fetchCampaign(ckEditor);
+                fetchCampaign(ckEditor);//TODO
               }}
               onChange={(event: any, ckEditor: { getData: () => any }) => {
                 onChangeInEditor(event, ckEditor, "description");

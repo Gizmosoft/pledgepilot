@@ -2,6 +2,7 @@ import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom'
 import { jwtDecode } from "jwt-decode";
+import { registerUserViaOauth, userDB } from '../../services/oauthService';
 
 const GoogleLoginComponent = () => {
     const navigate = useNavigate()
@@ -17,39 +18,25 @@ const GoogleLoginComponent = () => {
             'email': userObject.email
         }
         try {
-            const userDBResponse = await fetch('http://localhost:3001/users/oauth/' + user.email)
-            console.log('userDBResponse:');
-            console.log(userDBResponse);
-            
-            const userJsonResponse = await userDBResponse.json()
-            
-            console.log(userJsonResponse);
+            const userDBResponse = await userDB(user.email);
 
             // if user doesn't exist yet, then add the user to the DB
-            if (Object.keys(userJsonResponse).length === 0) {
-                console.log('Reached here inside try!');
+            if (Object.keys(userDBResponse).length === 0) {
                 
                 // use the post api endpoint
                 const currentDate = new Date().toISOString().split('T')[0];
                 try {
-                    const response = await fetch('http://localhost:3001/users/oauth/register', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            firstName: user.first_name,
-                            lastName: user.last_name,
-                            emailAddress: user.email,
-                            accountCreationDate: currentDate
-                        })
+                    const registerUserViaOauthResponse = await registerUserViaOauth({
+                        firstName: user.first_name,
+                        lastName: user.last_name,
+                        emailAddress: user.email,
+                        accountCreationDate: currentDate
                     })
-                    if(response.ok){
-                        const addedUser = await fetch('http://localhost:3001/users/oauth/' + user.email)
-                        const addedUserJson = await addedUser.json()
-                        console.log(addedUser);
-                        sessionStorage.setItem("user", JSON.stringify(addedUserJson[0]));
-                        localStorage.setItem("user",JSON.stringify(addedUserJson[0]));
+
+                    if(registerUserViaOauthResponse){
+                        const addedUser = await userDB(user.email);
+                        sessionStorage.setItem("user", JSON.stringify(addedUser[0]));
+                        localStorage.setItem("user",JSON.stringify(addedUser[0]));
                         navigate('/dashboard')
                     }
                     else {
@@ -61,8 +48,8 @@ const GoogleLoginComponent = () => {
             }
             // if user Exists, then login the user
             else {
-                sessionStorage.setItem("user", JSON.stringify(userJsonResponse[0]));
-                localStorage.setItem("user",JSON.stringify(userJsonResponse[0]));
+                sessionStorage.setItem("user", JSON.stringify(userDBResponse[0]));
+                localStorage.setItem("user",JSON.stringify(userDBResponse[0]));
                 navigate('/dashboard')
             }
         } catch (error: any) {

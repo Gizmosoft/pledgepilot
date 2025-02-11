@@ -10,13 +10,10 @@ const Stats = () => {
     useEffect(()=> {
         const campaignData = async () => {
             try {
-                const response:any = await campaignStats();
-                const data = await response.json(); // Assuming the data is in JSON format
-                console.log(data, 'response of stats in UI')
-                // Set the data in the component state
-                setCampaignStatsData(data.campaignCount); 
-                setPaymentStatsData(data.paymentCount);
-                setRewardStatsData(data.rewardCount);
+                const campaignStatsResponse:any = await campaignStats();
+                setCampaignStatsData(campaignStatsResponse.campaignCount); 
+                setPaymentStatsData(campaignStatsResponse.paymentCount);
+                setRewardStatsData(campaignStatsResponse.rewardCount);
             } catch (error) {
                 console.error('Error fetching campaign stats:', error);
             }
